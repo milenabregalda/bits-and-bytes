@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class LoginView extends javax.swing.JPanel {
 
@@ -225,11 +226,18 @@ public class LoginView extends javax.swing.JPanel {
     }//GEN-LAST:event_campoLoginSenhaActionPerformed
 
     private void botaoLoginEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginEntrarActionPerformed
-        cardLayout.show(mainPanel, "cyberStation"); // AQUI É TROCADA A JANELA, NO MOMENTO SEM VALIDAÇÃO
+        if (campoLoginCPFEmail.getText().equals("  CPF ou e-mail")) {
+            JOptionPane.showMessageDialog(LoginView.this, 
+            "Preencha todos os campos para fazer login.", 
+            "Erro", 
+            JOptionPane.ERROR_MESSAGE);
+        } else {
+            cardLayout.show(mainPanel, "cyberStation");
+        }
     }//GEN-LAST:event_botaoLoginEntrarActionPerformed
 
     private void botaoLoginCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginCriarContaActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "criarConta");
     }//GEN-LAST:event_botaoLoginCriarContaActionPerformed
 
 

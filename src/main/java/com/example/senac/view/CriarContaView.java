@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class CriarContaView extends javax.swing.JPanel {
 
@@ -340,15 +341,41 @@ public class CriarContaView extends javax.swing.JPanel {
     }//GEN-LAST:event_caixaCriarContaConcordaTermosActionPerformed
 
     private void botaoCriarContaConcordaTermosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaConcordaTermosActionPerformed
-        // TODO add your handling code here:
+        String termosDeUsoEPoliticaDePrivacidade = "\n1. Termos de Uso\n\n" +
+            "Ao utilizar nossos serviços, você concorda com os seguintes termos. Se não concordar, por favor, não utilize nossos serviços.\n\n" +
+            "1.1 Uso dos Computadores\n\n" +
+            "Você pode reservar computadores via CyberStation. O uso deve ser legal e ético, e a segurança de suas informações é sua responsabilidade.\n\n" +
+            "1.2 Compras de Alimentos e Bebidas\n\n" +
+            "Adquira salgados, doces, combos e bebidas pelo Cybersnacks. Todos os itens devem ser consumidos no local.\n\n" +
+            "1.3 Conduta no Cybercafé\n\n" +
+            "Mantenha um comportamento respeitoso. Danos aos equipamentos serão cobrados.\n\n" +
+            "2. Política de Privacidade\n\n" +
+            "Coletamos informações para melhorar nossos serviços. Não compartilhamos suas informações sem sua permissão.\n\n" +
+            "3. Contato\n\n" +
+            "Dúvidas? Entre em contato conosco pelo e-mail contato@bitsbytescybercafe.com.\n\n";
+            
+        JOptionPane.showMessageDialog(null, termosDeUsoEPoliticaDePrivacidade, "Termos de uso e Política de Privacidade", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botaoCriarContaConcordaTermosActionPerformed
 
     private void botaoCriarContaCadastrarSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaCadastrarSeActionPerformed
-        // TROCAR CARD AQUI
+        
+        if (campoCriarContaNome.getText().equals("  Nome completo") ||
+            campoCriarContaCPF.getText().equals("  CPF") ||
+            campoCriarContaTelefone.getText().equals("  Número de telefone") ||
+            campoCriarContaEmail.getText().equals("  E-mail") ||
+            !caixaCriarContaConcordaTermos.isSelected()) {
+                    
+                JOptionPane.showMessageDialog(CriarContaView.this, 
+                "Preencha todos os campos e concorde com os termos para criar a conta.", 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE);
+        } else {
+                 cardLayout.show(mainPanel, "cyberStation");
+        } 
     }//GEN-LAST:event_botaoCriarContaCadastrarSeActionPerformed
 
     private void botaoCriarContaEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaEntrarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "login");
     }//GEN-LAST:event_botaoCriarContaEntrarActionPerformed
 
 
