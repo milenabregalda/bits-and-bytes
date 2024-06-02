@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class CyberStationView extends javax.swing.JPanel {
 
@@ -13,15 +14,47 @@ public class CyberStationView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private boolean[] seMesasCyberStationOcupadas = new boolean[15];
+    private JButton[] botoesDasMesas = new JButton[15];
+    private JButton botaoSelecionado = null;
 
     public CyberStationView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         initComponents();
+        preencherVetorDeBotoesDeMesas();
+        verificarSeMesasOcupadas();
+        definirCorDosBotoesDeMesas();
+    }
+
+    // Por enquanto, esse método define que todas as mesas não estão ocupadas. Futuramente, terá conexão com banco:
+    public void verificarSeMesasOcupadas() {
+        for (int i = 0; i < seMesasCyberStationOcupadas.length; i++) {
+          seMesasCyberStationOcupadas[i] = false;
+        }
+    }
+
+    // Método que define a cor de acordo com se as mesas estão ocupadas ou não:
+    public void definirCorDosBotoesDeMesas() {
+        for (int i = 0; i < seMesasCyberStationOcupadas.length; i++) {
+          if (seMesasCyberStationOcupadas[i]) {
+            definirBotoesComputadores('A', botoesDasMesas[i]);
+          } else {
+            definirBotoesComputadores('R', botoesDasMesas[i]);
+          }
+        }
+    }
+
+    // Método responsável por só o botão clicado e selecionado ser verde:
+    public void verificarBotaoSelecionado(JButton botao) {
+        if (botaoSelecionado != null) {
+            botaoSelecionado.setBackground(new Color(94, 34, 122)); // Roxo
+        }
+        botao.setBackground(new Color(17, 137, 56)); // Verde
+        botaoSelecionado = botao;
     }
     
-    // Método que define cor dos botões de computadores e se são clicáveis (chamados em Post-Init Code)
-    // Para lógica de aluguel quando buscar no banco - na visualização em Design não muda, mas na execução sim
+    // Método que define cor dos botões de computadores e se são clicáveis
     public static void definirBotoesComputadores(char definidor, JButton botaoDefinido) {
         botaoDefinido.setBorderPainted(false);
         botaoDefinido.setFocusPainted(false);
@@ -29,6 +62,7 @@ public class CyberStationView extends javax.swing.JPanel {
         switch (definidor) {
             case 'V':
                 botaoDefinido.setBackground(new Color(17, 137, 56)); // Verde
+                botaoDefinido.setEnabled(true);
                 break;
             case 'A':
                 botaoDefinido.setBackground(new Color(73, 84, 111)); // Azul escuro
@@ -36,12 +70,32 @@ public class CyberStationView extends javax.swing.JPanel {
                 break;
             case 'R':
                 botaoDefinido.setBackground(new Color(94, 34, 122)); // Roxo
+                botaoDefinido.setEnabled(true);
                 break;
             default:
                 break;
         }
         botaoDefinido.revalidate();
     }
+
+    // Adiciona botões a vetor para facilitar definição do estado dos botões:
+    public void preencherVetorDeBotoesDeMesas() {
+        botoesDasMesas[0] = botaoCyberStationMesa1;
+        botoesDasMesas[1] = botaoCyberStationMesa2;
+        botoesDasMesas[2] = botaoCyberStationMesa3;
+        botoesDasMesas[3] = botaoCyberStationMesa4;
+        botoesDasMesas[4] = botaoCyberStationMesa5;
+        botoesDasMesas[5] = botaoCyberStationMesa6;
+        botoesDasMesas[6] = botaoCyberStationMesa7;
+        botoesDasMesas[7] = botaoCyberStationMesa8;
+        botoesDasMesas[8] = botaoCyberStationMesa9;
+        botoesDasMesas[9] = botaoCyberStationMesa10;
+        botoesDasMesas[10] = botaoCyberStationMesa11;
+        botoesDasMesas[11] = botaoCyberStationMesa12;
+        botoesDasMesas[12] = botaoCyberStationMesa13;
+        botoesDasMesas[13] = botaoCyberStationMesa14;
+        botoesDasMesas[14] = botaoCyberStationMesa15;
+      }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -582,63 +636,63 @@ public class CyberStationView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCyberStationMesa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa1ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa1);
     }//GEN-LAST:event_botaoCyberStationMesa1ActionPerformed
 
     private void botaoCyberStationMesa3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa3ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa3);
     }//GEN-LAST:event_botaoCyberStationMesa3ActionPerformed
 
     private void botaoCyberStationMesa5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa5ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa5);
     }//GEN-LAST:event_botaoCyberStationMesa5ActionPerformed
 
     private void botaoCyberStationMesa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa2ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa2);
     }//GEN-LAST:event_botaoCyberStationMesa2ActionPerformed
 
     private void botaoCyberStationMesa4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa4ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa4);
     }//GEN-LAST:event_botaoCyberStationMesa4ActionPerformed
 
     private void botaoCyberStationMesa6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa6ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa6);
     }//GEN-LAST:event_botaoCyberStationMesa6ActionPerformed
 
     private void botaoCyberStationMesa7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa7ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa7);
     }//GEN-LAST:event_botaoCyberStationMesa7ActionPerformed
 
     private void botaoCyberStationMesa8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa8ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa8);
     }//GEN-LAST:event_botaoCyberStationMesa8ActionPerformed
 
     private void botaoCyberStationMesa9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa9ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa9);
     }//GEN-LAST:event_botaoCyberStationMesa9ActionPerformed
 
     private void botaoCyberStationMesa10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa10ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa10);
     }//GEN-LAST:event_botaoCyberStationMesa10ActionPerformed
 
     private void botaoCyberStationMesa11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa11ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa11);
     }//GEN-LAST:event_botaoCyberStationMesa11ActionPerformed
 
     private void botaoCyberStationMesa12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa12ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa12);
     }//GEN-LAST:event_botaoCyberStationMesa12ActionPerformed
 
     private void botaoCyberStationMesa13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa13ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa13);
     }//GEN-LAST:event_botaoCyberStationMesa13ActionPerformed
 
     private void botaoCyberStationMesa14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa14ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa14);
     }//GEN-LAST:event_botaoCyberStationMesa14ActionPerformed
 
     private void botaoCyberStationMesa15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationMesa15ActionPerformed
-        // TODO add your handling code here:
+        verificarBotaoSelecionado(botaoCyberStationMesa15);
     }//GEN-LAST:event_botaoCyberStationMesa15ActionPerformed
 
     private void botaoCyberStationDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationDisponivelActionPerformed
@@ -654,7 +708,17 @@ public class CyberStationView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCyberStationSelecionadoActionPerformed
 
     private void botaoCyberStationReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberStationReservarActionPerformed
-        // TROCAR CARD AQUI
+        if (comboCyberStationDia.getSelectedIndex() == 0 ||
+        comboCyberStationMes.getSelectedIndex() == 0 ||
+        comboCyberStationHoraInicio.getSelectedIndex() == 0 ||
+        comboCyberStationHoraTermino.getSelectedIndex() == 0 || botaoSelecionado == null) {
+             JOptionPane.showMessageDialog(CyberStationView.this, 
+            "Preencha todos os campos para fazer a sua reserva.", 
+            "Erro", 
+            JOptionPane.ERROR_MESSAGE);   
+        } else {
+            cardLayout.show(mainPanel, "cyberSnacks");
+        }
     }//GEN-LAST:event_botaoCyberStationReservarActionPerformed
 
 
