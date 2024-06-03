@@ -4,6 +4,13 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class CombosSemanaisView extends javax.swing.JPanel {
 
@@ -303,17 +310,85 @@ public class CombosSemanaisView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCombosSemanaisVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCombosSemanaisVoltarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "cyberSnacks");
     }//GEN-LAST:event_botaoCombosSemanaisVoltarActionPerformed
 
     private void botaoCombosSemanaisFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCombosSemanaisFinalizarCompraActionPerformed
-        // TROCAR CARD AQUI
+      if(comboCombosSemanaisQuarta.getSelectedItem()!="0" || comboCombosSemanaisQuinta.getSelectedItem()!="0" || comboCombosSemanaisSegunda.getSelectedItem()!="0" || comboCombosSemanaisSexta.getSelectedItem()!="0" || comboCombosSemanaisTerca.getSelectedItem()!="0"){
+        cardLayout.show(mainPanel, "confirmacaoPedido");
+      }else{
+ JOptionPane.showMessageDialog(CombosSemanaisView.this, 
+                "Insira uma opção ou volte.", 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE);   
+      }
     }//GEN-LAST:event_botaoCombosSemanaisFinalizarCompraActionPerformed
+    private void botaoCombosSemanaisAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {
+        // Verifica se alguma combobox foi selecionada com quantidade diferente de "0"
+        if (!"0".equals(comboCombosSemanaisSegunda.getSelectedItem()) ||
+            !"0".equals(comboCombosSemanaisTerca.getSelectedItem()) ||
+            !"0".equals(comboCombosSemanaisQuarta.getSelectedItem()) ||
+            !"0".equals(comboCombosSemanaisQuinta.getSelectedItem()) ||
+            !"0".equals(comboCombosSemanaisSexta.getSelectedItem())) {
 
-    private void botaoCombosSemanaisAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCombosSemanaisAdicionarAoCarrinhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoCombosSemanaisAdicionarAoCarrinhoActionPerformed
+            // Lista para armazenar os combos selecionados
+            List<String> combosSelecionados = new ArrayList<>();
 
+            // Adiciona os combos selecionados à lista
+            adicionarComboSelecionado(combosSelecionados, comboCombosSemanaisSegunda, "Combo Semanal Segunda");
+            adicionarComboSelecionado(combosSelecionados, comboCombosSemanaisTerca, "Combo Semanal Terça");
+            adicionarComboSelecionado(combosSelecionados, comboCombosSemanaisQuarta, "Combo Semanal Quarta");
+            adicionarComboSelecionado(combosSelecionados, comboCombosSemanaisQuinta, "Combo Semanal Quinta");
+            adicionarComboSelecionado(combosSelecionados, comboCombosSemanaisSexta, "Combo Semanal Sexta");
+
+            // Mostra a próxima tela
+            cardLayout.show(mainPanel, "weeklyCombos");
+
+            // Converte a lista para array de String
+            String[] arrayCombos = combosSelecionados.toArray(new String[0]);
+            for (String combo : arrayCombos) {
+                System.out.println(combo);
+            }
+        } else {
+            JOptionPane.showMessageDialog(CombosSemanaisView.this,
+                    "Selecione pelo menos um combo semanal.",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Método para adicionar ou atualizar combo selecionado à lista
+    private void adicionarComboSelecionado(List<String> lista, JComboBox<String> comboBox, String nomeCombo) {
+        String quantidade = (String) comboBox.getSelectedItem();
+        if (!"0".equals(quantidade)) {
+            // Verifica se o combo já está na lista e atualiza a quantidade
+            boolean encontrado = false;
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).startsWith(nomeCombo)) {
+                    lista.set(i, nomeCombo + " - Quantidade: " + quantidade);
+                    encontrado = true;
+                    break;
+                }
+            }
+            // Se não foi encontrado, adiciona o combo à lista
+            if (!encontrado) {
+                lista.add(nomeCombo + " - Quantidade: " + quantidade);
+            }
+        } else {
+            // Remove o combo da lista se a quantidade for "0"
+            removeCombo(lista, nomeCombo);
+        }
+    }
+
+    // Método para remover combo da lista
+    private void removeCombo(List<String> lista, String nomeCombo) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).startsWith(nomeCombo)) {
+                lista.remove(i);
+                break; // Como só deve haver um combo com o mesmo nome, podemos parar a remoção aqui
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCombosSemanaisAdicionarAoCarrinho;

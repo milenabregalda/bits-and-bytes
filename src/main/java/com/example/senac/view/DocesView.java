@@ -2,8 +2,17 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class DocesView extends javax.swing.JPanel {
 
@@ -421,16 +430,97 @@ public class DocesView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoDocesVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDocesVoltarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "cyberSnacks");
     }//GEN-LAST:event_botaoDocesVoltarActionPerformed
 
     private void botaoDocesFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDocesFinalizarCompraActionPerformed
-        // TROCAR CARD AQUI
+    if(comboDocesBrigadeiro.getSelectedItem()!="0" || comboDocesCheesecake.getSelectedItem()!="0" || comboDocesMilkshakeBaunilha.getSelectedItem()!="0" || comboDocesMilkshakeChocolate.getSelectedItem()!="0" || comboDocesMilkshakeMorango.getSelectedItem()!="0" || comboDocesSaladaDeFrutas.getSelectedItem()!="0" || comboDocesSonho.getSelectedItem()!="0" || comboDocesSorveteChocolate.getSelectedItem()!="0" || comboDocesSorveteMisto.getSelectedItem()!="0" || comboDocesSorveteMorango.getSelectedItem()!="0"){
+        cardLayout.show(mainPanel, "confirmacaoPedido");
+    }else{
+                JOptionPane.showMessageDialog(DocesView.this, 
+                "Insira uma opção ou volte.", 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE);   
+            }
     }//GEN-LAST:event_botaoDocesFinalizarCompraActionPerformed
 
-    private void botaoDocesAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDocesAdicionarAoCarrinhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoDocesAdicionarAoCarrinhoActionPerformed
+   private void botaoDocesAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {
+    // Verifica se alguma combobox foi selecionada com quantidade diferente de "0"
+    if (!"0".equals(comboDocesBrigadeiro.getSelectedItem()) ||
+        !"0".equals(comboDocesCheesecake.getSelectedItem()) ||
+        !"0".equals(comboDocesMilkshakeBaunilha.getSelectedItem()) ||
+        !"0".equals(comboDocesMilkshakeChocolate.getSelectedItem()) ||
+        !"0".equals(comboDocesMilkshakeMorango.getSelectedItem()) ||
+        !"0".equals(comboDocesSaladaDeFrutas.getSelectedItem()) ||
+        !"0".equals(comboDocesSonho.getSelectedItem()) ||
+        !"0".equals(comboDocesSorveteChocolate.getSelectedItem()) ||
+        !"0".equals(comboDocesSorveteMisto.getSelectedItem()) ||
+        !"0".equals(comboDocesSorveteMorango.getSelectedItem())) {
+
+        // Lista para armazenar os doces selecionados
+        List<String> docesSelecionados = new ArrayList<>();
+
+        // Adiciona os doces selecionados à lista
+        adicionarDoceSelecionado(docesSelecionados, comboDocesBrigadeiro, "Brigadeiro");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesCheesecake, "Cheesecake");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesMilkshakeBaunilha, "Milkshake de Baunilha");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesMilkshakeChocolate, "Milkshake de Chocolate");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesMilkshakeMorango, "Milkshake de Morango");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesSaladaDeFrutas, "Salada de Frutas");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesSonho, "Sonho");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesSorveteChocolate, "Sorvete de Chocolate");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesSorveteMisto, "Sorvete Misto");
+        adicionarDoceSelecionado(docesSelecionados, comboDocesSorveteMorango, "Sorvete de Morango");
+
+        // Mostra a próxima tela
+        cardLayout.show(mainPanel, "cyberSweets");
+
+        // Converte a lista para array de String
+        String[] arrayDoces = docesSelecionados.toArray(new String[0]);
+        for (String doce : arrayDoces) {
+            System.out.println(doce);
+        }
+    } else {
+        JOptionPane.showMessageDialog(DocesView.this,
+                "Selecione pelo menos um doce.",
+                "Erro",
+                JOptionPane.ERROR_MESSAGE);
+    }
+}
+
+// Método para adicionar ou atualizar doce selecionado à lista
+private void adicionarDoceSelecionado(List<String> lista, JComboBox<String> comboBox, String nomeDoce) {
+    String quantidade = (String) comboBox.getSelectedItem();
+    if (!"0".equals(quantidade)) {
+        // Verifica se o doce já está na lista e atualiza a quantidade
+        boolean encontrado = false;
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).startsWith(nomeDoce)) {
+                lista.set(i, nomeDoce + " - Quantidade: " + quantidade);
+                encontrado = true;
+                break;
+            }
+        }
+        // Se não foi encontrado, adiciona o doce à lista
+        if (!encontrado) {
+            lista.add(nomeDoce + " - Quantidade: " + quantidade);
+        }
+    } else {
+        // Remove o doce da lista se a quantidade for "0"
+        removeDoce(lista, nomeDoce);
+    }
+}
+
+// Método para remover doce da lista
+private void removeDoce(List<String> lista, String nomeDoce) {
+    for (int i = 0; i < lista.size(); i++) {
+        if (lista.get(i).startsWith(nomeDoce)) {
+            lista.remove(i);
+            break; // Como só deve haver um doce com o mesmo nome, podemos parar a remoção aqui
+        }
+    }
+}
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
