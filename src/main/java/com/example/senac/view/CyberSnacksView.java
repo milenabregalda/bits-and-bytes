@@ -237,27 +237,27 @@ public class CyberSnacksView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoCyberSnacksSalgadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksSalgadosActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "salgados");
     }//GEN-LAST:event_botaoCyberSnacksSalgadosActionPerformed
 
     private void botaoCyberSnacksDocesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksDocesActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "doces");
     }//GEN-LAST:event_botaoCyberSnacksDocesActionPerformed
 
     private void botaoCyberSnacksBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksBebidasActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "bebidas");
     }//GEN-LAST:event_botaoCyberSnacksBebidasActionPerformed
 
-    private void botaoCyberSnacksSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksSairActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoCyberSnacksSairActionPerformed
+    private void botaoCyberSnacksSairActionPerformed(java.awt.event.ActionEvent evt) {
+        System.exit(0);
+    }
 
     private void botaoCyberSnacksCombosSemanaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksCombosSemanaisActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "combosSemanais");
     }//GEN-LAST:event_botaoCyberSnacksCombosSemanaisActionPerformed
 
     private void botaoCyberSnacksFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksFinalizarCompraActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "confirmacaoPedido");
     }//GEN-LAST:event_botaoCyberSnacksFinalizarCompraActionPerformed
 
 
