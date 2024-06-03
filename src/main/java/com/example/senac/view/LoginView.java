@@ -38,7 +38,7 @@ public class LoginView extends javax.swing.JPanel {
         textoLoginUsuario = new javax.swing.JLabel();
         campoLoginCPFEmail = new javax.swing.JTextField();
         textoLoginSenha = new javax.swing.JLabel();
-        campoLoginSenha = new javax.swing.JTextField();
+        campoLoginSenha = new javax.swing.JPasswordField();
         textoLoginAindaNaoConta = new javax.swing.JLabel();
         botaoLoginCriarConta = new javax.swing.JButton();
         botaoLoginEntrar = new javax.swing.JButton();
@@ -83,10 +83,7 @@ public class LoginView extends javax.swing.JPanel {
         campoLoginSenha.setBackground(new java.awt.Color(73, 84, 111));
         campoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoLoginSenha.setForeground(new java.awt.Color(174, 174, 174));
-        campoLoginSenha.setText("  Digite sua senha");
         campoLoginSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
-        campoLoginSenha.setCaretColor(new java.awt.Color(73, 84, 111));
-        campoLoginSenha.setSelectedTextColor(new java.awt.Color(73, 84, 111));
         campoLoginSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoLoginSenhaActionPerformed(evt);
@@ -139,11 +136,11 @@ public class LoginView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quadradoLoginLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textoLoginSenha)
-                    .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textoLoginUsuario))
+                .addGroup(quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(textoLoginSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(textoLoginUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoLoginSenha))
                 .addGap(32, 32, 32))
         );
         quadradoLoginLayout.setVerticalGroup(
@@ -156,8 +153,8 @@ public class LoginView extends javax.swing.JPanel {
                 .addGap(29, 29, 29)
                 .addComponent(textoLoginSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(campoLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addComponent(campoLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addComponent(botaoLoginEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
