@@ -31,7 +31,7 @@ public class App extends JFrame {
         JPanel card4 = new JPanel(); // Adicione o painel para o botão de cancelar
 
         mainPanel.add(card1, "cyberSnacks"); // Nomeie como "cardAnterior" ou algo que descreva o conteúdo do painel
-        mainPanel.add(card2, "cardPersonalizacaoPedido");
+        mainPanel.add(card2, "cyberStation");
         mainPanel.add(card3, "cardConcluir"); // Nomeie como "cardConcluir"
         mainPanel.add(card4, "cardCancelar"); // Nomeie como "cardCancelar")
 

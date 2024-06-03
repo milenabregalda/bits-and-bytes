@@ -213,7 +213,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoConfirmacaoPedidoVoltarActionPerformed
 
     private void botaoConfirmacaoPedidoPersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoPersonalizarActionPerformed
-        cardLayout.show(mainPanel, "cardPersonalizacaoPedido");
+        cardLayout.show(mainPanel, "cyberStation");
     }//GEN-LAST:event_botaoConfirmacaoPedidoPersonalizarActionPerformed
 
     private void botaoConfirmacaoPedidoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoConcluirActionPerformed
