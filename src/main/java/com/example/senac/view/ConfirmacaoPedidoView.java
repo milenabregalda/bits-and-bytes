@@ -209,19 +209,19 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoConfirmacaoPedidoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoVoltarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "cyberSnacks");
     }//GEN-LAST:event_botaoConfirmacaoPedidoVoltarActionPerformed
 
     private void botaoConfirmacaoPedidoPersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoPersonalizarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "cyberStation");
     }//GEN-LAST:event_botaoConfirmacaoPedidoPersonalizarActionPerformed
 
     private void botaoConfirmacaoPedidoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoConcluirActionPerformed
-        // TODO add your handling code here:
+        cardLayout.show(mainPanel, "cardConcluir");
     }//GEN-LAST:event_botaoConfirmacaoPedidoConcluirActionPerformed
 
     private void botaoConfirmacaoPedidoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoCancelarActionPerformed
-        // TODO add your handling code here:
+        cardLayout.show(mainPanel, "cardCancelar");
     }//GEN-LAST:event_botaoConfirmacaoPedidoCancelarActionPerformed
 
 
