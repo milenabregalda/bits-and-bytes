@@ -1,24 +1,29 @@
 package com.example.senac.view;
-
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javassist.bytecode.Descriptor.Iterator;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import java.util.List;
 
 public class SalgadosView extends javax.swing.JPanel {
-
     /**
      * Creates new form Interface
      */
-
+    
     private CardLayout cardLayout;
     private JPanel mainPanel;
-     
+    String[] arraysalgado = new String[10];
     public SalgadosView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         initComponents();
     }
+   
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,6 +133,8 @@ public class SalgadosView extends javax.swing.JPanel {
         comboSalgadosEmpadaFrango.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         comboSalgadosEmpadaFrango.setForeground(new java.awt.Color(75, 75, 75));
         comboSalgadosEmpadaFrango.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        
+        
 
         textoSalgadosPaoQueijo.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         textoSalgadosPaoQueijo.setForeground(new java.awt.Color(195, 195, 195));
@@ -200,6 +207,7 @@ public class SalgadosView extends javax.swing.JPanel {
         precoSalgadosEmpadaFrango.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         precoSalgadosEmpadaFrango.setForeground(new java.awt.Color(27, 137, 75));
         precoSalgadosEmpadaFrango.setText("R$ 8.00");
+        
 
         precoSalgadosEmpadaCalabresa.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         precoSalgadosEmpadaCalabresa.setForeground(new java.awt.Color(27, 137, 75));
@@ -421,17 +429,101 @@ public class SalgadosView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoSalgadosVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalgadosVoltarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "cyberSnacks");
     }//GEN-LAST:event_botaoSalgadosVoltarActionPerformed
 
     private void botaoSalgadosFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalgadosFinalizarCompraActionPerformed
-        // TROCAR CARD AQUI
+            if(comboSalgadosEmpadaFrango.getSelectedItem()!="0" || comboSalgadosCoxinha.getSelectedItem()!="0" || comboSalgadosEmpada.getSelectedItem()!="0" || comboSalgadosEmpadaCalabresa.getSelectedItem()!="0" || comboSalgadosEnroladinho.getSelectedItem()!="0" || comboSalgadosPaoQueijo.getSelectedItem()!="0" || comboSalgadosPastelCarne.getSelectedItem()!="0" || comboSalgadosPastelCoracao.getSelectedItem()!="0" || comboSalgadosPastelFrango.getSelectedItem()!="0" || comboSalgadosPastelQueijo.getSelectedItem()!="0"){
+                cardLayout.show(mainPanel, "confirmacaoPedido");
+            }else{
+                JOptionPane.showMessageDialog(SalgadosView.this, 
+                "Insira uma opção ou volte.", 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE);   
+            }
+           
     }//GEN-LAST:event_botaoSalgadosFinalizarCompraActionPerformed
 
-    private void botaoSalgadosAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalgadosAdicionarAoCarrinhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoSalgadosAdicionarAoCarrinhoActionPerformed
+    private void botaoSalgadosAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {
+        // Verifica se alguma combobox foi selecionada com quantidade diferente de "0"
+        if (!"0".equals(comboSalgadosEmpadaFrango.getSelectedItem()) ||
+            !"0".equals(comboSalgadosCoxinha.getSelectedItem()) ||
+            !"0".equals(comboSalgadosEmpada.getSelectedItem()) ||
+            !"0".equals(comboSalgadosEmpadaCalabresa.getSelectedItem()) ||
+            !"0".equals(comboSalgadosEnroladinho.getSelectedItem()) ||
+            !"0".equals(comboSalgadosPaoQueijo.getSelectedItem()) ||
+            !"0".equals(comboSalgadosPastelCarne.getSelectedItem()) ||
+            !"0".equals(comboSalgadosPastelCoracao.getSelectedItem()) ||
+            !"0".equals(comboSalgadosPastelFrango.getSelectedItem()) ||
+            !"0".equals(comboSalgadosPastelQueijo.getSelectedItem())) {
+    
+            // Lista para armazenar os salgados selecionados
+            List<String> salgadosSelecionados = new ArrayList<>();
+    
+            // Adiciona os salgados selecionados à lista
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosEmpadaFrango, "Empada de Frango");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosCoxinha, "Coxinha");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosEmpada, "Empada");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosEmpadaCalabresa, "Empada Calabresa");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosEnroladinho, "Enroladinho");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosPaoQueijo, "Pão de Queijo");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosPastelCarne, "Pastel Carne");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosPastelCoracao, "Pastel Coração");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosPastelFrango, "Pastel Frango");
+            adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosPastelQueijo, "Pastel Queijo");
+    
+            // Mostra a próxima tela
+            cardLayout.show(mainPanel, "cyberSnacks");
+    
+            // Converte a lista para array de String
+            String[] arraySalgados = salgadosSelecionados.toArray(new String[0]);
+            for (String salgado : arraySalgados) {
+                System.out.println(salgado);
+            }
+        } else {
+            JOptionPane.showMessageDialog(SalgadosView.this, 
+                    "Selecione pelo menos um salgado.", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Método para adicionar ou atualizar salgado selecionado à lista
+    private void adicionarSalgadoSelecionado(List<String> lista, JComboBox<String> comboBox, String nomeSalgado) {
+        String quantidade = (String) comboBox.getSelectedItem();
+        if (!"0".equals(quantidade)) {
+            // Verifica se o salgado já está na lista e atualiza a quantidade
+            boolean encontrado = false;
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).startsWith(nomeSalgado)) {
+                    lista.set(i, nomeSalgado + " - Quantidade: " + quantidade);
+                    encontrado = true;
+                    break;
+                }
+            }
+            // Se não foi encontrado, adiciona o salgado à lista
+            if (!encontrado) {
+                lista.add(nomeSalgado + " - Quantidade: " + quantidade);
+            }
+        } else {
+            // Remove o salgado da lista se a quantidade for "0"
+            removeSalgado(lista, nomeSalgado);
+        }
+    }
+    
+    // Método para remover salgado da lista
+    private void removeSalgado(List<String> lista, String nomeSalgado) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).startsWith(nomeSalgado)) {
+                lista.remove(i);
+                break; // Como só deve haver um salgado com o mesmo nome, podemos parar a remoção aqui
+            }
+        }
+    }
+    
 
+
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoSalgadosAdicionarAoCarrinho;

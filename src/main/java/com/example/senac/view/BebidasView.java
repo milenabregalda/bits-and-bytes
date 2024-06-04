@@ -2,8 +2,18 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.ArrayList;
+import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 public class BebidasView extends javax.swing.JPanel {
 
@@ -424,16 +434,97 @@ public class BebidasView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoBebidasFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBebidasFinalizarCompraActionPerformed
-        // TROCAR CARD AQUI
+        if(comboBebidasCafeComLeite.getSelectedItem()!="0" || comboBebidasCafeGeladoCremoso.getSelectedItem()!="0" || comboBebidasCafeGeladoFrutasVermelhas.getSelectedItem()!="0" || comboBebidasCafePreto.getSelectedItem()!="0" || comboBebidasCappuccinoBaunilha.getSelectedItem()!="0" || comboBebidasCappuccinoCaramelo.getSelectedItem()!="0" || comboBebidasEspresso.getSelectedItem()!="0" || comboBebidasLimonadaFresca.getSelectedItem()!="0" || comboBebidasMoccha.getSelectedItem()!="0" || comboBebidasSmoothieRefrescante.getSelectedItem()!="0"){
+            cardLayout.show(mainPanel, "confirmacaoPedido");
+        }else{
+            JOptionPane.showMessageDialog(BebidasView.this, 
+            "Insira uma opção ou volte.", 
+            "Erro", 
+            JOptionPane.ERROR_MESSAGE);   
+        }
+        
     }//GEN-LAST:event_botaoBebidasFinalizarCompraActionPerformed
 
     private void botaoBebidasVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBebidasVoltarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "cyberSnacks");
     }//GEN-LAST:event_botaoBebidasVoltarActionPerformed
 
-    private void botaoBebidasAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBebidasAdicionarAoCarrinhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoBebidasAdicionarAoCarrinhoActionPerformed
+    private void botaoBebidasAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {
+        // Verifica se alguma combobox foi selecionada com quantidade diferente de "0"
+        if (!"0".equals(comboBebidasCafeComLeite.getSelectedItem()) ||
+            !"0".equals(comboBebidasCafeGeladoCremoso.getSelectedItem()) ||
+            !"0".equals(comboBebidasCafeGeladoFrutasVermelhas.getSelectedItem()) ||
+            !"0".equals(comboBebidasCafePreto.getSelectedItem()) ||
+            !"0".equals(comboBebidasCappuccinoBaunilha.getSelectedItem()) ||
+            !"0".equals(comboBebidasCappuccinoCaramelo.getSelectedItem()) ||
+            !"0".equals(comboBebidasEspresso.getSelectedItem()) ||
+            !"0".equals(comboBebidasLimonadaFresca.getSelectedItem()) ||
+            !"0".equals(comboBebidasMoccha.getSelectedItem()) ||
+            !"0".equals(comboBebidasSmoothieRefrescante.getSelectedItem())) {
+
+            // Lista para armazenar as bebidas selecionadas
+            List<String> bebidasSelecionadas = new ArrayList<>();
+
+            // Adiciona as bebidas selecionadas à lista
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasCafeComLeite, "Café com Leite");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasCafeGeladoCremoso, "Café Gelado Cremoso");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasCafeGeladoFrutasVermelhas, "Café Gelado Frutas Vermelhas");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasCafePreto, "Café Preto");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasCappuccinoBaunilha, "Cappuccino de Baunilha");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasCappuccinoCaramelo, "Cappuccino de Caramelo");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasEspresso, "Espresso");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasLimonadaFresca, "Limonada Fresca");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasMoccha, "Moccha");
+            adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasSmoothieRefrescante, "Smoothie Refrescante");
+
+            // Mostra a próxima tela
+            cardLayout.show(mainPanel, "cyberDrinks");
+
+            // Converte a lista para array de String
+            String[] arrayBebidas = bebidasSelecionadas.toArray(new String[0]);
+            for (String bebida : arrayBebidas) {
+                System.out.println(bebida);
+            }
+        } else {
+            JOptionPane.showMessageDialog(BebidasView.this,
+                    "Selecione pelo menos uma bebida.",
+                    "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // Método para adicionar ou atualizar bebida selecionada à lista
+    private void adicionarBebidaSelecionada(List<String> lista, JComboBox<String> comboBox, String nomeBebida) {
+        String quantidade = (String) comboBox.getSelectedItem();
+        if (!"0".equals(quantidade)) {
+            // Verifica se a bebida já está na lista e atualiza a quantidade
+            boolean encontrado = false;
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).startsWith(nomeBebida)) {
+                    lista.set(i, nomeBebida + " - Quantidade: " + quantidade);
+                    encontrado = true;
+                    break;
+                }
+            }
+            // Se não foi encontrado, adiciona a bebida à lista
+            if (!encontrado) {
+                lista.add(nomeBebida + " - Quantidade: " + quantidade);
+            }
+        } else {
+            // Remove a bebida da lista se a quantidade for "0"
+            removeBebida(lista, nomeBebida);
+        }
+    }
+
+    // Método para remover bebida da lista
+    private void removeBebida(List<String> lista, String nomeBebida) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).startsWith(nomeBebida)) {
+                lista.remove(i);
+                break; // Como só deve haver uma bebida com o mesmo nome, podemos parar a remoção aqui
+            }
+        }
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
