@@ -14,6 +14,10 @@ public class AppView extends JPanel {
     private BebidasView bebidasView;
     private CombosSemanaisView combosSemanaisView;
     private ConfirmacaoPedidoView confirmacaoPedidoView;
+    private PagamentoView pagamentoView;
+    private CreditoView creditoView;
+    private DebitoView debitoView;
+    private PixView pixView;
 
     /* Classe responsável por gerenciar todas as outras views. Uma instância dessa view é criada em App.java (main)
     E uma instância de todas as outras views são criadas aqui e gerenciadas por cardLayout. CardLayout dessa classe é
@@ -34,6 +38,10 @@ public class AppView extends JPanel {
         bebidasView = new BebidasView(cardLayout, painel);
         combosSemanaisView = new CombosSemanaisView(cardLayout, painel);
         confirmacaoPedidoView = new ConfirmacaoPedidoView(cardLayout, painel);
+        pagamentoView = new PagamentoView(cardLayout, painel);
+        creditoView = new CreditoView(cardLayout, painel);
+        debitoView = new DebitoView(cardLayout, painel);
+        pixView = new PixView(cardLayout, painel);
 
         // Painéis são adicionados ao cardLayout com um nome (String)
         painel.add(loginView, "login");
@@ -45,6 +53,10 @@ public class AppView extends JPanel {
         painel.add(bebidasView, "bebidas");
         painel.add(combosSemanaisView, "combosSemanais");
         painel.add(confirmacaoPedidoView, "confirmacaoPedido");
+        painel.add(pagamentoView, "pagamento");
+        painel.add(creditoView, "credito");
+        painel.add(debitoView, "debito");
+        painel.add(pixView, "pix");
 
         add(painel);
         cardLayout.show(painel, "login");
