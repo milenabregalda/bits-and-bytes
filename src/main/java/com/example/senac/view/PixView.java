@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class PixView extends javax.swing.JPanel {
 
@@ -201,11 +202,14 @@ public class PixView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConcluirActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Seu pedido foi concluído com sucesso. Agradecemos por escolher o Bits & Bytes, volte sempre!");
+        System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoConcluirActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
+        // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoCancelarActionPerformed
 
 

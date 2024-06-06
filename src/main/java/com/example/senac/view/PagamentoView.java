@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class PagamentoView extends javax.swing.JPanel {
 
@@ -248,11 +249,13 @@ public class PagamentoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoFinalizarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarPagamentoActionPerformed
-        // TODO add your handling code here:
+        cardLayout.show(mainPanel, "credito");
     }//GEN-LAST:event_botaoFinalizarPagamentoActionPerformed
 
     private void botaoCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarPedidoActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
+        // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoCancelarPedidoActionPerformed
 
     private void botaoCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCreditoActionPerformed

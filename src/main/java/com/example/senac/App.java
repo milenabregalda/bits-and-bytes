@@ -45,9 +45,6 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Saída no console para testar se o projeto está executando corretamente
-        System.out.println("Bits & Bytes");
-
         // Fazer a janela aparecer
         new App();
 
