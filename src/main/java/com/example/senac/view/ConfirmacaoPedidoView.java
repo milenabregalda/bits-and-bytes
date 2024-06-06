@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class ConfirmacaoPedidoView extends javax.swing.JPanel {
 
@@ -217,11 +218,13 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoConfirmacaoPedidoPersonalizarActionPerformed
 
     private void botaoConfirmacaoPedidoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoConcluirActionPerformed
-        cardLayout.show(mainPanel, "cardConcluir");
+        cardLayout.show(mainPanel, "pagamento");
     }//GEN-LAST:event_botaoConfirmacaoPedidoConcluirActionPerformed
 
     private void botaoConfirmacaoPedidoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoCancelarActionPerformed
-        cardLayout.show(mainPanel, "cardCancelar");
+        JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
+        // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoConfirmacaoPedidoCancelarActionPerformed
 
 
