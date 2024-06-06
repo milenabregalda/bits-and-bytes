@@ -2,8 +2,12 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.JFrame;
+
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class CreditoView extends javax.swing.JPanel {
 
@@ -195,11 +199,14 @@ public class CreditoView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "pagamento");
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConcluirActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Seu pedido foi concluído com sucesso. Agradecemos por escolher o Bits & Bytes, volte sempre!");
+        
+        JFrame janelaParaFechar = (JFrame) SwingUtilities.getWindowAncestor(this);
+        janelaParaFechar.dispose();
     }//GEN-LAST:event_botaoConcluirActionPerformed
 
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed

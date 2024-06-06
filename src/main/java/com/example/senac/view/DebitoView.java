@@ -176,7 +176,7 @@ public class DebitoView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
-        // TROCAR CARD AQUI
+        cardLayout.show(mainPanel, "pagamento");
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConcluirActionPerformed
