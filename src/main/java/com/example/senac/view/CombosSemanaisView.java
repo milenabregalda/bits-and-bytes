@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import java.util.Calendar;
 
 public class CombosSemanaisView extends javax.swing.JPanel {
 
@@ -25,8 +26,41 @@ public class CombosSemanaisView extends javax.swing.JPanel {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         initComponents();
+        habilitarComboDoDia();
     }
     
+    // Método que pega o dia de hoje e só habilita o combo desse dia para ser adicionado ao carrinho
+    private void habilitarComboDoDia() {
+        comboCombosSemanaisSegunda.setEnabled(false);
+        comboCombosSemanaisTerca.setEnabled(false);
+        comboCombosSemanaisQuarta.setEnabled(false);
+        comboCombosSemanaisQuinta.setEnabled(false);
+        comboCombosSemanaisSexta.setEnabled(false);
+        Calendar cal = Calendar.getInstance();
+        int diaDaSemana = cal.get(Calendar.DAY_OF_WEEK);
+    
+        switch (diaDaSemana) {
+            case Calendar.MONDAY:
+                comboCombosSemanaisSegunda.setEnabled(true);
+                break;
+            case Calendar.TUESDAY:
+                comboCombosSemanaisTerca.setEnabled(true);
+                break;
+            case Calendar.WEDNESDAY:
+                comboCombosSemanaisQuarta.setEnabled(true);
+                break;
+            case Calendar.THURSDAY:
+                comboCombosSemanaisQuinta.setEnabled(true);
+                break;
+            case Calendar.FRIDAY:
+                comboCombosSemanaisSexta.setEnabled(true);
+                break;
+            default:
+                // Se for sábado ou domingo, nenhum comboBox é habilitado
+                break;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
