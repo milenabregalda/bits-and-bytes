@@ -2,7 +2,7 @@ package com.example.senac.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "reservas_cyberstation")
@@ -21,12 +21,10 @@ public class ReservaCyberStation {
     private Date dataReserva;
 
     @Column(name = "hora_inicio", nullable = false)
-    @Temporal(TemporalType.TIME)
-    private Time horaInicio;
+    private LocalTime horaInicio;
 
     @Column(name = "hora_termino", nullable = false)
-    @Temporal(TemporalType.TIME)
-    private Time horaTermino;
+    private LocalTime horaTermino;
 
     @Column(name = "mesa", nullable = false)
     private int mesa;
@@ -38,7 +36,7 @@ public class ReservaCyberStation {
     public ReservaCyberStation() {
     }
 
-    public ReservaCyberStation(Usuario usuario, Date dataReserva, Time horaInicio, Time horaTermino, int mesa,
+    public ReservaCyberStation(Usuario usuario, Date dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa,
             Status status) {
         this.usuario = usuario;
         this.dataReserva = dataReserva;
@@ -72,19 +70,19 @@ public class ReservaCyberStation {
         this.dataReserva = dataReserva;
     }
 
-    public Time getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Time getHoraTermino() {
+    public LocalTime getHoraTermino() {
         return horaTermino;
     }
 
-    public void setHoraTermino(Time horaTermino) {
+    public void setHoraTermino(LocalTime horaTermino) {
         this.horaTermino = horaTermino;
     }
 
