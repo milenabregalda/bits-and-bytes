@@ -30,6 +30,13 @@ public class PedidoCyberSnack {
     public PedidoCyberSnack() {
     }
 
+    public PedidoCyberSnack(Pedido pedido, CyberSnack cyberSnack, int quantidade, float preco) {
+        this.pedido = pedido;
+        this.cyberSnack = cyberSnack;
+        this.quantidade = quantidade;
+        this.preco = preco;
+    }
+
     public PedidoCyberSnackId getId() {
         return id;
     }

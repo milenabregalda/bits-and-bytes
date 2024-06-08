@@ -26,8 +26,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nome, String cpf, String email, String senha, String telefone) {
-        this.id = id;
+    public Usuario(String nome, String cpf, String email, String senha, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
