@@ -11,7 +11,7 @@ public class Usuario {
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
 
-    @Column(name = "cpf", nullable = false, unique = true, length = 11)
+    @Column(name = "cpf", nullable = false, unique = true, length = 100)
     private String cpf;
 
     @Column(name = "email", nullable = false, unique = true, length = 100)
@@ -26,8 +26,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long id, String nome, String cpf, String email, String senha, String telefone) {
-        this.id = id;
+    public Usuario(String nome, String cpf, String email, String senha, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
