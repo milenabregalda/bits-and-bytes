@@ -6,57 +6,55 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import java.util.List;
-import com.example.senac.model.Usuario;
+import com.example.senac.model.CyberSnack;
 
-public class UsuarioController {
+public class CyberSnackController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
-    public UsuarioController() {
+    public CyberSnackController() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
         this.entityManager = entityManagerFactory.createEntityManager();
     }
 
-    // Método para criar um novo usuário
-    public Usuario criarUsuario(Usuario usuario) {
+    // Método para criar um novo CyberSnack
+    public CyberSnack criarCyberSnack(CyberSnack cyberSnack) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(usuario);
+            entityManager.persist(cyberSnack);
             entityManager.getTransaction().commit();
-            return usuario;
+            return cyberSnack;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Já existe um usuário cadastrado com este CPF ou e-mail.\nEm caso de dúvidas, contate um funcionário do Bits & Bytes.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
 
-    // Método para obter um usuário pelo ID
-    public Usuario obterUsuario(Long id) {
+    // Método para obter um CyberSnack pelo ID
+    public CyberSnack obterCyberSnack(Long id) {
         try {
-            return entityManager.find(Usuario.class, id);
+            return entityManager.find(CyberSnack.class, id);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
 
-    // Método para atualizar um usuário existente
-    public Usuario atualizarUsuario(Long id, Usuario usuarioAtualizado) {
+    // Método para atualizar um CyberSnack existente
+    public CyberSnack atualizarCyberSnack(Long id, CyberSnack cyberSnackAtualizado) {
         try {
             entityManager.getTransaction().begin();
-            Usuario usuario = entityManager.find(Usuario.class, id);
-            if (usuario != null) {
-                usuario.setNome(usuarioAtualizado.getNome());
-                usuario.setCpf(usuarioAtualizado.getCpf());
-                usuario.setEmail(usuarioAtualizado.getEmail());
-                usuario.setSenha(usuarioAtualizado.getSenha());
-                usuario.setTelefone(usuarioAtualizado.getTelefone());
-                entityManager.merge(usuario);
+            CyberSnack cyberSnack = entityManager.find(CyberSnack.class, id);
+            if (cyberSnack != null) {
+                cyberSnack.setNome(cyberSnackAtualizado.getNome());
+                cyberSnack.setTipo(cyberSnackAtualizado.getTipo());
+                cyberSnack.setPreco(cyberSnackAtualizado.getPreco());
+                entityManager.merge(cyberSnack);
             }
             entityManager.getTransaction().commit();
-            return usuario;
+            return cyberSnack;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -64,30 +62,30 @@ public class UsuarioController {
         }
     }
 
-    // Método para excluir um usuário
-    public String excluirUsuario(Long id) {
+    // Método para excluir um CyberSnack
+    public String excluirCyberSnack(Long id) {
         try {
             entityManager.getTransaction().begin();
-            Usuario usuario = entityManager.find(Usuario.class, id);
-            if (usuario != null) {
-                entityManager.remove(usuario);
+            CyberSnack cyberSnack = entityManager.find(CyberSnack.class, id);
+            if (cyberSnack != null) {
+                entityManager.remove(cyberSnack);
                 entityManager.getTransaction().commit();
-                return "Usuário excluído com sucesso.";
+                return "CyberSnack excluído com sucesso.";
             } else {
                 entityManager.getTransaction().rollback();
-                return "Usuário não encontrado.";
+                return "CyberSnack não encontrado.";
             }
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return "Erro ao excluir o usuário.";
+            return "Erro ao excluir o CyberSnack.";
         }
     }
 
-    // Método para listar todos os usuários
-    public List<Usuario> listarUsuarios() {
+    // Método para listar todos os CyberSnacks
+    public List<CyberSnack> listarCyberSnacks() {
         try {
-            TypedQuery<Usuario> query = entityManager.createQuery("SELECT u FROM Usuario u", Usuario.class);
+            TypedQuery<CyberSnack> query = entityManager.createQuery("SELECT c FROM CyberSnack c", CyberSnack.class);
             return query.getResultList();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);

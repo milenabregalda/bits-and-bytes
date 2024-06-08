@@ -6,11 +6,13 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
+import com.example.senac.view.AppView;
+import com.example.senac.view.ConfirmacaoPedidoView;
 
 import com.example.senac.controller.UsuarioController;
 import com.example.senac.model.Usuario;
-import com.example.senac.view.AppView;
-import com.example.senac.view.ConfirmacaoPedidoView;
+import com.example.senac.controller.CyberSnackController;
+import com.example.senac.model.CyberSnack;
 
 //import com.example.senac.model.seumodel;
 
@@ -31,39 +33,46 @@ public class App extends JFrame {
 
 
         
-        // - TESTANDO LÓGICA DE USUÁRIO
-        UsuarioController controller = new UsuarioController();
+        // - TESTANDO LÓGICA DE CYBERSNACK
+        CyberSnackController controller = new CyberSnackController();
 
-        // Criar um novo usuário
-        Usuario novoUsuario = new Usuario(null, "João Silva", "teste2", "teste2", "senha123", "123456789");
-        controller.criarUsuario(novoUsuario);
+        // Criar um novo CyberSnack
+        CyberSnack novoCyberSnack = new CyberSnack("Batata Frita", CyberSnack.Tipo.SALGADO, 12.50f);
+        controller.criarCyberSnack(novoCyberSnack);
 
-        Usuario novoUsuario2 = new Usuario(null, "João Silva", "testeList", "testeList", "senha123", "123456789");
-        controller.criarUsuario(novoUsuario2);
+        CyberSnack novoCyberSnack2 = new CyberSnack("Coca-Cola", CyberSnack.Tipo.BEBIDA, 5.00f);
+        controller.criarCyberSnack(novoCyberSnack2);
 
-        // Obter um usuário pelo ID
-        Usuario usuario = controller.obterUsuario(novoUsuario.getId());
-        System.out.println("Usuário encontrado: " + usuario.getNome());
-
-        // Atualizar um usuário
-        Usuario usuarioAtualizado = new Usuario(null, "João Souza", "att4", "att4", "novaSenha123", "123456789");
-        controller.atualizarUsuario(novoUsuario.getId(), usuarioAtualizado);
-        System.out.println("Usuário " + usuarioAtualizado.getNome() + " atualizado.");
-
-        // Listar todos os usuários
-        List<Usuario> usuarios = controller.listarUsuarios();
-        if (usuarios != null) {
-            System.out.println("Lista de usuários:");
-            for (Usuario u : usuarios) {
-                System.out.println("ID: " + u.getId() + ", Nome: " + u.getNome() + ", CPF: " + u.getCpf() + ", Email: " + u.getEmail());
-            }
+        // Obter um CyberSnack pelo ID
+        CyberSnack cyberSnack = controller.obterCyberSnack(novoCyberSnack.getId());
+        if (cyberSnack != null) {
+            System.out.println("CyberSnack encontrado: " + cyberSnack.getNome());
         } else {
-            System.out.println("Erro ao listar os usuários.");
+            System.out.println("CyberSnack não encontrado.");
         }
 
+        // Atualizar um CyberSnack
+        CyberSnack cyberSnackAtualizado = new CyberSnack("Batata Doce Frita", CyberSnack.Tipo.SALGADO, 15.00f);
+        CyberSnack atualizado = controller.atualizarCyberSnack(novoCyberSnack.getId(), cyberSnackAtualizado);
+        if (atualizado != null) {
+            System.out.println("CyberSnack " + atualizado.getNome() + " atualizado.");
+        } else {
+            System.out.println("Erro ao atualizar o CyberSnack.");
+        }
 
-        // Excluir um usuário
-        String resultado = controller.excluirUsuario(novoUsuario.getId());
+        // Listar todos os CyberSnacks
+        List<CyberSnack> cyberSnacks = controller.listarCyberSnacks();
+        if (cyberSnacks != null) {
+            System.out.println("Lista de CyberSnacks:");
+            for (CyberSnack c : cyberSnacks) {
+                System.out.println("ID: " + c.getId() + ", Nome: " + c.getNome() + ", Tipo: " + c.getTipo() + ", Preço: " + c.getPreco());
+            }
+        } else {
+            System.out.println("Erro ao listar os CyberSnacks.");
+        }
+
+        // Excluir um CyberSnack
+        String resultado = controller.excluirCyberSnack(novoCyberSnack.getId());
         System.out.println(resultado);
 
         // Fechar o EntityManager
