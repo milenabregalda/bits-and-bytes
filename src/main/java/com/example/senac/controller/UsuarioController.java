@@ -13,9 +13,23 @@ public class UsuarioController {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
+    private Usuario usuario;
+
+
+    public void criarObjetoUsuario(String nome, String cpf, String email, String senha, String telefone) {
+        usuario = new Usuario(nome, cpf, email, senha, telefone);
+    }
+
+    public Usuario getObjetoUsuario() {
+        return usuario;
+    }
+
+
+    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
+
     public UsuarioController() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        this.entityManager = entityManagerFactory.createEntityManager();
+        //this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        //this.entityManager = entityManagerFactory.createEntityManager();
     }
 
     // Método para criar um novo usuário

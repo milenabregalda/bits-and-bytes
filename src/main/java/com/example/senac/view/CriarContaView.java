@@ -2,6 +2,11 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.example.senac.controller.UsuarioController;
+import com.example.senac.model.Usuario;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -14,10 +19,22 @@ public class CriarContaView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
-     
-    public CriarContaView(CardLayout cardLayout, JPanel mainPanel) {
+
+    private UsuarioController usuarioController;
+    /*private static boolean primeiroClique = true;
+    
+    private static void limparNoPrimeiroClique(JTextField campo) {
+        boolean primeiroClique = true;
+        if (primeiroClique) {
+            campo.setText(""); // Limpa o texto
+                primeiroClique = false; // Define para false para que isso não aconteça novamente
+        }
+    }*/
+
+    public CriarContaView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.usuarioController = usuarioController;
         initComponents();
     }
     
@@ -309,19 +326,19 @@ public class CriarContaView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoCriarContaEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCriarContaEmailActionPerformed
-        // TODO add your handling code here:
+        //limparNoPrimeiroClique(campoCriarContaEmail);
     }//GEN-LAST:event_campoCriarContaEmailActionPerformed
 
     private void campoCriarContaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCriarContaNomeActionPerformed
-        // TODO add your handling code here:
+        //limparNoPrimeiroClique(campoCriarContaNome);
     }//GEN-LAST:event_campoCriarContaNomeActionPerformed
 
     private void campoCriarContaCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCriarContaCPFActionPerformed
-        // TODO add your handling code here:
+        //limparNoPrimeiroClique(campoCriarContaCPF);
     }//GEN-LAST:event_campoCriarContaCPFActionPerformed
 
     private void campoCriarContaTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCriarContaTelefoneActionPerformed
-        // TODO add your handling code here:
+        //limparNoPrimeiroClique(campoCriarContaTelefone);
     }//GEN-LAST:event_campoCriarContaTelefoneActionPerformed
 
     private void senhaCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaCriarContaActionPerformed
@@ -370,7 +387,25 @@ public class CriarContaView extends javax.swing.JPanel {
                 "Erro", 
                 JOptionPane.ERROR_MESSAGE);
         } else {
-                 cardLayout.show(mainPanel, "cyberStation");
+                //Criação do objeto usuário com dados inseridos
+                String nome = campoCriarContaNome.getText();
+                String cpf = campoCriarContaCPF.getText();
+                String telefone = campoCriarContaTelefone.getText();
+                String email = campoCriarContaEmail.getText();
+                String senha = new String(senhaCriarConta.getPassword());
+
+                // Criar um novo usuário com os dados fornecidos
+                try {
+                    usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
+                    Usuario usuario = usuarioController.getObjetoUsuario();
+                    System.out.println(usuario.toString());
+                    cardLayout.show(mainPanel, "cyberStation");
+                } catch (Exception e) {
+                    // Exibe uma mensagem de erro em um JOptionPane
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    // Imprime o stack trace da exceção para depuração
+                    e.printStackTrace();
+                }
         } 
     }//GEN-LAST:event_botaoCriarContaCadastrarSeActionPerformed
 

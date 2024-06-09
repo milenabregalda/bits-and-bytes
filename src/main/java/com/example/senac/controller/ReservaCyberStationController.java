@@ -13,6 +13,11 @@ public class ReservaCyberStationController {
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
+
+
+
+    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
+    
     public ReservaCyberStationController() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
         this.entityManager = entityManagerFactory.createEntityManager();

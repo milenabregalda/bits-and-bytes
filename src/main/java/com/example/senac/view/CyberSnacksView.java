@@ -19,6 +19,12 @@ public class CyberSnacksView extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
         initComponents();
     }
+
+    public static float converterStringPraNumero(String valorMonetario) {
+        String numeroString = valorMonetario.replaceAll("[^0-9.]", "");
+        float numero = Float.parseFloat(numeroString);
+        return numero;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

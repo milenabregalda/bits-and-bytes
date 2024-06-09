@@ -23,8 +23,7 @@ public class Usuario {
     @Column(name = "telefone", length = 15)
     private String telefone;
 
-    public Usuario() {
-    }
+    private static Long idContador = 0L;
 
     public Usuario(String nome, String cpf, String email, String senha, String telefone) {
         this.nome = nome;
@@ -32,6 +31,7 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
+        this.id = ++idContador; // Lógica que não é necessária com banco de dados
     }
 
     public Long getId() {
@@ -80,6 +80,12 @@ public class Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha
+                + ", telefone=" + telefone + "]";
     }
 }
 

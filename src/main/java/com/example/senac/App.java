@@ -20,8 +20,6 @@ import com.example.senac.model.Pedido;
 import com.example.senac.model.Pedido.TipoPagamento;
 import com.example.senac.model.PedidoCyberSnack;
 
-//import com.example.senac.model.seumodel;
-
 public class App extends JFrame {
 
     public App() {
@@ -35,11 +33,10 @@ public class App extends JFrame {
 
     public static void main(String[] args) {
         // Fazer a janela aparecer
-        //new App(); - TIREI PARA FAZER OS TESTES DE CONTROLLER
+        new App(); //- TIREI PARA FAZER OS TESTES DE CONTROLLER
 
         System.out.println("Teste se funciona.");
 
-        
         /*// - TESTES DE CONTROLLERS SÃO AQUI
         PedidoController controller = new PedidoController();
 
