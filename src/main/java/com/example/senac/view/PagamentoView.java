@@ -69,7 +69,8 @@ public class PagamentoView extends javax.swing.JPanel {
         areaValorTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         areaValorTotal.setForeground(new java.awt.Color(174, 174, 174));
         areaValorTotal.setRows(5);
-        areaValorTotal.setText("Aqui fica o valor total.");
+        //areaValorTotal.setText("Aqui fica o valor total.");
+        areaValorTotal.setText("R$ 74.40");
         areaValorTotal.setBorder(null);
         barraValorTotal.setViewportView(areaValorTotal);
 

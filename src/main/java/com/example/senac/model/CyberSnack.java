@@ -19,6 +19,8 @@ public class CyberSnack {
 
     @Column(name = "preco", nullable = false)
     private float preco;
+
+    private static Long idContador = 0L;
     
     public CyberSnack() {
     }
@@ -27,6 +29,7 @@ public class CyberSnack {
         this.nome = nome;
         this.tipo = tipo;
         this.preco = preco;
+        this.id = ++idContador; // Lógica que não é necessária com banco de dados
     }
 
     public Long getId() {

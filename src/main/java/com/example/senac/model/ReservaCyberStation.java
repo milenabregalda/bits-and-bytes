@@ -2,6 +2,7 @@ package com.example.senac.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -18,7 +19,7 @@ public class ReservaCyberStation {
 
     @Column(name = "data_reserva", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date dataReserva;
+    private LocalDate dataReserva;
 
     @Column(name = "hora_inicio", nullable = false)
     private LocalTime horaInicio;
@@ -33,10 +34,12 @@ public class ReservaCyberStation {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    private static Long idContador = 0L;
+
     public ReservaCyberStation() {
     }
 
-    public ReservaCyberStation(Usuario usuario, Date dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa,
+    public ReservaCyberStation(Usuario usuario, LocalDate dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa,
             Status status) {
         this.usuario = usuario;
         this.dataReserva = dataReserva;
@@ -44,6 +47,7 @@ public class ReservaCyberStation {
         this.horaTermino = horaTermino;
         this.mesa = mesa;
         this.status = status;
+        this.id = ++idContador; // Lógica que não é necessária com banco de dados
     }
 
     public Long getId() {
@@ -62,11 +66,11 @@ public class ReservaCyberStation {
         this.usuario = usuario;
     }
 
-    public Date getDataReserva() {
+    public LocalDate getDataReserva() {
         return dataReserva;
     }
 
-    public void setDataReserva(Date dataReserva) {
+    public void setDataReserva(LocalDate dataReserva) {
         this.dataReserva = dataReserva;
     }
 

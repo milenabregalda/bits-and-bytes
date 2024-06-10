@@ -38,4 +38,9 @@ public class PedidoCyberSnackId implements Serializable {
     public int hashCode() {
         return Objects.hash(pedidoId, cyberSnacksId);
     }
+
+    @Override
+    public String toString() {
+        return "PedidoCyberSnackId [pedidoId=" + pedidoId + ", cyberSnacksId=" + cyberSnacksId + "]";
+    }
 }

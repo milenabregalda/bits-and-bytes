@@ -3,8 +3,13 @@ package com.example.senac.view;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+import com.example.senac.controller.ReservaCyberStationController;
+import com.example.senac.model.ReservaCyberStation;
 
 public class ConfirmacaoPedidoView extends javax.swing.JPanel {
 
@@ -12,12 +17,50 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
      * Creates new form Interface
      */
 
+     String dadosPedidoPlaceHolder = "RESERVAS CYBERSTATION\n" +
+        "----------------------------------------\n" +
+        "ID: 1\n" +
+        "Usuário: Usuário\n" +
+        "Data: 2024-06-11\n" +
+        "Hora de Início: 13:00\n" +
+        "Hora de Término: 14:00\n" +
+        "Status: DISPONIVEL\n" +
+        "Preço (R$ 10.00/hora): R$ 10.00\n\n\n" +
+        
+        "CYBERSNACKS\n" +
+        "---------------------------------------\n" +
+        "Quantidade: 2\n" +
+        "Nome: Pão de Queijo\n" +
+        "Tipo: SALGADO\n" +
+        "Preço: 2x de R$ 10.00\n\n" +
+
+        "Quantidade: 1\n" +
+        "Nome: Sorvete Misto\n" +
+        "Tipo: DOCE\n" +
+        "Preço: R$ 11.00\n\n" +
+
+        "Quantidade: 1\n" +
+        "Nome: Café com Leite\n" +
+        "Tipo: BEBIDA\n" +
+        "Preço: R$ 10.00\n\n" +
+
+        "Quantidade: 1\n" +
+        "Nome: COMBO TERÇA-FEIRA SABOROSA\n" +
+        "Tipo: COMBO\n" +
+        "Preço: R$ 23.40\n\n" +
+
+        "\nTOTAL\n---------------------------------------\n" +
+        "R$ 74.40\n";
+
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private ReservaCyberStationController reservaCyberStationController;
+    List<ReservaCyberStation> reservas;
 
-    public ConfirmacaoPedidoView(CardLayout cardLayout, JPanel mainPanel) {
+    public ConfirmacaoPedidoView(CardLayout cardLayout, JPanel mainPanel, ReservaCyberStationController reservaCyberStationController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.reservaCyberStationController = reservaCyberStationController;
         initComponents();
     }
     
@@ -66,7 +109,8 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         areaConfirmacaoPedidoTexto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         areaConfirmacaoPedidoTexto.setForeground(new java.awt.Color(174, 174, 174));
         areaConfirmacaoPedidoTexto.setRows(5);
-        areaConfirmacaoPedidoTexto.setText("Aqui vão ficar os dados do pedido\n(de computadores e de comidas).\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n");
+        //areaConfirmacaoPedidoTexto.setText("Aqui vão ficar os dados do pedido\n(de computadores e de comidas).\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n");
+        areaConfirmacaoPedidoTexto.setText(dadosPedidoPlaceHolder);
         areaConfirmacaoPedidoTexto.setBorder(null);
         barraAreaConfirmacaoPedido.setViewportView(areaConfirmacaoPedidoTexto);
 

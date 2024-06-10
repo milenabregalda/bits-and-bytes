@@ -2,6 +2,10 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import com.example.senac.controller.UsuarioController;
+import com.example.senac.model.Usuario;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -14,10 +18,12 @@ public class LoginView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private UsuarioController usuarioController;
 
-    public LoginView(CardLayout cardLayout, JPanel mainPanel) {
+    public LoginView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.usuarioController = usuarioController; // Add isso aqui
         initComponents();
     }
     
@@ -223,13 +229,29 @@ public class LoginView extends javax.swing.JPanel {
     }//GEN-LAST:event_campoLoginSenhaActionPerformed
 
     private void botaoLoginEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginEntrarActionPerformed
+        //usuarioController.criarObjetoUsuario("Teste", "123", "email", "456", "tel");
+        Usuario usuario2 = usuarioController.getObjetoUsuario();
+        
         if (campoLoginCPFEmail.getText().equals("  CPF ou e-mail")) {
             JOptionPane.showMessageDialog(LoginView.this, 
             "Preencha todos os campos para fazer login.", 
             "Erro", 
             JOptionPane.ERROR_MESSAGE);
         } else {
-            cardLayout.show(mainPanel, "cyberStation");
+            if (usuario2 != null) {
+                String cpfEmail = campoLoginCPFEmail.getText();
+                String senha = new String(campoLoginSenha.getText());
+                System.out.println(cpfEmail);
+                System.out.println(senha);
+                if (cpfEmail.equals(usuario2.getCpf()) || cpfEmail.equals(usuario2.getEmail())) {
+                    cardLayout.show(mainPanel, "cyberStation");
+                }
+                else {
+                    JOptionPane.showMessageDialog(LoginView.this, "Não existe conta com esse CPF ou e-mail.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                    JOptionPane.showMessageDialog(LoginView.this, "Não existe conta com esse CPF ou e-mail.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_botaoLoginEntrarActionPerformed
 

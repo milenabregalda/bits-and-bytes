@@ -376,12 +376,12 @@ public class CombosSemanaisView extends javax.swing.JPanel {
             adicionarComboSelecionado(combosSelecionados, comboCombosSemanaisSexta, "Combo Semanal Sexta");
 
             // Mostra a próxima tela
-            cardLayout.show(mainPanel, "weeklyCombos");
+            cardLayout.show(mainPanel, "cyberSnacks");
 
             // Converte a lista para array de String
             String[] arrayCombos = combosSelecionados.toArray(new String[0]);
             for (String combo : arrayCombos) {
-                System.out.println(combo);
+                //System.out.println(combo);
             }
         } else {
             JOptionPane.showMessageDialog(CombosSemanaisView.this,

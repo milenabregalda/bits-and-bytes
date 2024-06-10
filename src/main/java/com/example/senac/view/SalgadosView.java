@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import java.util.List;
+import com.example.senac.controller.CyberSnackController;
 
 public class SalgadosView extends javax.swing.JPanel {
     /**
@@ -17,10 +18,18 @@ public class SalgadosView extends javax.swing.JPanel {
     
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    String[] arraysalgado = new String[10];
-    public SalgadosView(CardLayout cardLayout, JPanel mainPanel) {
+    private CyberSnackController cyberSnackController;
+
+    
+
+
+
+    //String[] arraysalgado = new String[10];
+
+    public SalgadosView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.cyberSnackController = cyberSnackController;
         initComponents();
     }
    
@@ -478,7 +487,7 @@ public class SalgadosView extends javax.swing.JPanel {
             // Converte a lista para array de String
             String[] arraySalgados = salgadosSelecionados.toArray(new String[0]);
             for (String salgado : arraySalgados) {
-                System.out.println(salgado);
+                //System.out.println(salgado);
             }
         } else {
             JOptionPane.showMessageDialog(SalgadosView.this, 
@@ -521,10 +530,6 @@ public class SalgadosView extends javax.swing.JPanel {
         }
     }
     
-
-
-  
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoSalgadosAdicionarAoCarrinho;
     private javax.swing.JButton botaoSalgadosFinalizarCompra;

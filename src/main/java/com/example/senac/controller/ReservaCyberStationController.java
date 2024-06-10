@@ -5,17 +5,41 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
+import java.util.Date;
+import java.time.LocalDate;
+//import java.sql.Date;
+import java.time.LocalTime;
 import java.util.List;
 import com.example.senac.model.ReservaCyberStation;
+import com.example.senac.model.ReservaCyberStation.Status;
+import com.example.senac.model.Usuario;
+import java.util.ArrayList;
 
 public class ReservaCyberStationController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
+    private List<ReservaCyberStation> reservas = new ArrayList<>();
+
+    public void criarObjetoReservaCyberStation(Usuario usuario, LocalDate dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa, Status status) {
+        ReservaCyberStation reserva = new ReservaCyberStation(usuario, dataReserva, horaInicio, horaTermino, mesa, status);
+        reservas.add(reserva);
+    }
+
+    public List<ReservaCyberStation> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<ReservaCyberStation> reservas) {
+        this.reservas = reservas;
+    }
+
+    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
+
     public ReservaCyberStationController() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        this.entityManager = entityManagerFactory.createEntityManager();
+        //this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        //this.entityManager = entityManagerFactory.createEntityManager();
     }
 
     // Método para criar uma nova ReservaCyberStation

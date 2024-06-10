@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import com.example.senac.controller.CyberSnackController;
 
 
 public class BebidasView extends javax.swing.JPanel {
@@ -23,14 +24,13 @@ public class BebidasView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private CyberSnackController cyberSnackController;
     
-    public BebidasView(CardLayout cardLayout, JPanel mainPanel) {
+    public BebidasView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.cyberSnackController = cyberSnackController;
         initComponents();
-        
-//        CardLayout layout = (CardLayout) cardLayoutPrincipal.getLayout();
-//        layout.show(cardLayoutPrincipal, "card1");
     }
     
     /**
@@ -478,12 +478,12 @@ public class BebidasView extends javax.swing.JPanel {
             adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasSmoothieRefrescante, "Smoothie Refrescante");
 
             // Mostra a próxima tela
-            cardLayout.show(mainPanel, "cyberDrinks");
+            cardLayout.show(mainPanel, "cyberSnacks");
 
             // Converte a lista para array de String
             String[] arrayBebidas = bebidasSelecionadas.toArray(new String[0]);
             for (String bebida : arrayBebidas) {
-                System.out.println(bebida);
+                //System.out.println(bebida);
             }
         } else {
             JOptionPane.showMessageDialog(BebidasView.this,
