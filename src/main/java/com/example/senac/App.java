@@ -32,15 +32,8 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Fazer a janela aparecer
-        new App(); //- TIREI PARA FAZER OS TESTES DE CONTROLLER
+        new App(); // Faz a janela aparecer
 
-        System.out.println("Teste se funciona.");
-
-        /*// - TESTES DE CONTROLLERS SÃO AQUI
-        PedidoController controller = new PedidoController();
-
-        // Fechar o EntityManager
-        controller.fechar(); */
+        System.out.println("Bits & Bytes CyberCafé.");
     }
 }

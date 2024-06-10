@@ -31,6 +31,10 @@ public class ReservaCyberStationController {
         return reservas;
     }
 
+    public void setReservas(List<ReservaCyberStation> reservas) {
+        this.reservas = reservas;
+    }
+
     // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
 
     public ReservaCyberStationController() {

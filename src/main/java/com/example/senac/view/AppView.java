@@ -48,7 +48,7 @@ public class AppView extends JPanel {
         docesView = new DocesView(cardLayout, painel, cyberSnackController);
         bebidasView = new BebidasView(cardLayout, painel, cyberSnackController);
         combosSemanaisView = new CombosSemanaisView(cardLayout, painel);
-        confirmacaoPedidoView = new ConfirmacaoPedidoView(cardLayout, painel);
+        confirmacaoPedidoView = new ConfirmacaoPedidoView(cardLayout, painel, reservaCyberStationController);
         pagamentoView = new PagamentoView(cardLayout, painel);
         creditoView = new CreditoView(cardLayout, painel);
         debitoView = new DebitoView(cardLayout, painel);
@@ -70,9 +70,7 @@ public class AppView extends JPanel {
         painel.add(pixView, "pix");
 
         add(painel);
-        cardLayout.show(painel, "cyberSnacks");
-        // ATENÇÃO: Trocar o nome "login" pela janela em que você está mexendo para mostrá-la direto na execução enquanto desenvolve,
-        // mas a versão o final começa com login
+        cardLayout.show(painel, "login");
         // Esse é o método que é chamado para trocar o conteúdo da janela, também colocá-lo nos JButtons necessários
         // Se o nome do cardLayout estiver errado, ele abrirá login.
     }

@@ -42,8 +42,6 @@ public class CyberStationView extends javax.swing.JPanel {
         preencherVetorDeBotoesDeMesas();
         verificarSeMesasOcupadas();
         definirCorDosBotoesDeMesas();
-
-        
     }
 
     // Por enquanto, esse método define que todas as mesas não estão ocupadas. Futuramente, terá conexão com banco:
@@ -777,46 +775,14 @@ public class CyberStationView extends javax.swing.JPanel {
                         reservaString += "----------------------------------\n\n";
                     }
                     
-                    System.out.println(reservaString);
+                    //System.out.println(reservaString);
 
                     
                     cardLayout.show(mainPanel, "cyberSnacks");
             } else {
                 JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             }
-
-            
-
-
         }
-
-        
-
-
-
-
-
-
-
-
-
-        /*// Criar um objeto Usuario
-        usuarioController.criarObjetoUsuario("Teste", "12345678901", "joao@example.com", "senha123", "987654321");
-        System.out.println("Criou");
-        // Obter o objeto Usuario criado
-        Usuario usuario = usuarioController.getObjetoUsuario();
-        System.out.println(usuario.toString());
-        System.out.println("Adicionou");
-        // Criar um objeto ReservaCyberStation
-        reservaCyberStationController.criarObjetoReservaCyberStation(usuario, new Date(), LocalTime.of(10, 0), LocalTime.of(12, 0), 1, Status.DISPONIVEL);
-
-        // Obter o objeto ReservaCyberStation criado
-        ReservaCyberStation reserva = reservaCyberStationController.getObjetoReservaCyberStation();
-        System.out.println("Pegou");
-        System.out.println(reserva.toString()); */
-
-        
-
     }//GEN-LAST:event_botaoCyberStationReservarActionPerformed
 
 

@@ -21,15 +21,6 @@ public class CriarContaView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private UsuarioController usuarioController;
-    /*private static boolean primeiroClique = true;
-    
-    private static void limparNoPrimeiroClique(JTextField campo) {
-        boolean primeiroClique = true;
-        if (primeiroClique) {
-            campo.setText(""); // Limpa o texto
-                primeiroClique = false; // Define para false para que isso não aconteça novamente
-        }
-    }*/
 
     public CriarContaView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
@@ -398,7 +389,7 @@ public class CriarContaView extends javax.swing.JPanel {
                 try {
                     usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
                     Usuario usuario = usuarioController.getObjetoUsuario();
-                    System.out.println(usuario.toString());
+                    //System.out.println(usuario.toString());
                     cardLayout.show(mainPanel, "cyberStation");
                 } catch (Exception e) {
                     // Exibe uma mensagem de erro em um JOptionPane

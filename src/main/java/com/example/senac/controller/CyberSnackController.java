@@ -23,7 +23,7 @@ public class CyberSnackController {
         cyberSnacks.add(snack);
     }
 
-    public List<CyberSnack> getCyberSnacks() {
+    public List<CyberSnack> getObjetosCyberSnacks() {
         return cyberSnacks;
     }
 

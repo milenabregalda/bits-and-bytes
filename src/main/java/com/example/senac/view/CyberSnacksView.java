@@ -18,6 +18,7 @@ public class CyberSnacksView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private CyberSnackController cyberSnackController;
+    
 
     public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
