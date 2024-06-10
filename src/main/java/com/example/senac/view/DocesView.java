@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import com.example.senac.controller.CyberSnackController;
 
 public class DocesView extends javax.swing.JPanel {
 
@@ -22,10 +23,12 @@ public class DocesView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private CyberSnackController cyberSnackController;
 
-    public DocesView(CardLayout cardLayout, JPanel mainPanel) {
+    public DocesView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.cyberSnackController = cyberSnackController;
         initComponents();
     }
     

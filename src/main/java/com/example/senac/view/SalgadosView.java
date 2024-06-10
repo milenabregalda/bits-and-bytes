@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import java.util.List;
+import com.example.senac.controller.CyberSnackController;
 
 public class SalgadosView extends javax.swing.JPanel {
     /**
@@ -17,10 +18,14 @@ public class SalgadosView extends javax.swing.JPanel {
     
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private CyberSnackController cyberSnackController;
+
     String[] arraysalgado = new String[10];
-    public SalgadosView(CardLayout cardLayout, JPanel mainPanel) {
+
+    public SalgadosView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.cyberSnackController = cyberSnackController;
         initComponents();
     }
    

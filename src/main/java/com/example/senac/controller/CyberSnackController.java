@@ -5,17 +5,33 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.example.senac.model.CyberSnack;
+import com.example.senac.model.CyberSnack.Tipo;
 
 public class CyberSnackController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
+    private List<CyberSnack> cyberSnacks = new ArrayList<>();
+
+    public void criarObjetoCyberSnack(String nome, Tipo tipo, float preco) {
+        CyberSnack snack = new CyberSnack(nome, tipo, preco);
+        cyberSnacks.add(snack);
+    }
+
+    public List<CyberSnack> getCyberSnacks() {
+        return cyberSnacks;
+    }
+
+    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
+
     public CyberSnackController() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        this.entityManager = entityManagerFactory.createEntityManager();
+        //this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        //this.entityManager = entityManagerFactory.createEntityManager();
     }
 
     // Método para criar um novo CyberSnack

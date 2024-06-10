@@ -2,6 +2,9 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import com.example.senac.controller.CyberSnackController;
+
 import java.awt.Color;
 import javax.swing.JButton;
 
@@ -14,9 +17,12 @@ public class CyberSnacksView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
-    public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel) {
+    private CyberSnackController cyberSnackController;
+
+    public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.cyberSnackController = cyberSnackController;
         initComponents();
     }
 
