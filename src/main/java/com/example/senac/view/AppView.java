@@ -70,7 +70,7 @@ public class AppView extends JPanel {
         painel.add(pixView, "pix");
 
         add(painel);
-        cardLayout.show(painel, "login");
+        cardLayout.show(painel, "criarConta");
         // Esse é o método que é chamado para trocar o conteúdo da janela, também colocá-lo nos JButtons necessários
         // Se o nome do cardLayout estiver errado, ele abrirá login.
     }

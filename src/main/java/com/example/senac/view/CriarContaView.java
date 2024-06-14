@@ -29,6 +29,23 @@ public class CriarContaView extends javax.swing.JPanel {
         initComponents();
     }
     
+    // Método simplificado para validar o CPF
+    private boolean validarCPF(String cpf) {
+        // Remove caracteres não numéricos
+        cpf = cpf.replaceAll("[^\\d]", "");
+
+        // Verifica se tem 11 dígitos e se os 9 primeiros são números
+        if (cpf.length() == 11) {
+            for (int i = 0; i < 9; i++) {
+                if (!Character.isDigit(cpf.charAt(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,7 +116,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaCPF.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaCPF.setText("  CPF");
-        campoCriarContaCPF.setToolTipText("CPF"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
+        campoCriarContaCPF.setToolTipText("CPF (somente números)"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaCPF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaCPF.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaCPF.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -372,21 +389,28 @@ public class CriarContaView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCriarContaConcordaTermosActionPerformed
 
     private void botaoCriarContaCadastrarSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaCadastrarSeActionPerformed
-        
+        String cpf = campoCriarContaCPF.getText();
+        boolean cpfValido = validarCPF(cpf);
         if (campoCriarContaNome.getText().equals("  Nome completo") ||
             campoCriarContaCPF.getText().equals("  CPF") ||
             campoCriarContaTelefone.getText().equals("  Número de telefone") ||
             campoCriarContaEmail.getText().equals("  E-mail") ||
-            !caixaCriarContaConcordaTermos.isSelected()) {
+            !caixaCriarContaConcordaTermos.isSelected() || !cpfValido) {
                     
                 JOptionPane.showMessageDialog(CriarContaView.this, 
-                "Preencha todos os campos e concorde com os termos para criar a conta.", 
+                "Preencha todos os campos corretamente e concorde com os termos para criar a conta.", 
                 "Erro", 
                 JOptionPane.ERROR_MESSAGE);
+                if (!cpfValido) {
+                    JOptionPane.showMessageDialog(CriarContaView.this, 
+                    "CPF inválido.", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+                }
         } else {
                 //Criação do objeto usuário com dados inseridos
                 String nome = campoCriarContaNome.getText();
-                String cpf = campoCriarContaCPF.getText();
+                //String cpf = campoCriarContaCPF.getText();
                 String telefone = campoCriarContaTelefone.getText();
                 String email = campoCriarContaEmail.getText();
                 String senha = new String(senhaCriarConta.getPassword());
