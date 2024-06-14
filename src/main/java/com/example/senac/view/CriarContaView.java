@@ -388,47 +388,58 @@ public class CriarContaView extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, termosDeUsoEPoliticaDePrivacidade, "Termos de uso e Política de Privacidade", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botaoCriarContaConcordaTermosActionPerformed
 
-    private void botaoCriarContaCadastrarSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaCadastrarSeActionPerformed
+    private void botaoCriarContaCadastrarSeActionPerformed(java.awt.event.ActionEvent evt) {
         String cpf = campoCriarContaCPF.getText();
         boolean cpfValido = validarCPF(cpf);
+    
         if (campoCriarContaNome.getText().equals("  Nome completo") ||
             campoCriarContaCPF.getText().equals("  CPF") ||
             campoCriarContaTelefone.getText().equals("  Número de telefone") ||
             campoCriarContaEmail.getText().equals("  E-mail") ||
             !caixaCriarContaConcordaTermos.isSelected() || !cpfValido) {
-                    
-                JOptionPane.showMessageDialog(CriarContaView.this, 
+            
+            JOptionPane.showMessageDialog(CriarContaView.this, 
                 "Preencha todos os campos corretamente e concorde com os termos para criar a conta.", 
                 "Erro", 
                 JOptionPane.ERROR_MESSAGE);
-                if (!cpfValido) {
-                    JOptionPane.showMessageDialog(CriarContaView.this, 
+    
+            if (!cpfValido) {
+                JOptionPane.showMessageDialog(CriarContaView.this, 
                     "CPF inválido.", 
                     "Erro", 
                     JOptionPane.ERROR_MESSAGE);
-                }
+            }
         } else {
-                //Criação do objeto usuário com dados inseridos
-                String nome = campoCriarContaNome.getText();
-                //String cpf = campoCriarContaCPF.getText();
-                String telefone = campoCriarContaTelefone.getText();
-                String email = campoCriarContaEmail.getText();
-                String senha = new String(senhaCriarConta.getPassword());
-
-                // Criar um novo usuário com os dados fornecidos
-                try {
-                    usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
-                    Usuario usuario = usuarioController.getObjetoUsuario();
-                    //System.out.println(usuario.toString());
+            String nome = campoCriarContaNome.getText();
+            String telefone = campoCriarContaTelefone.getText();
+            String email = campoCriarContaEmail.getText();
+            String senha = new String(senhaCriarConta.getPassword());
+    
+            // Criar um novo usuário com os dados fornecidos
+            Usuario usuario = new Usuario(nome, cpf, email, senha, telefone);
+    
+            try {
+                // Persistir o usuário no banco de dados usando o controller
+                /*Usuario usuarioSalvo = usuarioController.cadastrarUsuarioNoBD(usuario);
+    
+                // Verificar se o usuário foi salvo corretamente
+                if (usuarioSalvo != null) {
+                    System.out.println("Usuário salvo com sucesso: " + usuarioSalvo);
                     cardLayout.show(mainPanel, "cyberStation");
-                } catch (Exception e) {
-                    // Exibe uma mensagem de erro em um JOptionPane
-                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-                    // Imprime o stack trace da exceção para depuração
-                    e.printStackTrace();
-                }
-        } 
-    }//GEN-LAST:event_botaoCriarContaCadastrarSeActionPerformed
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o usuário.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }*/
+                System.out.println("Em desenvolvimento");
+                cardLayout.show(mainPanel, "cyberStation");
+            } catch (Exception e) {
+                // Exibir uma mensagem de erro em um JOptionPane
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+                // Imprimir o stack trace da exceção para depuração
+                e.printStackTrace();
+            }
+        }
+    }
+    
 
     private void botaoCriarContaEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaEntrarActionPerformed
         cardLayout.show(mainPanel, "login");

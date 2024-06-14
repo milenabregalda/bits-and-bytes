@@ -16,8 +16,9 @@ public class UsuarioController {
     private Usuario usuario;
 
 
-    public void criarObjetoUsuario(String nome, String cpf, String email, String senha, String telefone) {
+    public Usuario criarObjetoUsuario(String nome, String cpf, String email, String senha, String telefone) {
         usuario = new Usuario(nome, cpf, email, senha, telefone);
+        return usuario;
     }
 
     public Usuario getObjetoUsuario() {
@@ -28,12 +29,37 @@ public class UsuarioController {
     // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
 
     public UsuarioController() {
-        //this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        //this.entityManager = entityManagerFactory.createEntityManager();
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        this.entityManager = entityManagerFactory.createEntityManager();
     }
 
-    // Método para criar um novo usuário
-    public Usuario criarUsuario(Usuario usuario) {
+    /*// Método para criar um novo usuário
+    public Usuario cadastrarUsuarioNoBD(Usuario usuario) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(usuario);
+            entityManager.getTransaction().commit();
+            return usuario;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Já existe um usuário cadastrado com este CPF ou e-mail.\nEm caso de dúvidas, contate um funcionário do Bits & Bytes.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        entityManager.getTransaction().begin();
+            entityManager.persist(usuario);
+            entityManager.getTransaction().commit();
+            return usuario;
+    }*/
+
+    /*public Usuario cadastrarUsuarioNoBD(Usuario usuario) {
+        entityManager.getTransaction().begin();
+        usuario = entityManager.merge(usuario);
+        entityManager.getTransaction().commit();
+        return usuario;
+    }*/
+
+    public Usuario cadastrarUsuarioNoBD(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
