@@ -73,6 +73,7 @@ public class LoginView extends javax.swing.JPanel {
         campoLoginCPFEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoLoginCPFEmail.setForeground(new java.awt.Color(174, 174, 174));
         campoLoginCPFEmail.setText("  CPF ou e-mail");
+        campoLoginCPFEmail.setToolTipText("CPF ou e-mail"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoLoginCPFEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoLoginCPFEmail.setCaretColor(new java.awt.Color(73, 84, 111));
         campoLoginCPFEmail.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -88,6 +89,7 @@ public class LoginView extends javax.swing.JPanel {
 
         campoLoginSenha.setBackground(new java.awt.Color(73, 84, 111));
         campoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        campoLoginSenha.setToolTipText("Digite sua senha"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui=
         campoLoginSenha.setForeground(new java.awt.Color(174, 174, 174));
         campoLoginSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoLoginSenha.addActionListener(new java.awt.event.ActionListener() {

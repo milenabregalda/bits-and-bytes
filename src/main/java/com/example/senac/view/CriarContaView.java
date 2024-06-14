@@ -71,6 +71,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaEmail.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaEmail.setText("  E-mail");
+        campoCriarContaEmail.setToolTipText("E-mail"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaEmail.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaEmail.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -84,6 +85,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaNome.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaNome.setText("  Nome completo");
+        campoCriarContaNome.setToolTipText("Nome completo"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaNome.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaNome.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -97,6 +99,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaCPF.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaCPF.setText("  CPF");
+        campoCriarContaCPF.setToolTipText("CPF"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaCPF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaCPF.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaCPF.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -110,6 +113,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaTelefone.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaTelefone.setText("  Número de telefone");
+        campoCriarContaTelefone.setToolTipText("Número de telefone"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaTelefone.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaTelefone.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -122,6 +126,7 @@ public class CriarContaView extends javax.swing.JPanel {
         senhaCriarConta.setBackground(new java.awt.Color(73, 84, 111));
         senhaCriarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         senhaCriarConta.setForeground(new java.awt.Color(174, 174, 174));
+        senhaCriarConta.setToolTipText("Senha"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         senhaCriarConta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         senhaCriarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +137,7 @@ public class CriarContaView extends javax.swing.JPanel {
         confirmarSenhaCriarConta.setBackground(new java.awt.Color(73, 84, 111));
         confirmarSenhaCriarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         confirmarSenhaCriarConta.setForeground(new java.awt.Color(174, 174, 174));
+        confirmarSenhaCriarConta.setToolTipText("Confirmação de senha"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         confirmarSenhaCriarConta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         confirmarSenhaCriarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
