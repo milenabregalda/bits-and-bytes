@@ -18,7 +18,6 @@ public class ReservaCyberStation {
     private Usuario usuario;
 
     @Column(name = "data_reserva", nullable = false)
-    @Temporal(TemporalType.DATE)
     private LocalDate dataReserva;
 
     @Column(name = "hora_inicio", nullable = false)

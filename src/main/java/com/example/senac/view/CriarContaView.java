@@ -29,6 +29,23 @@ public class CriarContaView extends javax.swing.JPanel {
         initComponents();
     }
     
+    // Método simplificado para validar o CPF
+    private boolean validarCPF(String cpf) {
+        // Remove caracteres não numéricos
+        cpf = cpf.replaceAll("[^\\d]", "");
+
+        // Verifica se tem 11 dígitos e se os 9 primeiros são números
+        if (cpf.length() == 11) {
+            for (int i = 0; i < 9; i++) {
+                if (!Character.isDigit(cpf.charAt(i))) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +88,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaEmail.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaEmail.setText("  E-mail");
+        campoCriarContaEmail.setToolTipText("E-mail"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaEmail.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaEmail.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -84,6 +102,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaNome.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaNome.setText("  Nome completo");
+        campoCriarContaNome.setToolTipText("Nome completo"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaNome.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaNome.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -97,6 +116,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaCPF.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaCPF.setText("  CPF");
+        campoCriarContaCPF.setToolTipText("CPF (somente números)"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaCPF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaCPF.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaCPF.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -110,6 +130,7 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaTelefone.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaTelefone.setText("  Número de telefone");
+        campoCriarContaTelefone.setToolTipText("Número de telefone"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaTelefone.setCaretColor(new java.awt.Color(73, 84, 111));
         campoCriarContaTelefone.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -122,6 +143,7 @@ public class CriarContaView extends javax.swing.JPanel {
         senhaCriarConta.setBackground(new java.awt.Color(73, 84, 111));
         senhaCriarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         senhaCriarConta.setForeground(new java.awt.Color(174, 174, 174));
+        senhaCriarConta.setToolTipText("Senha"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         senhaCriarConta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         senhaCriarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +154,7 @@ public class CriarContaView extends javax.swing.JPanel {
         confirmarSenhaCriarConta.setBackground(new java.awt.Color(73, 84, 111));
         confirmarSenhaCriarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         confirmarSenhaCriarConta.setForeground(new java.awt.Color(174, 174, 174));
+        confirmarSenhaCriarConta.setToolTipText("Confirmação de senha"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         confirmarSenhaCriarConta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         confirmarSenhaCriarConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,40 +388,58 @@ public class CriarContaView extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, termosDeUsoEPoliticaDePrivacidade, "Termos de uso e Política de Privacidade", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botaoCriarContaConcordaTermosActionPerformed
 
-    private void botaoCriarContaCadastrarSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaCadastrarSeActionPerformed
-        
+    private void botaoCriarContaCadastrarSeActionPerformed(java.awt.event.ActionEvent evt) {
+        String cpf = campoCriarContaCPF.getText();
+        boolean cpfValido = validarCPF(cpf);
+    
         if (campoCriarContaNome.getText().equals("  Nome completo") ||
             campoCriarContaCPF.getText().equals("  CPF") ||
             campoCriarContaTelefone.getText().equals("  Número de telefone") ||
             campoCriarContaEmail.getText().equals("  E-mail") ||
-            !caixaCriarContaConcordaTermos.isSelected()) {
-                    
-                JOptionPane.showMessageDialog(CriarContaView.this, 
-                "Preencha todos os campos e concorde com os termos para criar a conta.", 
+            !caixaCriarContaConcordaTermos.isSelected() || !cpfValido) {
+            
+            JOptionPane.showMessageDialog(CriarContaView.this, 
+                "Preencha todos os campos corretamente e concorde com os termos para criar a conta.", 
                 "Erro", 
                 JOptionPane.ERROR_MESSAGE);
+    
+            if (!cpfValido) {
+                JOptionPane.showMessageDialog(CriarContaView.this, 
+                    "CPF inválido.", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-                //Criação do objeto usuário com dados inseridos
-                String nome = campoCriarContaNome.getText();
-                String cpf = campoCriarContaCPF.getText();
-                String telefone = campoCriarContaTelefone.getText();
-                String email = campoCriarContaEmail.getText();
-                String senha = new String(senhaCriarConta.getPassword());
-
-                // Criar um novo usuário com os dados fornecidos
-                try {
-                    usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
-                    Usuario usuario = usuarioController.getObjetoUsuario();
-                    //System.out.println(usuario.toString());
+            String nome = campoCriarContaNome.getText();
+            String telefone = campoCriarContaTelefone.getText();
+            String email = campoCriarContaEmail.getText();
+            String senha = new String(senhaCriarConta.getPassword());
+    
+            // Criar um novo usuário com os dados fornecidos
+            Usuario usuario = new Usuario(nome, cpf, email, senha, telefone);
+    
+            try {
+                // Persistir o usuário no banco de dados usando o controller
+                /*Usuario usuarioSalvo = usuarioController.cadastrarUsuarioNoBD(usuario);
+    
+                // Verificar se o usuário foi salvo corretamente
+                if (usuarioSalvo != null) {
+                    System.out.println("Usuário salvo com sucesso: " + usuarioSalvo);
                     cardLayout.show(mainPanel, "cyberStation");
-                } catch (Exception e) {
-                    // Exibe uma mensagem de erro em um JOptionPane
-                    JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-                    // Imprime o stack trace da exceção para depuração
-                    e.printStackTrace();
-                }
-        } 
-    }//GEN-LAST:event_botaoCriarContaCadastrarSeActionPerformed
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o usuário.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }*/
+                System.out.println("Em desenvolvimento");
+                cardLayout.show(mainPanel, "cyberStation");
+            } catch (Exception e) {
+                // Exibir uma mensagem de erro em um JOptionPane
+                JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+                // Imprimir o stack trace da exceção para depuração
+                e.printStackTrace();
+            }
+        }
+    }
+    
 
     private void botaoCriarContaEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaEntrarActionPerformed
         cardLayout.show(mainPanel, "login");
