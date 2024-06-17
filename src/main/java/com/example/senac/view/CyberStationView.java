@@ -734,7 +734,7 @@ public class CyberStationView extends javax.swing.JPanel {
             "Erro", 
             JOptionPane.ERROR_MESSAGE);   
         } else {
-            int mesaSelecionada = Integer.parseInt(botaoSelecionado.getText());
+            /*int mesaSelecionada = Integer.parseInt(botaoSelecionado.getText());
             int dia = Integer.parseInt((String) comboCyberStationDia.getSelectedItem());
             int mes = Integer.parseInt((String) comboCyberStationMes.getSelectedItem());
             int ano = Integer.parseInt((String) comboCyberStationAno.getSelectedItem());
@@ -775,13 +775,13 @@ public class CyberStationView extends javax.swing.JPanel {
                         reservaString += "----------------------------------\n\n";
                     }
                     
-                    //System.out.println(reservaString);
+                    //System.out.println(reservaString);*/
 
                     
                     cardLayout.show(mainPanel, "cyberSnacks");
-            } else {
+            /*} else {
                 JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
         }
     }//GEN-LAST:event_botaoCyberStationReservarActionPerformed
 
