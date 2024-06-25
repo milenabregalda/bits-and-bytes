@@ -12,7 +12,6 @@ public class UsuarioController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-
     private Usuario usuario;
 
     public UsuarioController() {
@@ -20,49 +19,22 @@ public class UsuarioController {
         this.entityManager = entityManagerFactory.createEntityManager();
     }
 
-
-
-
-
-
+    // Método para criar o objeto Usuario com os dados inseridos na aplicação
     public Usuario criarObjetoUsuario(String nome, String cpf, String email, String senha, String telefone) {
         usuario = new Usuario(nome, cpf, email, senha, telefone);
         return usuario;
     }
 
-    public Usuario getObjetoUsuario() {
-        return usuario;
-    }
-
-    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
-
-    //public 
-
-
-    // Método para criar novo usuário - sem try catch para consertar a exceção
+    // Método para cadastrar o objeto Usuario no banco de dados
     public void cadastrarUsuario(Usuario usuario) {
-        entityManager.getTransaction().begin();
-        usuario = entityManager.merge(usuario);
-        entityManager.getTransaction().commit();
-        //return usuario;
-    }
-
-
-
-    // Método para criar um novo usuário - completo, mas com problemas
-    /*
-    public Usuario cadastrarUsuarioNoBD(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();
-            entityManager.persist(usuario);
+            usuario = entityManager.merge(usuario);
             entityManager.getTransaction().commit();
-            return usuario;
         } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Já existe um usuário cadastrado com este CPF ou e-mail.\nEm caso de dúvidas, contate um funcionário do Bits & Bytes.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }*/
+    }
 
     // Método para obter um usuário pelo ID
     public Usuario obterUsuario(Long id) {
@@ -114,6 +86,10 @@ public class UsuarioController {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return "Erro ao excluir o usuário.";
         }
+    }
+
+    public Usuario getObjetoUsuario() {
+        return usuario;
     }
 
     // Método para listar todos os usuários

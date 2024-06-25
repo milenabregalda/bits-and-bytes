@@ -415,33 +415,11 @@ public class CriarContaView extends javax.swing.JPanel {
             String email = campoCriarContaEmail.getText();
             String senha = new String(senhaCriarConta.getPassword());
     
-            // Criar um novo usuário com os dados fornecidos
-            Usuario usuario = new Usuario(nome, cpf, email, senha, telefone);
+            Usuario usuario = usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
             System.out.println(usuario.toString());
 
-            try {
-                // Persistir o usuário no banco de dados usando o controller
-                /*Usuario usuarioSalvo = usuarioController.cadastrarUsuarioNoBD(usuario);
-    
-                // Verificar se o usuário foi salvo corretamente
-                if (usuarioSalvo != null) {
-                    System.out.println("Usuário salvo com sucesso: " + usuarioSalvo);
-                    cardLayout.show(mainPanel, "cyberStation");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o usuário.", "Erro", JOptionPane.ERROR_MESSAGE);
-                }*/
-
-                usuarioController.cadastrarUsuario(usuario);
-
-
-                //System.out.println("Em desenvolvimento");
-                cardLayout.show(mainPanel, "cyberStation");
-            } catch (Exception e) {
-                // Exibir uma mensagem de erro em um JOptionPane
-                JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-                // Imprimir o stack trace da exceção para depuração
-                e.printStackTrace();
-            }
+            usuarioController.cadastrarUsuario(usuario);
+            cardLayout.show(mainPanel, "cyberStation");
         }
     }
     
