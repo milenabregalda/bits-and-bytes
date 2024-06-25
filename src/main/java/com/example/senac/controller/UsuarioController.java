@@ -15,6 +15,15 @@ public class UsuarioController {
 
     private Usuario usuario;
 
+    public UsuarioController() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        this.entityManager = entityManagerFactory.createEntityManager();
+    }
+
+
+
+
+
 
     public Usuario criarObjetoUsuario(String nome, String cpf, String email, String senha, String telefone) {
         usuario = new Usuario(nome, cpf, email, senha, telefone);
@@ -25,40 +34,23 @@ public class UsuarioController {
         return usuario;
     }
 
-
     // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
 
-    public UsuarioController() {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        this.entityManager = entityManagerFactory.createEntityManager();
-    }
+    //public 
 
-    /*// Método para criar um novo usuário
-    public Usuario cadastrarUsuarioNoBD(Usuario usuario) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(usuario);
-            entityManager.getTransaction().commit();
-            return usuario;
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Já existe um usuário cadastrado com este CPF ou e-mail.\nEm caso de dúvidas, contate um funcionário do Bits & Bytes.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
 
-        entityManager.getTransaction().begin();
-            entityManager.persist(usuario);
-            entityManager.getTransaction().commit();
-            return usuario;
-    }*/
-
-    /*public Usuario cadastrarUsuarioNoBD(Usuario usuario) {
+    // Método para criar novo usuário - sem try catch para consertar a exceção
+    public void cadastrarUsuario(Usuario usuario) {
         entityManager.getTransaction().begin();
         usuario = entityManager.merge(usuario);
         entityManager.getTransaction().commit();
-        return usuario;
-    }*/
+        //return usuario;
+    }
 
+
+
+    // Método para criar um novo usuário - completo, mas com problemas
+    /*
     public Usuario cadastrarUsuarioNoBD(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();
@@ -70,7 +62,7 @@ public class UsuarioController {
             JOptionPane.showMessageDialog(null, "Já existe um usuário cadastrado com este CPF ou e-mail.\nEm caso de dúvidas, contate um funcionário do Bits & Bytes.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-    }
+    }*/
 
     // Método para obter um usuário pelo ID
     public Usuario obterUsuario(Long id) {

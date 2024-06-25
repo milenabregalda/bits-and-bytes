@@ -417,7 +417,8 @@ public class CriarContaView extends javax.swing.JPanel {
     
             // Criar um novo usuário com os dados fornecidos
             Usuario usuario = new Usuario(nome, cpf, email, senha, telefone);
-    
+            System.out.println(usuario.toString());
+
             try {
                 // Persistir o usuário no banco de dados usando o controller
                 /*Usuario usuarioSalvo = usuarioController.cadastrarUsuarioNoBD(usuario);
@@ -429,7 +430,11 @@ public class CriarContaView extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar o usuário.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }*/
-                System.out.println("Em desenvolvimento");
+
+                usuarioController.cadastrarUsuario(usuario);
+
+
+                //System.out.println("Em desenvolvimento");
                 cardLayout.show(mainPanel, "cyberStation");
             } catch (Exception e) {
                 // Exibir uma mensagem de erro em um JOptionPane
