@@ -29,7 +29,7 @@ public class UsuarioController {
     public void cadastrarUsuario(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();
-            usuario = entityManager.merge(usuario);
+            entityManager.persist(usuario);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
