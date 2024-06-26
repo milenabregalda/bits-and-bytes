@@ -32,6 +32,7 @@ public class UsuarioController {
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
+            entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
