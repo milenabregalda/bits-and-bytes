@@ -1,7 +1,6 @@
 package com.example.senac.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
