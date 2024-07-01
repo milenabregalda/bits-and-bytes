@@ -2,7 +2,7 @@ package com.example.senac.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Objects;
 
 @Embeddable // Dado embutido em outra classe (PedidoCyberCafe)

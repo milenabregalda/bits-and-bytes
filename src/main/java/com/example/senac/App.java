@@ -1,24 +1,8 @@
 package com.example.senac;
-import javax.persistence.*;
+
 import java.awt.Container;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.CardLayout;
 import com.example.senac.view.AppView;
-import com.example.senac.view.ConfirmacaoPedidoView;
-
-import com.example.senac.controller.UsuarioController;
-import com.example.senac.model.Usuario;
-import com.example.senac.controller.CyberSnackController;
-import com.example.senac.controller.PedidoController;
-import com.example.senac.model.CyberSnack;
-import com.example.senac.model.Pedido;
-import com.example.senac.model.Pedido.TipoPagamento;
-import com.example.senac.model.PedidoCyberSnack;
 
 public class App extends JFrame {
 

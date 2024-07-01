@@ -20,10 +20,10 @@ public class Usuario {
     @Column(name = "senha", nullable = false, length = 100)
     private String senha;
 
-    @Column(name = "telefone", length = 15)
+    @Column(name = "telefone", length = 100)
     private String telefone;
 
-    private static Long idContador = 0L;
+    //private static Long idContador = 0L;
 
     public Usuario(String nome, String cpf, String email, String senha, String telefone) {
         this.nome = nome;
@@ -31,7 +31,10 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        this.id = ++idContador; // Lógica que não é necessária com banco de dados
+        //this.id = ++idContador; // Lógica que não é necessária com banco de dados
+    }
+
+    public Usuario() {
     }
 
     public Long getId() {
