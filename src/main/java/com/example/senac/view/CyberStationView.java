@@ -25,15 +25,18 @@ public class CyberStationView extends javax.swing.JPanel {
     private boolean[] seMesasCyberStationOcupadas = new boolean[15];
     private JButton[] botoesDasMesas = new JButton[15];
     private JButton botaoSelecionado = null;
+    private boolean primeiraVez = true;
 
     private UsuarioController usuarioController;
     private ReservaCyberStationController reservaCyberStationController;
+    private ConfirmacaoPedidoView confirmacaoPedidoView;
 
-    public CyberStationView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController, ReservaCyberStationController reservaCyberStationController) {
+    public CyberStationView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController, ReservaCyberStationController reservaCyberStationController, ConfirmacaoPedidoView confirmacaoPedidoView) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.usuarioController = usuarioController;
         this.reservaCyberStationController = reservaCyberStationController;
+        this.confirmacaoPedidoView = confirmacaoPedidoView;
         initComponents();
         preencherVetorDeBotoesDeMesas();
         verificarSeMesasOcupadas();
@@ -743,49 +746,64 @@ public class CyberStationView extends javax.swing.JPanel {
             Usuario usuario = usuarioController.getObjetoUsuario();
             System.out.println(usuario.toString());
 
-            // Criar um objeto ReservaCyberStation
-            if (usuario != null) {
-                System.out.println("Deu aqui 1");
-                ReservaCyberStation reserva = reservaCyberStationController.criarObjetoReservaCyberStation(
-                    usuario,
-                    LocalDate.of(ano, mes, dia),
-                    LocalTime.of(horaInicio, minutoInicio),
-                    LocalTime.of(horaTermino, minutoTermino),
-                    mesaSelecionada,
-                    Status.DISPONIVEL
-                );
-                System.out.println("Deu aqui 2");
-                System.out.println(reserva.toString());
+            if(primeiraVez) {
+                // Criar um objeto ReservaCyberStation
+                if (usuario != null) {
+                    ReservaCyberStation reserva = reservaCyberStationController.criarObjetoReservaCyberStation(
+                        usuario,
+                        LocalDate.of(ano, mes, dia),
+                        LocalTime.of(horaInicio, minutoInicio),
+                        LocalTime.of(horaTermino, minutoTermino),
+                        mesaSelecionada,
+                        Status.DISPONIVEL
+                    );
+                    System.out.println(reserva.toString());
 
-                /*boolean sucesso = reservaCyberStationController.cadastrarReservaCyberStation(reserva);
-                System.out.println("Deu aqui 3");
-                if (sucesso) {
-                    cardLayout.show(mainPanel, "cyberSnacks");
+        
+                    boolean sucesso = reservaCyberStationController.cadastrarReservaCyberStation(reserva);
+                    if (sucesso) {
+                        cardLayout.show(mainPanel, "cyberSnacks");
+                        //confirmacaoPedidoView.definirDadosPedido();
+                    }
+        
+                    //reservaCyberStationController.cadastrarReservaCyberStation(reserva);
+
+                        // Criar uma string com o título e as reservas
+
+                        /*// DEPOIS PARA CONFIRMAÇÃO PEDIDO
+                        String reservaString = "RESERVAS CYBERSTATION:\n";
+                        for (ReservaCyberStation reserva : reservas) {
+                            reservaString += "----------------------------------\n";
+                            reservaString += "ID: " + reserva.getId() + "\n";
+                            reservaString += "Usuário: " + reserva.getUsuario().getNome() + "\n";
+                            reservaString += "Data: " + reserva.getDataReserva() + "\n";
+                            reservaString += "Hora de Início: " + reserva.getHoraInicio() + "\n";
+                            reservaString += "Hora de Término: " + reserva.getHoraTermino() + "\n";
+                            reservaString += "Mesa: " + reserva.getMesa() + "\n";
+                            reservaString += "Status: " + reserva.getStatus() + "\n";
+                            reservaString += "----------------------------------\n\n";
+                        }*/
+
+                        /*List<ReservaCyberStation> reservas = reservaCyberStationController.getReservas();
+                        ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1);
+
+                        String reservaString = "RESERVAS CYBERSTATION:\n";
+                            reservaString += "----------------------------------\n";
+                            reservaString += "ID: " + ultimaReserva.getId() + "\n";
+                            reservaString += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
+                            reservaString += "Data: " + ultimaReserva.getDataReserva() + "\n";
+                            reservaString += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
+                            reservaString += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
+                            reservaString += "Mesa: " + ultimaReserva.getMesa() + "\n";
+                            reservaString += "Status: " + ultimaReserva.getStatus() + "\n";
+                            reservaString += "----------------------------------\n\n";
+
+                            confirmacaoPedidoView.dadosPedido = reservaString;*/
+                        
+                        //System.out.println(reservaString);
                 }
-                System.out.println("Deu aqui 4");*/
-    
-                reservaCyberStationController.cadastrarReservaCyberStation2(reserva);
-
-                    // Criar uma string com o título e as reservas
-
-                    /*// DEPOIS PARA CONFIRMAÇÃO PEDIDO
-                    String reservaString = "RESERVAS CYBERSTATION:\n";
-                    for (ReservaCyberStation reserva : reservas) {
-                        reservaString += "----------------------------------\n";
-                        reservaString += "ID: " + reserva.getId() + "\n";
-                        reservaString += "Usuário: " + reserva.getUsuario().getNome() + "\n";
-                        reservaString += "Data: " + reserva.getDataReserva() + "\n";
-                        reservaString += "Hora de Início: " + reserva.getHoraInicio() + "\n";
-                        reservaString += "Hora de Término: " + reserva.getHoraTermino() + "\n";
-                        reservaString += "Mesa: " + reserva.getMesa() + "\n";
-                        reservaString += "Status: " + reserva.getStatus() + "\n";
-                        reservaString += "----------------------------------\n\n";
-                    }*/
-                    
-                    //System.out.println(reservaString);
-
-                } else {
-                JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Atualizar reserva seria aqui
             }
         }
     }//GEN-LAST:event_botaoCyberStationReservarActionPerformed

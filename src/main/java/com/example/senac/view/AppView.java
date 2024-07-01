@@ -42,13 +42,14 @@ public class AppView extends JPanel {
         // O construtor das views passa o cardLayout e o painel para que elas possam trocar o card (conteúdo da janela) mostrado nos ActionListeners:
         loginView = new LoginView(cardLayout, painel, usuarioController); // Controller passado aqui
         criarContaView = new CriarContaView(cardLayout, painel, usuarioController);
-        cyberStationView = new CyberStationView(cardLayout, painel, usuarioController, reservaCyberStationController);
         cyberSnacksView = new CyberSnacksView(cardLayout, painel, cyberSnackController);
         salgadosView = new SalgadosView(cardLayout, painel, cyberSnackController);
         docesView = new DocesView(cardLayout, painel, cyberSnackController);
         bebidasView = new BebidasView(cardLayout, painel, cyberSnackController);
         combosSemanaisView = new CombosSemanaisView(cardLayout, painel);
         confirmacaoPedidoView = new ConfirmacaoPedidoView(cardLayout, painel, reservaCyberStationController);
+        cyberStationView = new CyberStationView(cardLayout, painel, usuarioController, reservaCyberStationController, confirmacaoPedidoView);
+        // Construtor de cyberStationView fica abaixo de confirmacaoPedidoView por ele ser um parâmetro
         pagamentoView = new PagamentoView(cardLayout, painel);
         creditoView = new CreditoView(cardLayout, painel);
         debitoView = new DebitoView(cardLayout, painel);

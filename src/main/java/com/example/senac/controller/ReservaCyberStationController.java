@@ -32,7 +32,7 @@ public class ReservaCyberStationController {
 
     // Método para criar uma nova ReservaCyberStation
     public boolean cadastrarReservaCyberStation(ReservaCyberStation reserva) {
-        /*try {
+        try {
             entityManager.getTransaction().begin();
             entityManager.persist(reserva);
             entityManager.getTransaction().commit();
@@ -41,33 +41,8 @@ public class ReservaCyberStationController {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
-        }*/
-
-        entityManager.getTransaction().begin();
-            entityManager.persist(reserva);
-            entityManager.getTransaction().commit();
-            return true;
-           
+        }
     }
-
-    public void cadastrarReservaCyberStation2(ReservaCyberStation reserva) {
-        /*try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(reserva);
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }*/
-
-        entityManager.getTransaction().begin();
-            entityManager.persist(reserva);
-            entityManager.getTransaction().commit();
-           
-    }
-
 
     // Método para obter uma ReservaCyberStation pelo ID
     public ReservaCyberStation obterReservaCyberStation(Long id) {

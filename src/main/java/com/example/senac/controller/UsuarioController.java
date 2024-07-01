@@ -106,7 +106,7 @@ public class UsuarioController {
         }
     }
 
-    // Método de login pelo CPF ou email e senha
+    /*// Método de login pelo CPF ou email e senha
     public Usuario login(String cpfOuEmail, String senha) {
         try {
             TypedQuery<Usuario> query = entityManager.createQuery(
@@ -117,7 +117,22 @@ public class UsuarioController {
         } catch (Exception e) {
             return null;
         }
+    }*/
+
+    // Método de login pelo CPF ou email e senha
+public Usuario login(String cpfOuEmail, String senha) {
+    try {
+        TypedQuery<Usuario> query = entityManager.createQuery(
+            "SELECT u FROM Usuario u WHERE (u.cpf = :cpfOuEmail OR u.email = :cpfOuEmail) AND u.senha = :senha", Usuario.class);
+        query.setParameter("cpfOuEmail", cpfOuEmail);
+        query.setParameter("senha", senha);
+        Usuario usuarioEncontrado = query.getSingleResult();
+        this.usuario = usuarioEncontrado; // Atualiza o campo usuario
+        return usuarioEncontrado;
+    } catch (Exception e) {
+        return null;
     }
+}
 
     // Método para fechar o EntityManager
     public void fechar() {
