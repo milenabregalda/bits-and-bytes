@@ -41,7 +41,7 @@ public class LoginView extends javax.swing.JPanel {
 
         cardLogin.setBackground(new java.awt.Color(36, 45, 65));
 
-        tituloLoginBitsBytes.setFont(new java.awt.Font("Segoe UI", 0, 100));
+        tituloLoginBitsBytes.setFont(new java.awt.Font("Segoe UI", 0, 100)); 
         tituloLoginBitsBytes.setForeground(new java.awt.Color(27, 137, 75));
         tituloLoginBitsBytes.setText("Bits & Bytes");
 
@@ -56,7 +56,7 @@ public class LoginView extends javax.swing.JPanel {
         textoLoginUsuario.setText("Usuário");
 
         campoLoginCPFEmail.setBackground(new java.awt.Color(73, 84, 111));
-        campoLoginCPFEmail.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        campoLoginCPFEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         campoLoginCPFEmail.setForeground(new java.awt.Color(174, 174, 174));
         campoLoginCPFEmail.setText("  CPF ou e-mail");
         campoLoginCPFEmail.setToolTipText("CPF ou e-mail");
@@ -74,7 +74,7 @@ public class LoginView extends javax.swing.JPanel {
         textoLoginSenha.setText("Senha");
 
         campoLoginSenha.setBackground(new java.awt.Color(73, 84, 111));
-        campoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 14));
+        campoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
         campoLoginSenha.setToolTipText("Digite sua senha");
         campoLoginSenha.setForeground(new java.awt.Color(174, 174, 174));
         campoLoginSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
@@ -133,28 +133,28 @@ public class LoginView extends javax.swing.JPanel {
                 .addGroup(quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(textoLoginSenha, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                    .addComponent(textoLoginUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoLoginSenha))
-                .addGap(32, 32, 32))
+                    .addComponent(campoLoginSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(textoLoginUsuario, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(47, 47, 47))
         );
         quadradoLoginLayout.setVerticalGroup(
             quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quadradoLoginLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(85, 85, 85)
                 .addComponent(textoLoginUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(textoLoginSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(campoLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(botaoLoginEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(botaoLoginEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoLoginAindaNaoConta)
                     .addComponent(botaoLoginCriarConta))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout cardLoginLayout = new javax.swing.GroupLayout(cardLogin);
@@ -162,38 +162,39 @@ public class LoginView extends javax.swing.JPanel {
         cardLoginLayout.setHorizontalGroup(
             cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardLoginLayout.createSequentialGroup()
-                .addContainerGap(417, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardLoginLayout.createSequentialGroup()
-                        .addComponent(tituloLoginBitsBytes)
-                        .addGap(425, 425, 425))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardLoginLayout.createSequentialGroup()
-                        .addGroup(cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(sloganLoginBitsBytes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(quadradoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(466, 466, 466))))
+                    .addComponent(tituloLoginBitsBytes)
+                    .addGroup(cardLoginLayout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(sloganLoginBitsBytes)))
+                .addGap(457, 457, 457))
+            .addGroup(cardLoginLayout.createSequentialGroup()
+                .addGap(466, 466, 466)
+                .addComponent(quadradoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(473, Short.MAX_VALUE))
         );
         cardLoginLayout.setVerticalGroup(
             cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardLoginLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(40, 40, 40)
                 .addComponent(tituloLoginBitsBytes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sloganLoginBitsBytes)
-                .addGap(34, 34, 34)
+                .addGap(33, 33, 33)
                 .addComponent(quadradoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout cardLayoutPrincipalLayout = new javax.swing.GroupLayout(cardLayoutPrincipal);
         cardLayoutPrincipal.setLayout(cardLayoutPrincipalLayout);
         cardLayoutPrincipalLayout.setHorizontalGroup(
             cardLayoutPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(cardLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         cardLayoutPrincipalLayout.setVerticalGroup(
             cardLayoutPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(cardLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -209,66 +210,43 @@ public class LoginView extends javax.swing.JPanel {
     }
 
     private void campoLoginCPFEmailActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
     private void campoLoginSenhaActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
     }
 
     private void botaoLoginEntrarActionPerformed(java.awt.event.ActionEvent evt) {
+        String cpfOuEmail = campoLoginCPFEmail.getText().trim();
+        String senha = new String(((JPasswordField) campoLoginSenha).getPassword());
 
-            String nome = campoLoginCPFEmail.getText();
-            String senha = new String(((JPasswordField) campoLoginSenha).getPassword());
-        
-            if (nome.isEmpty() || senha.isEmpty()) {
-                JOptionPane.showMessageDialog(LoginView.this, "Preencha todos os campos para fazer login.", "Erro", JOptionPane.ERROR_MESSAGE);
-            } else {
-                Usuario usuario = usuarioController.login(nome, senha);
-                if (usuario != null) {
-                    cardLayout.show(mainPanel, "cyberStation");
-                } else {
-                    JOptionPane.showMessageDialog(LoginView.this, "Nome ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        
-        /*String nome = campoLoginCPFEmail.getText();
-        String senha = new String(campoLoginSenha.getPassword());
-        
-        if (nome.equals("") || senha.equals("")) {
-            JOptionPane.showMessageDialog(LoginView.this, 
-            "Preencha todos os campos para fazer login.", 
-            "Erro", 
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Usuario usuario = usuarioController.login(nome, senha);
-        
-        if (usuario != null) {
-            cardLayout.show(mainPanel, "cyberStation");
+        if (cpfOuEmail.isEmpty() || senha.isEmpty()) {
+            JOptionPane.showMessageDialog(LoginView.this, "Preencha todos os campos para fazer login.", "Erro", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(LoginView.this, 
-            "Nome ou senha incorretos.", 
-            "Erro", 
-            JOptionPane.ERROR_MESSAGE);
-        }*/
+            Usuario usuario = usuarioController.login(cpfOuEmail, senha);
+            if (usuario != null) {
+                cardLayout.show(mainPanel, "cyberStation");
+            } else {
+                JOptionPane.showMessageDialog(LoginView.this, "CPF, email ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     private void botaoLoginCriarContaActionPerformed(java.awt.event.ActionEvent evt) {
-        cardLayout.show(mainPanel, "criarConta");
+        cardLayout.show(mainPanel, "cadastro");
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoLoginCriarConta;
     private javax.swing.JButton botaoLoginEntrar;
-    private javax.swing.JTextField campoLoginCPFEmail;
-    private javax.swing.JTextField campoLoginSenha;
     private javax.swing.JPanel cardLayoutPrincipal;
     private javax.swing.JPanel cardLogin;
+    private javax.swing.JTextField campoLoginCPFEmail;
+    private javax.swing.JPasswordField campoLoginSenha;
     private javax.swing.JPanel quadradoLogin;
     private javax.swing.JLabel sloganLoginBitsBytes;
     private javax.swing.JLabel textoLoginAindaNaoConta;
     private javax.swing.JLabel textoLoginSenha;
     private javax.swing.JLabel textoLoginUsuario;
     private javax.swing.JLabel tituloLoginBitsBytes;
-    // End of variables declaration//GEN-END:variables
 }

@@ -26,14 +26,16 @@ public class UsuarioController {
     }
 
     // Método para cadastrar o objeto Usuario no banco de dados
-    public void cadastrarUsuario(Usuario usuario) {
+    public boolean cadastrarUsuario(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
@@ -104,12 +106,25 @@ public class UsuarioController {
         }
     }
 
-    // Método de login pelo nome e senha
-    public Usuario login(String nome, String senha) {
+    // Método de login pelo nome e senha (substituir ou remover este método)
+    // public Usuario login(String nome, String senha) {
+    //     try {
+    //         TypedQuery<Usuario> query = entityManager.createQuery(
+    //             "SELECT u FROM Usuario u WHERE u.nome = :nome AND u.senha = :senha", Usuario.class);
+    //         query.setParameter("nome", nome);
+    //         query.setParameter("senha", senha);
+    //         return query.getSingleResult();
+    //     } catch (Exception e) {
+    //         return null;
+    //     }
+    // }
+
+    // Método de login pelo CPF ou email e senha
+    public Usuario login(String cpfOuEmail, String senha) {
         try {
             TypedQuery<Usuario> query = entityManager.createQuery(
-                "SELECT u FROM Usuario u WHERE u.nome = :nome AND u.senha = :senha", Usuario.class);
-            query.setParameter("nome", nome);
+                "SELECT u FROM Usuario u WHERE (u.cpf = :cpfOuEmail OR u.email = :cpfOuEmail) AND u.senha = :senha", Usuario.class);
+            query.setParameter("cpfOuEmail", cpfOuEmail);
             query.setParameter("senha", senha);
             return query.getSingleResult();
         } catch (Exception e) {
