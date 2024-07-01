@@ -17,42 +17,57 @@ public class ReservaCyberStationController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-
     private List<ReservaCyberStation> reservas = new ArrayList<>();
 
-    public void criarObjetoReservaCyberStation(Usuario usuario, LocalDate dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa, Status status) {
+    public ReservaCyberStationController() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        this.entityManager = entityManagerFactory.createEntityManager();
+    }
+
+    public ReservaCyberStation criarObjetoReservaCyberStation(Usuario usuario, LocalDate dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa, Status status) {
         ReservaCyberStation reserva = new ReservaCyberStation(usuario, dataReserva, horaInicio, horaTermino, mesa, status);
         reservas.add(reserva);
-    }
-
-    public List<ReservaCyberStation> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<ReservaCyberStation> reservas) {
-        this.reservas = reservas;
-    }
-
-    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
-
-    public ReservaCyberStationController() {
-        //this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        //this.entityManager = entityManagerFactory.createEntityManager();
+        return reserva;
     }
 
     // Método para criar uma nova ReservaCyberStation
-    public ReservaCyberStation criarReservaCyberStation(ReservaCyberStation reserva) {
-        try {
+    public boolean cadastrarReservaCyberStation(ReservaCyberStation reserva) {
+        /*try {
             entityManager.getTransaction().begin();
             entityManager.persist(reserva);
             entityManager.getTransaction().commit();
-            return reserva;
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
+            return false;
+        }*/
+
+        entityManager.getTransaction().begin();
+            entityManager.persist(reserva);
+            entityManager.getTransaction().commit();
+            return true;
+           
     }
+
+    public void cadastrarReservaCyberStation2(ReservaCyberStation reserva) {
+        /*try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(reserva);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }*/
+
+        entityManager.getTransaction().begin();
+            entityManager.persist(reserva);
+            entityManager.getTransaction().commit();
+           
+    }
+
 
     // Método para obter uma ReservaCyberStation pelo ID
     public ReservaCyberStation obterReservaCyberStation(Long id) {
@@ -105,6 +120,14 @@ public class ReservaCyberStationController {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return "Erro ao excluir a reserva.";
         }
+    }
+
+    public List<ReservaCyberStation> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<ReservaCyberStation> reservas) {
+        this.reservas = reservas;
     }
 
     // Método para listar todas as ReservasCyberStation

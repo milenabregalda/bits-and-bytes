@@ -32,8 +32,6 @@ public class ReservaCyberStation {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private static Long idContador = 0L;
-
     public ReservaCyberStation() {
     }
 
@@ -45,7 +43,6 @@ public class ReservaCyberStation {
         this.horaTermino = horaTermino;
         this.mesa = mesa;
         this.status = status;
-        this.id = ++idContador; // Lógica que não é necessária com banco de dados
     }
 
     public Long getId() {

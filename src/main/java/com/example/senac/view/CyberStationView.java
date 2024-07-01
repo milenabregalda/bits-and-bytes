@@ -730,7 +730,7 @@ public class CyberStationView extends javax.swing.JPanel {
             "Erro", 
             JOptionPane.ERROR_MESSAGE);   
         } else {
-            /*int mesaSelecionada = Integer.parseInt(botaoSelecionado.getText());
+            int mesaSelecionada = Integer.parseInt(botaoSelecionado.getText());
             int dia = Integer.parseInt((String) comboCyberStationDia.getSelectedItem());
             int mes = Integer.parseInt((String) comboCyberStationMes.getSelectedItem());
             int ano = Integer.parseInt((String) comboCyberStationAno.getSelectedItem());
@@ -741,23 +741,34 @@ public class CyberStationView extends javax.swing.JPanel {
 
             // Pegar um objeto usuário existente
             Usuario usuario = usuarioController.getObjetoUsuario();
+            System.out.println(usuario.toString());
 
             // Criar um objeto ReservaCyberStation
             if (usuario != null) {
-                reservaCyberStationController.criarObjetoReservaCyberStation(
+                System.out.println("Deu aqui 1");
+                ReservaCyberStation reserva = reservaCyberStationController.criarObjetoReservaCyberStation(
                     usuario,
                     LocalDate.of(ano, mes, dia),
                     LocalTime.of(horaInicio, minutoInicio),
                     LocalTime.of(horaTermino, minutoTermino),
                     mesaSelecionada,
-                    Status.DISPONIVEL);
-                    // Obter o objeto ReservaCyberStation criado
-                    List<ReservaCyberStation> reservas = reservaCyberStationController.getReservas();
+                    Status.DISPONIVEL
+                );
+                System.out.println("Deu aqui 2");
+                System.out.println(reserva.toString());
+
+                /*boolean sucesso = reservaCyberStationController.cadastrarReservaCyberStation(reserva);
+                System.out.println("Deu aqui 3");
+                if (sucesso) {
+                    cardLayout.show(mainPanel, "cyberSnacks");
+                }
+                System.out.println("Deu aqui 4");*/
     
+                reservaCyberStationController.cadastrarReservaCyberStation2(reserva);
 
                     // Criar uma string com o título e as reservas
 
-                    // DEPOIS PARA CONFIRMAÇÃO PEDIDO
+                    /*// DEPOIS PARA CONFIRMAÇÃO PEDIDO
                     String reservaString = "RESERVAS CYBERSTATION:\n";
                     for (ReservaCyberStation reserva : reservas) {
                         reservaString += "----------------------------------\n";
@@ -769,15 +780,13 @@ public class CyberStationView extends javax.swing.JPanel {
                         reservaString += "Mesa: " + reserva.getMesa() + "\n";
                         reservaString += "Status: " + reserva.getStatus() + "\n";
                         reservaString += "----------------------------------\n\n";
-                    }
+                    }*/
                     
-                    //System.out.println(reservaString);*/
+                    //System.out.println(reservaString);
 
-                    
-                    cardLayout.show(mainPanel, "cyberSnacks");
-            /*} else {
+                } else {
                 JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }*/
+            }
         }
     }//GEN-LAST:event_botaoCyberStationReservarActionPerformed
 
