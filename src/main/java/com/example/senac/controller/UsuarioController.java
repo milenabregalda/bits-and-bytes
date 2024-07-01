@@ -104,6 +104,19 @@ public class UsuarioController {
         }
     }
 
+    // Método de login pelo nome e senha
+    public Usuario login(String nome, String senha) {
+        try {
+            TypedQuery<Usuario> query = entityManager.createQuery(
+                "SELECT u FROM Usuario u WHERE u.nome = :nome AND u.senha = :senha", Usuario.class);
+            query.setParameter("nome", nome);
+            query.setParameter("senha", senha);
+            return query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     // Método para fechar o EntityManager
     public void fechar() {
         entityManager.close();
