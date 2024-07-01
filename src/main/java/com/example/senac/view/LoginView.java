@@ -22,6 +22,7 @@ public class LoginView extends javax.swing.JPanel {
     }
 
     private void initComponents() {
+
         cardLayoutPrincipal = new javax.swing.JPanel();
         cardLogin = new javax.swing.JPanel();
         tituloLoginBitsBytes = new javax.swing.JLabel();
@@ -41,25 +42,25 @@ public class LoginView extends javax.swing.JPanel {
 
         cardLogin.setBackground(new java.awt.Color(36, 45, 65));
 
-        tituloLoginBitsBytes.setFont(new java.awt.Font("Segoe UI", 0, 100)); 
+        tituloLoginBitsBytes.setFont(new java.awt.Font("Segoe UI", 0, 100)); // NOI18N
         tituloLoginBitsBytes.setForeground(new java.awt.Color(27, 137, 75));
         tituloLoginBitsBytes.setText("Bits & Bytes");
 
-        sloganLoginBitsBytes.setFont(new java.awt.Font("Segoe UI", 0, 30));
+        sloganLoginBitsBytes.setFont(new java.awt.Font("Segoe UI", 0, 30)); // NOI18N
         sloganLoginBitsBytes.setForeground(new java.awt.Color(195, 195, 195));
         sloganLoginBitsBytes.setText("Bytes de sabor, Bits de Diversão ");
 
         quadradoLogin.setBackground(new java.awt.Color(50, 60, 83));
 
-        textoLoginUsuario.setFont(new java.awt.Font("Segoe UI", 0, 22));
+        textoLoginUsuario.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         textoLoginUsuario.setForeground(new java.awt.Color(195, 195, 195));
         textoLoginUsuario.setText("Usuário");
 
         campoLoginCPFEmail.setBackground(new java.awt.Color(73, 84, 111));
-        campoLoginCPFEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
+        campoLoginCPFEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoLoginCPFEmail.setForeground(new java.awt.Color(174, 174, 174));
         campoLoginCPFEmail.setText("  CPF ou e-mail");
-        campoLoginCPFEmail.setToolTipText("CPF ou e-mail");
+        campoLoginCPFEmail.setToolTipText("CPF ou e-mail"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoLoginCPFEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoLoginCPFEmail.setCaretColor(new java.awt.Color(73, 84, 111));
         campoLoginCPFEmail.setSelectedTextColor(new java.awt.Color(73, 84, 111));
@@ -69,13 +70,13 @@ public class LoginView extends javax.swing.JPanel {
             }
         });
 
-        textoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 22));
+        textoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         textoLoginSenha.setForeground(new java.awt.Color(195, 195, 195));
         textoLoginSenha.setText("Senha");
 
         campoLoginSenha.setBackground(new java.awt.Color(73, 84, 111));
-        campoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); 
-        campoLoginSenha.setToolTipText("Digite sua senha");
+        campoLoginSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        campoLoginSenha.setToolTipText("Digite sua senha"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui=
         campoLoginSenha.setForeground(new java.awt.Color(174, 174, 174));
         campoLoginSenha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoLoginSenha.addActionListener(new java.awt.event.ActionListener() {
@@ -84,12 +85,12 @@ public class LoginView extends javax.swing.JPanel {
             }
         });
 
-        textoLoginAindaNaoConta.setFont(new java.awt.Font("Segoe UI", 0, 16));
+        textoLoginAindaNaoConta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         textoLoginAindaNaoConta.setForeground(new java.awt.Color(195, 195, 195));
         textoLoginAindaNaoConta.setText("Ainda não tem uma conta?");
 
         botaoLoginCriarConta.setBackground(new java.awt.Color(50, 60, 83));
-        botaoLoginCriarConta.setFont(new java.awt.Font("Segoe UI", 1, 16));
+        botaoLoginCriarConta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         botaoLoginCriarConta.setForeground(new java.awt.Color(84, 182, 133));
         botaoLoginCriarConta.setText("Criar conta");
         botaoLoginCriarConta.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -104,7 +105,7 @@ public class LoginView extends javax.swing.JPanel {
         botaoLoginEntrar.setBorderPainted(false);
         botaoLoginEntrar.setFocusPainted(false);
         botaoLoginEntrar.setBackground(new java.awt.Color(94, 34, 122));
-        botaoLoginEntrar.setFont(new java.awt.Font("Segoe UI", 1, 21));
+        botaoLoginEntrar.setFont(new java.awt.Font("Segoe UI", 1, 21)); // NOI18N
         botaoLoginEntrar.setForeground(new java.awt.Color(174, 174, 174));
         botaoLoginEntrar.setText("ENTRAR");
         botaoLoginEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -133,28 +134,28 @@ public class LoginView extends javax.swing.JPanel {
                 .addGroup(quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(textoLoginSenha, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                    .addComponent(campoLoginSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                    .addComponent(textoLoginUsuario, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(47, 47, 47))
+                    .addComponent(textoLoginUsuario, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoLoginSenha))
+                .addGap(32, 32, 32))
         );
         quadradoLoginLayout.setVerticalGroup(
             quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quadradoLoginLayout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(36, 36, 36)
                 .addComponent(textoLoginUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoLoginCPFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(textoLoginSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(botaoLoginEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(campoLoginSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(botaoLoginEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(quadradoLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textoLoginAindaNaoConta)
                     .addComponent(botaoLoginCriarConta))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout cardLoginLayout = new javax.swing.GroupLayout(cardLogin);
@@ -162,39 +163,38 @@ public class LoginView extends javax.swing.JPanel {
         cardLoginLayout.setHorizontalGroup(
             cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardLoginLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(417, Short.MAX_VALUE)
                 .addGroup(cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tituloLoginBitsBytes)
-                    .addGroup(cardLoginLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(sloganLoginBitsBytes)))
-                .addGap(457, 457, 457))
-            .addGroup(cardLoginLayout.createSequentialGroup()
-                .addGap(466, 466, 466)
-                .addComponent(quadradoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(473, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardLoginLayout.createSequentialGroup()
+                        .addComponent(tituloLoginBitsBytes)
+                        .addGap(425, 425, 425))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardLoginLayout.createSequentialGroup()
+                        .addGroup(cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(sloganLoginBitsBytes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(quadradoLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(466, 466, 466))))
         );
         cardLoginLayout.setVerticalGroup(
             cardLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cardLoginLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(31, 31, 31)
                 .addComponent(tituloLoginBitsBytes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sloganLoginBitsBytes)
-                .addGap(33, 33, 33)
+                .addGap(34, 34, 34)
                 .addComponent(quadradoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout cardLayoutPrincipalLayout = new javax.swing.GroupLayout(cardLayoutPrincipal);
         cardLayoutPrincipal.setLayout(cardLayoutPrincipalLayout);
         cardLayoutPrincipalLayout.setHorizontalGroup(
             cardLayoutPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cardLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         cardLayoutPrincipalLayout.setVerticalGroup(
             cardLayoutPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cardLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -207,7 +207,7 @@ public class LoginView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cardLayoutPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-    }
+    }// </editor-fold>//GEN-END:initComponents
 
     private void campoLoginCPFEmailActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -234,7 +234,7 @@ public class LoginView extends javax.swing.JPanel {
     }
 
     private void botaoLoginCriarContaActionPerformed(java.awt.event.ActionEvent evt) {
-        cardLayout.show(mainPanel, "cadastro");
+        cardLayout.show(mainPanel, "criarConta");
     }
 
     private javax.swing.JButton botaoLoginCriarConta;

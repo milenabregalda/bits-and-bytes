@@ -106,19 +106,6 @@ public class UsuarioController {
         }
     }
 
-    // Método de login pelo nome e senha (substituir ou remover este método)
-    // public Usuario login(String nome, String senha) {
-    //     try {
-    //         TypedQuery<Usuario> query = entityManager.createQuery(
-    //             "SELECT u FROM Usuario u WHERE u.nome = :nome AND u.senha = :senha", Usuario.class);
-    //         query.setParameter("nome", nome);
-    //         query.setParameter("senha", senha);
-    //         return query.getSingleResult();
-    //     } catch (Exception e) {
-    //         return null;
-    //     }
-    // }
-
     // Método de login pelo CPF ou email e senha
     public Usuario login(String cpfOuEmail, String senha) {
         try {
