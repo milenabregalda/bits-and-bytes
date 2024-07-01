@@ -413,8 +413,8 @@ public class CriarContaView extends javax.swing.JPanel {
             Usuario usuario = usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
             System.out.println(usuario.toString());
 
-            usuarioController.cadastrarUsuario(usuario);
-            cardLayout.show(mainPanel, "cyberStation");
+            boolean sucesso = usuarioController.cadastrarUsuario(usuario);
+            if (sucesso) cardLayout.show(mainPanel, "cyberStation");
         }
     }
     
