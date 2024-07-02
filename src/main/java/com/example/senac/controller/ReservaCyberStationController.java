@@ -108,7 +108,7 @@ public class ReservaCyberStationController {
     // Método para listar todas as ReservasCyberStation
     public List<ReservaCyberStation> listarReservas() {
         try {
-            TypedQuery<ReservaCyberStation> query = entityManager.createQuery("SELECT r FROM ReservaCyberStation r", ReservaCyberStation.class);
+            TypedQuery<ReservaCyberStation> query = entityManager.createQuery("SELECT r FROM ReservaCyberStation r ORDER BY r.id DESC", ReservaCyberStation.class);
             return query.getResultList();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);

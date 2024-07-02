@@ -6,6 +6,8 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import java.util.List;
+
+import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 
 public class UsuarioController {
@@ -38,6 +40,32 @@ public class UsuarioController {
             return false;
         }
     }
+
+    // Tá com problema na exceção
+    
+    /*// Método para cadastrar o objeto Usuario no banco de dados
+    public boolean cadastrarUsuario(Usuario usuario) throws UsuarioComNomeJaCadastradoException {
+        try {
+            // Verificar se o usuário já existe pelo nome
+            TypedQuery<Usuario> query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.nome = :nome", Usuario.class);
+            query.setParameter("nome", usuario.getNome());
+            List<Usuario> usuariosExistentes = query.getResultList();
+            if (!usuariosExistentes.isEmpty()) {
+                throw new UsuarioComNomeJaCadastradoException("Usuário com o nome " + usuario.getNome() + " já está cadastrado.");
+            }
+
+            entityManager.getTransaction().begin();
+            entityManager.persist(usuario);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (UsuarioComNomeJaCadastradoException e) {
+            throw e; // Lançar a exceção específica
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }*/
 
     // Método para obter um usuário pelo ID
     public Usuario obterUsuario(Long id) {
