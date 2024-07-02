@@ -763,7 +763,7 @@ public class CyberStationView extends javax.swing.JPanel {
                     boolean sucesso = reservaCyberStationController.cadastrarReservaCyberStation(reserva);
                     if (sucesso) {
                         cardLayout.show(mainPanel, "cyberSnacks");
-                        //confirmacaoPedidoView.definirDadosPedido();
+                        confirmacaoPedidoView.definirDadosPedido();
                     }
         
                     //reservaCyberStationController.cadastrarReservaCyberStation(reserva);
