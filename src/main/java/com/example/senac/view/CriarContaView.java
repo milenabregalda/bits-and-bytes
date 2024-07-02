@@ -3,6 +3,7 @@ package com.example.senac.view;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import com.example.senac.controller.UsuarioController;
+import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 import javax.swing.JOptionPane;
 
@@ -413,8 +414,14 @@ public class CriarContaView extends javax.swing.JPanel {
             Usuario usuario = usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
             System.out.println(usuario.toString());
 
-            boolean sucesso = usuarioController.cadastrarUsuario(usuario);
-            if (sucesso) cardLayout.show(mainPanel, "cyberStation");
+            try {
+                boolean sucesso = usuarioController.cadastrarUsuario(usuario);
+                if (sucesso) {
+                    cardLayout.show(mainPanel, "cyberStation");
+                }
+            } catch (UsuarioComNomeJaCadastradoException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     

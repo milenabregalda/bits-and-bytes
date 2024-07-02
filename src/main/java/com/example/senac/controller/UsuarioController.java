@@ -27,7 +27,7 @@ public class UsuarioController {
         return usuario;
     }
 
-    // Método para cadastrar o objeto Usuario no banco de dados
+    /*// Método para cadastrar o objeto Usuario no banco de dados
     public boolean cadastrarUsuario(Usuario usuario) {
         try {
             entityManager.getTransaction().begin();
@@ -39,11 +39,11 @@ public class UsuarioController {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-    }
+    }*/
 
     // Tá com problema na exceção
-    
-    /*// Método para cadastrar o objeto Usuario no banco de dados
+
+    // Método para cadastrar o objeto Usuario no banco de dados
     public boolean cadastrarUsuario(Usuario usuario) throws UsuarioComNomeJaCadastradoException {
         try {
             // Verificar se o usuário já existe pelo nome
@@ -65,7 +65,7 @@ public class UsuarioController {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-    }*/
+    }
 
     // Método para obter um usuário pelo ID
     public Usuario obterUsuario(Long id) {
