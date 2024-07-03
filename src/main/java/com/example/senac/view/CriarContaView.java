@@ -6,6 +6,7 @@ import com.example.senac.controller.UsuarioController;
 import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 import javax.swing.JOptionPane;
+import java.util.*;
 
 public class CriarContaView extends javax.swing.JPanel {
 
@@ -410,6 +411,7 @@ public class CriarContaView extends javax.swing.JPanel {
             String telefone = campoCriarContaTelefone.getText();
             String email = campoCriarContaEmail.getText();
             String senha = new String(senhaCriarConta.getPassword());
+                       
     
             Usuario usuario = usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
             System.out.println(usuario.toString());
@@ -426,7 +428,13 @@ public class CriarContaView extends javax.swing.JPanel {
     }
     
 
+    private void clear() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+    }
+
     private void botaoCriarContaEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaEntrarActionPerformed
+        LoginView.campoLoginCPFEmail.setText("Ae carai :D");
         cardLayout.show(mainPanel, "login");
     }//GEN-LAST:event_botaoCriarContaEntrarActionPerformed
 

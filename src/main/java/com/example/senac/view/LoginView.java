@@ -241,8 +241,8 @@ public class LoginView extends javax.swing.JPanel {
     private javax.swing.JButton botaoLoginEntrar;
     private javax.swing.JPanel cardLayoutPrincipal;
     private javax.swing.JPanel cardLogin;
-    private javax.swing.JTextField campoLoginCPFEmail;
-    private javax.swing.JPasswordField campoLoginSenha;
+    public static javax.swing.JTextField campoLoginCPFEmail;
+    public javax.swing.JPasswordField campoLoginSenha;
     private javax.swing.JPanel quadradoLogin;
     private javax.swing.JLabel sloganLoginBitsBytes;
     private javax.swing.JLabel textoLoginAindaNaoConta;
