@@ -18,12 +18,27 @@ public class CriarContaView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private UsuarioController usuarioController;
+    private LoginView loginView;
 
     public CriarContaView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.usuarioController = usuarioController;
         initComponents();
+    }
+
+    public void setLoginView(LoginView loginView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.loginView = loginView;
+    }
+
+    public void reiniciarCamposDeTextoCriarConta() {
+        campoCriarContaNome.setText("  Nome completo");
+        campoCriarContaCPF.setText("  CPF");
+        campoCriarContaTelefone.setText("  Número de telefone");
+        campoCriarContaEmail.setText("  E-mail");
+        senhaCriarConta.setText("");
+        confirmarSenhaCriarConta.setText("");
     }
     
     // Método simplificado para validar o CPF
@@ -426,15 +441,9 @@ public class CriarContaView extends javax.swing.JPanel {
             }
         }
     }
-    
-
-    private void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
-    }
 
     private void botaoCriarContaEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaEntrarActionPerformed
-        LoginView.campoLoginCPFEmail.setText("Ae carai :D");
+        loginView.reiniciarCamposDeTextoLogin();
         cardLayout.show(mainPanel, "login");
     }//GEN-LAST:event_botaoCriarContaEntrarActionPerformed
 

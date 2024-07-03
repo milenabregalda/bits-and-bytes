@@ -13,12 +13,23 @@ public class LoginView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private UsuarioController usuarioController;
+    private CriarContaView criarContaView;
 
     public LoginView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.usuarioController = usuarioController;
         initComponents();
+    }
+
+    public void setCriarContaView(CriarContaView criarContaView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.criarContaView = criarContaView;
+    }
+
+    public void reiniciarCamposDeTextoLogin() {
+        campoLoginCPFEmail.setText("  CPF ou e-mail");
+        campoLoginSenha.setText("");
     }
 
     private void initComponents() {
@@ -234,6 +245,7 @@ public class LoginView extends javax.swing.JPanel {
     }
 
     private void botaoLoginCriarContaActionPerformed(java.awt.event.ActionEvent evt) {
+        criarContaView.reiniciarCamposDeTextoCriarConta();
         cardLayout.show(mainPanel, "criarConta");
     }
 

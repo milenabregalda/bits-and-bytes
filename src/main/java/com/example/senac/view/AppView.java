@@ -54,6 +54,10 @@ public class AppView extends JPanel {
         creditoView = new CreditoView(cardLayout, painel);
         debitoView = new DebitoView(cardLayout, painel);
         pixView = new PixView(cardLayout, painel);
+        
+        // Como as referências dessas views são cruzadas, elas são adicionadas tardiamente para evitar problemas:
+        loginView.setCriarContaView(criarContaView);
+        criarContaView.setLoginView(loginView);
 
         // Painéis são adicionados ao cardLayout com um nome (String)
         painel.add(loginView, "login");
