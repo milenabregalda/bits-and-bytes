@@ -14,7 +14,41 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
      * Creates new form Interface
      */
 
-     String dadosPedidoPlaceHolder = "RESERVAS CYBERSTATION\n" +
+
+    public String dadosPedido;
+
+    public void atualizarDadosPedido() {
+        dadosPedido = definirDadosPedido();
+        areaConfirmacaoPedidoTexto.setText(dadosPedido); // Atualiza a área de texto com os dados do pedido
+    }
+
+    public String definirDadosPedido() {
+        String dados = "RESERVAS CYBERSTATION\n";
+        List<ReservaCyberStation> reservas = reservaCyberStationController.listarReservas();
+
+        if (reservas != null && !reservas.isEmpty()) {
+            System.out.println("Reservas encontradas: " + reservas.size());
+            ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1); // Pega a última reserva da lista
+
+            dados += "----------------------------------\n";
+            dados += "ID: " + ultimaReserva.getId() + "\n";
+            dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
+            dados += "Data: " + ultimaReserva.getDataReserva() + "\n";
+            dados += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
+            dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
+            dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
+            dados += "Status: " + ultimaReserva.getStatus() + "\n";
+            dados += "----------------------------------\n\n";
+        } else {
+            System.out.println("Nenhuma reserva encontrada.");
+        }
+
+        return dados;
+    }
+    
+    
+
+     /*String dadosPedidoPlaceHolder = "RESERVAS CYBERSTATION\n" +
         "----------------------------------------\n" +
         "ID: 1\n" +
         "Usuário: Usuário\n" +
@@ -47,7 +81,8 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         "Preço: R$ 23.40\n\n" +
 
         "\nTOTAL\n---------------------------------------\n" +
-        "R$ 74.40\n";
+        "R$ 74.40\n";*/
+
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
@@ -59,6 +94,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
         this.reservaCyberStationController = reservaCyberStationController;
         initComponents();
+        atualizarDadosPedido(); // Atualiza os dados do pedido ao iniciar a view
     }
     
     /**
@@ -107,7 +143,10 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         areaConfirmacaoPedidoTexto.setForeground(new java.awt.Color(174, 174, 174));
         areaConfirmacaoPedidoTexto.setRows(5);
         //areaConfirmacaoPedidoTexto.setText("Aqui vão ficar os dados do pedido\n(de computadores e de comidas).\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n\nAqui vão ficar os dados do pedido.\n");
-        areaConfirmacaoPedidoTexto.setText(dadosPedidoPlaceHolder);
+        
+        // MODIFICAR PARA dadosPedido DEPOIS
+        areaConfirmacaoPedidoTexto.setText(dadosPedido);
+
         areaConfirmacaoPedidoTexto.setBorder(null);
         barraAreaConfirmacaoPedido.setViewportView(areaConfirmacaoPedidoTexto);
 

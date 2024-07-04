@@ -6,6 +6,8 @@ import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import java.util.List;
+
+import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 
 public class UsuarioController {
@@ -26,14 +28,26 @@ public class UsuarioController {
     }
 
     // Método para cadastrar o objeto Usuario no banco de dados
-    public void cadastrarUsuario(Usuario usuario) {
+    public boolean cadastrarUsuario(Usuario usuario) throws UsuarioComNomeJaCadastradoException {
         try {
+            // Verificar se o usuário já existe pelo nome
+            TypedQuery<Usuario> query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.nome = :nome", Usuario.class);
+            query.setParameter("nome", usuario.getNome());
+            List<Usuario> usuariosExistentes = query.getResultList();
+            if (!usuariosExistentes.isEmpty()) {
+                throw new UsuarioComNomeJaCadastradoException("Usuário com o nome " + usuario.getNome() + " já está cadastrado.");
+            }
+
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
+            return true;
+        } catch (UsuarioComNomeJaCadastradoException e) {
+            throw e; // Lançar a exceção específica
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return false;
         }
     }
 
@@ -100,6 +114,21 @@ public class UsuarioController {
             return query.getResultList();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+    }
+
+    // Método de login pelo CPF ou email e senha
+    public Usuario login(String cpfOuEmail, String senha) {
+        try {
+            TypedQuery<Usuario> query = entityManager.createQuery(
+                "SELECT u FROM Usuario u WHERE (u.cpf = :cpfOuEmail OR u.email = :cpfOuEmail) AND u.senha = :senha", Usuario.class);
+            query.setParameter("cpfOuEmail", cpfOuEmail);
+            query.setParameter("senha", senha);
+            Usuario usuarioEncontrado = query.getSingleResult();
+            this.usuario = usuarioEncontrado; // Atualiza o campo usuario
+            return usuarioEncontrado;
+        } catch (Exception e) {
             return null;
         }
     }

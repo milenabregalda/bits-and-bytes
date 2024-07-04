@@ -3,8 +3,10 @@ package com.example.senac.view;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import com.example.senac.controller.UsuarioController;
+import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 import javax.swing.JOptionPane;
+import java.util.*;
 
 public class CriarContaView extends javax.swing.JPanel {
 
@@ -16,12 +18,27 @@ public class CriarContaView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private UsuarioController usuarioController;
+    private LoginView loginView;
 
     public CriarContaView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.usuarioController = usuarioController;
         initComponents();
+    }
+
+    public void setLoginView(LoginView loginView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.loginView = loginView;
+    }
+
+    public void reiniciarCamposDeTextoCriarConta() {
+        campoCriarContaNome.setText("  Nome completo");
+        campoCriarContaCPF.setText("  CPF");
+        campoCriarContaTelefone.setText("  Número de telefone");
+        campoCriarContaEmail.setText("  E-mail");
+        senhaCriarConta.setText("");
+        confirmarSenhaCriarConta.setText("");
     }
     
     // Método simplificado para validar o CPF
@@ -409,17 +426,24 @@ public class CriarContaView extends javax.swing.JPanel {
             String telefone = campoCriarContaTelefone.getText();
             String email = campoCriarContaEmail.getText();
             String senha = new String(senhaCriarConta.getPassword());
+                       
     
             Usuario usuario = usuarioController.criarObjetoUsuario(nome, cpf, email, senha, telefone);
             System.out.println(usuario.toString());
 
-            usuarioController.cadastrarUsuario(usuario);
-            cardLayout.show(mainPanel, "cyberStation");
+            try {
+                boolean sucesso = usuarioController.cadastrarUsuario(usuario);
+                if (sucesso) {
+                    cardLayout.show(mainPanel, "cyberStation");
+                }
+            } catch (UsuarioComNomeJaCadastradoException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
-    
 
     private void botaoCriarContaEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarContaEntrarActionPerformed
+        loginView.reiniciarCamposDeTextoLogin();
         cardLayout.show(mainPanel, "login");
     }//GEN-LAST:event_botaoCriarContaEntrarActionPerformed
 

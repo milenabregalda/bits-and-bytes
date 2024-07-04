@@ -17,40 +17,30 @@ public class ReservaCyberStationController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-
     private List<ReservaCyberStation> reservas = new ArrayList<>();
 
-    public void criarObjetoReservaCyberStation(Usuario usuario, LocalDate dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa, Status status) {
+    public ReservaCyberStationController() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        this.entityManager = entityManagerFactory.createEntityManager();
+    }
+
+    public ReservaCyberStation criarObjetoReservaCyberStation(Usuario usuario, LocalDate dataReserva, LocalTime horaInicio, LocalTime horaTermino, int mesa, Status status) {
         ReservaCyberStation reserva = new ReservaCyberStation(usuario, dataReserva, horaInicio, horaTermino, mesa, status);
         reservas.add(reserva);
-    }
-
-    public List<ReservaCyberStation> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<ReservaCyberStation> reservas) {
-        this.reservas = reservas;
-    }
-
-    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
-
-    public ReservaCyberStationController() {
-        //this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        //this.entityManager = entityManagerFactory.createEntityManager();
+        return reserva;
     }
 
     // Método para criar uma nova ReservaCyberStation
-    public ReservaCyberStation criarReservaCyberStation(ReservaCyberStation reserva) {
+    public boolean cadastrarReservaCyberStation(ReservaCyberStation reserva) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(reserva);
             entityManager.getTransaction().commit();
-            return reserva;
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
+            return false;
         }
     }
 
@@ -107,16 +97,38 @@ public class ReservaCyberStationController {
         }
     }
 
-    // Método para listar todas as ReservasCyberStation
+    public List<ReservaCyberStation> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<ReservaCyberStation> reservas) {
+        this.reservas = reservas;
+    }
+
     public List<ReservaCyberStation> listarReservas() {
         try {
-            TypedQuery<ReservaCyberStation> query = entityManager.createQuery("SELECT r FROM ReservaCyberStation r", ReservaCyberStation.class);
+            TypedQuery<ReservaCyberStation> query = entityManager.createQuery("SELECT r FROM ReservaCyberStation r ORDER BY r.id DESC", ReservaCyberStation.class);
+            query.setMaxResults(1); // Limita para retornar apenas uma reserva (a mais recente)
+            return query.getResultList();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace(); // Adicione para imprimir o erro completo no console
+            return null;
+        }
+    }
+
+
+    // antiga
+    // Método para listar todas as ReservasCyberStation
+    /*public List<ReservaCyberStation> listarReservas() {
+        try {
+            TypedQuery<ReservaCyberStation> query = entityManager.createQuery("SELECT r FROM ReservaCyberStation r ORDER BY r.id DESC", ReservaCyberStation.class);
             return query.getResultList();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-    }
+    }*/
 
     // Método para fechar o EntityManager
     public void fechar() {
