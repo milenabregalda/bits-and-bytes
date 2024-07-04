@@ -17,91 +17,19 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
 
     public String dadosPedido;
 
-    /*public String definirDadosPedido() {
-        String dados = "RESERVAS CYBERSTATION\\n";
-
-        List<ReservaCyberStation> reservas = reservaCyberStationController.getReservas();
-        ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1);
-
-        dados += "----------------------------------\n";
-        dados += "ID: " + ultimaReserva.getId() + "\n";
-        dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
-        dados += "Data: " + ultimaReserva.getDataReserva() + "\n";
-        dados += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
-        dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
-        dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
-        dados += "Status: " + ultimaReserva.getStatus() + "\n";
-        dados += "----------------------------------\n\n";
-
-        return dados;
-    }*/
-
-    /*public String definirDadosPedido() {
-        String dados = "RESERVAS CYBERSTATION\n";
-    
-        // Obtenha as reservas diretamente do banco de dados
-        List<ReservaCyberStation> reservas = reservaCyberStationController.listarReservas();
-        
-        if (reservas != null && !reservas.isEmpty()) {
-            System.out.println("Reservas encontradas: " + reservas.size());
-            ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1);
-    
-            dados += "----------------------------------\n";
-            dados += "ID: " + ultimaReserva.getId() + "\n";
-            dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
-            dados += "Data: " + ultimaReserva.getDataReserva() + "\n";
-            dados += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
-            dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
-            dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
-            dados += "Status: " + ultimaReserva.getStatus() + "\n";
-            dados += "----------------------------------\n\n";
-    
-            // Adicione aqui os dados dos snacks, se houver
-            dados += "CYBERSNACKS\n";
-            dados += "---------------------------------------\n";
-            dados += "Quantidade: 2\n";
-            dados += "Nome: Pão de Queijo\n";
-            dados += "Tipo: SALGADO\n";
-            dados += "Preço: 2x de R$ 10.00\n\n";
-            
-            dados += "Quantidade: 1\n";
-            dados += "Nome: Sorvete Misto\n";
-            dados += "Tipo: DOCE\n";
-            dados += "Preço: R$ 11.00\n\n";
-            
-            dados += "Quantidade: 1\n";
-            dados += "Nome: Café com Leite\n";
-            dados += "Tipo: BEBIDA\n";
-            dados += "Preço: R$ 10.00\n\n";
-            
-            dados += "Quantidade: 1\n";
-            dados += "Nome: COMBO TERÇA-FEIRA SABOROSA\n";
-            dados += "Tipo: COMBO\n";
-            dados += "Preço: R$ 23.40\n\n";
-    
-            dados += "\nTOTAL\n---------------------------------------\n";
-            dados += "R$ 74.40\n";
-        } else {
-            System.out.println("Nenhuma reserva encontrada.");
-        }
-    
-        return dados;
-    }*/
-
     public void atualizarDadosPedido() {
         dadosPedido = definirDadosPedido();
+        areaConfirmacaoPedidoTexto.setText(dadosPedido); // Atualiza a área de texto com os dados do pedido
     }
 
     public String definirDadosPedido() {
         String dados = "RESERVAS CYBERSTATION\n";
-    
-        // Obtenha as reservas diretamente do banco de dados
         List<ReservaCyberStation> reservas = reservaCyberStationController.listarReservas();
-        
+
         if (reservas != null && !reservas.isEmpty()) {
             System.out.println("Reservas encontradas: " + reservas.size());
-            ReservaCyberStation ultimaReserva = reservas.get(0); // Pega a primeira reserva da lista, que é a mais recente
-    
+            ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1); // Pega a última reserva da lista
+
             dados += "----------------------------------\n";
             dados += "ID: " + ultimaReserva.getId() + "\n";
             dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
@@ -111,36 +39,10 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
             dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
             dados += "Status: " + ultimaReserva.getStatus() + "\n";
             dados += "----------------------------------\n\n";
-    
-            // Adicione aqui os dados dos snacks, se houver
-            dados += "CYBERSNACKS\n";
-            dados += "---------------------------------------\n";
-            dados += "Quantidade: 2\n";
-            dados += "Nome: Pão de Queijo\n";
-            dados += "Tipo: SALGADO\n";
-            dados += "Preço: 2x de R$ 10.00\n\n";
-            
-            dados += "Quantidade: 1\n";
-            dados += "Nome: Sorvete Misto\n";
-            dados += "Tipo: DOCE\n";
-            dados += "Preço: R$ 11.00\n\n";
-            
-            dados += "Quantidade: 1\n";
-            dados += "Nome: Café com Leite\n";
-            dados += "Tipo: BEBIDA\n";
-            dados += "Preço: R$ 10.00\n\n";
-            
-            dados += "Quantidade: 1\n";
-            dados += "Nome: COMBO TERÇA-FEIRA SABOROSA\n";
-            dados += "Tipo: COMBO\n";
-            dados += "Preço: R$ 23.40\n\n";
-    
-            dados += "\nTOTAL\n---------------------------------------\n";
-            dados += "R$ 74.40\n";
         } else {
             System.out.println("Nenhuma reserva encontrada.");
         }
-    
+
         return dados;
     }
     
@@ -191,9 +93,8 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.reservaCyberStationController = reservaCyberStationController;
-        this.dadosPedido = definirDadosPedido();  // Use os dados reais
-        System.out.println("Dados do pedido: " + this.dadosPedido);  // Adicione esta linha para depuração
         initComponents();
+        atualizarDadosPedido(); // Atualiza os dados do pedido ao iniciar a view
     }
     
     /**
