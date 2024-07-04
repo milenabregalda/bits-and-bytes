@@ -27,22 +27,6 @@ public class UsuarioController {
         return usuario;
     }
 
-    /*// Método para cadastrar o objeto Usuario no banco de dados
-    public boolean cadastrarUsuario(Usuario usuario) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(usuario);
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-    }*/
-
-    // Tá com problema na exceção
-
     // Método para cadastrar o objeto Usuario no banco de dados
     public boolean cadastrarUsuario(Usuario usuario) throws UsuarioComNomeJaCadastradoException {
         try {
@@ -134,33 +118,20 @@ public class UsuarioController {
         }
     }
 
-    /*// Método de login pelo CPF ou email e senha
+    // Método de login pelo CPF ou email e senha
     public Usuario login(String cpfOuEmail, String senha) {
         try {
             TypedQuery<Usuario> query = entityManager.createQuery(
                 "SELECT u FROM Usuario u WHERE (u.cpf = :cpfOuEmail OR u.email = :cpfOuEmail) AND u.senha = :senha", Usuario.class);
             query.setParameter("cpfOuEmail", cpfOuEmail);
             query.setParameter("senha", senha);
-            return query.getSingleResult();
+            Usuario usuarioEncontrado = query.getSingleResult();
+            this.usuario = usuarioEncontrado; // Atualiza o campo usuario
+            return usuarioEncontrado;
         } catch (Exception e) {
             return null;
         }
-    }*/
-
-    // Método de login pelo CPF ou email e senha
-public Usuario login(String cpfOuEmail, String senha) {
-    try {
-        TypedQuery<Usuario> query = entityManager.createQuery(
-            "SELECT u FROM Usuario u WHERE (u.cpf = :cpfOuEmail OR u.email = :cpfOuEmail) AND u.senha = :senha", Usuario.class);
-        query.setParameter("cpfOuEmail", cpfOuEmail);
-        query.setParameter("senha", senha);
-        Usuario usuarioEncontrado = query.getSingleResult();
-        this.usuario = usuarioEncontrado; // Atualiza o campo usuario
-        return usuarioEncontrado;
-    } catch (Exception e) {
-        return null;
     }
-}
 
     // Método para fechar o EntityManager
     public void fechar() {
