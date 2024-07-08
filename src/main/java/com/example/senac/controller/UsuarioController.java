@@ -7,6 +7,8 @@ import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import java.util.List;
 
+import com.example.senac.exception.UsuarioComCPFJaCadastradoException;
+import com.example.senac.exception.UsuarioComEmailJaCadastradoException;
 import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 
@@ -28,28 +30,49 @@ public class UsuarioController {
     }
 
     // Método para cadastrar o objeto Usuario no banco de dados
-    public boolean cadastrarUsuario(Usuario usuario) throws UsuarioComNomeJaCadastradoException {
+    public boolean cadastrarUsuario(Usuario usuario) throws UsuarioComNomeJaCadastradoException, UsuarioComCPFJaCadastradoException, UsuarioComEmailJaCadastradoException {
         try {
             // Verificar se o usuário já existe pelo nome
-            TypedQuery<Usuario> query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.nome = :nome", Usuario.class);
-            query.setParameter("nome", usuario.getNome());
-            List<Usuario> usuariosExistentes = query.getResultList();
-            if (!usuariosExistentes.isEmpty()) {
+            TypedQuery<Usuario> queryNome = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.nome = :nome", Usuario.class);
+            queryNome.setParameter("nome", usuario.getNome());
+            List<Usuario> usuariosComMesmoNome = queryNome.getResultList();
+            if (!usuariosComMesmoNome.isEmpty()) {
                 throw new UsuarioComNomeJaCadastradoException("Usuário com o nome " + usuario.getNome() + " já está cadastrado.");
+            }
+
+            // Verificar se o usuário já existe pelo CPF
+            TypedQuery<Usuario> queryCPF = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.cpf = :cpf", Usuario.class);
+            queryCPF.setParameter("cpf", usuario.getCpf());
+            List<Usuario> usuariosComMesmoCPF = queryCPF.getResultList();
+            if (!usuariosComMesmoCPF.isEmpty()) {
+                throw new UsuarioComCPFJaCadastradoException("Usuário com o CPF " + usuario.getCpf() + " já está cadastrado.");
+            }
+
+            // Verificar se o usuário já existe pelo e-mail
+            TypedQuery<Usuario> queryEmail = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class);
+            queryEmail.setParameter("email", usuario.getEmail());
+            List<Usuario> usuariosComMesmoEmail = queryEmail.getResultList();
+            if (!usuariosComMesmoEmail.isEmpty()) {
+                throw new UsuarioComEmailJaCadastradoException("Usuário com o e-mail " + usuario.getEmail() + " já está cadastrado.");
             }
 
             entityManager.getTransaction().begin();
             entityManager.persist(usuario);
             entityManager.getTransaction().commit();
             return true;
-        } catch (UsuarioComNomeJaCadastradoException e) {
+
+        } catch (UsuarioComNomeJaCadastradoException | UsuarioComCPFJaCadastradoException | UsuarioComEmailJaCadastradoException e) {
             throw e; // Lançar a exceção específica
+
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
+
+
+    
 
     // Método para obter um usuário pelo ID
     public Usuario obterUsuario(Long id) {
