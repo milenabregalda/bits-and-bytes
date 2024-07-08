@@ -26,6 +26,7 @@ public class CyberStationView extends javax.swing.JPanel {
     private JButton[] botoesDasMesas = new JButton[15];
     private JButton botaoSelecionado = null;
     private boolean primeiraVez = true;
+    private Long reservaId;
 
     private UsuarioController usuarioController;
     private ReservaCyberStationController reservaCyberStationController;
@@ -763,16 +764,32 @@ public class CyberStationView extends javax.swing.JPanel {
     
                     // Cadastra a reserva
                     boolean sucesso = reservaCyberStationController.cadastrarReservaCyberStation(reserva);
-                    confirmacaoPedidoView.atualizarDadosPedido();
                     if (sucesso) {
-                        // Atualiza os dados do pedido na ConfirmacaoPedidoView
-                        
-                        // Troca para a tela de confirmação de pedido
+                        reservaId = reserva.getId();
+                        primeiraVez = false;
+                        confirmacaoPedidoView.atualizarDadosPedido();
                         cardLayout.show(mainPanel, "cyberSnacks");
                     }
                 }
             } else {
-                // Atualização da reserva (se necessário)
+                // Atualiza a reserva existente
+                if (usuario != null && reservaId != null) {
+                    ReservaCyberStation reservaAtualizada = reservaCyberStationController.criarObjetoReservaCyberStation(
+                        usuario,
+                        LocalDate.of(ano, mes, dia),
+                        LocalTime.of(horaInicio, minutoInicio),
+                        LocalTime.of(horaTermino, minutoTermino),
+                        mesaSelecionada,
+                        Status.DISPONIVEL
+                    );
+                    reservaAtualizada.setId(reservaId); // Define o ID da reserva a ser atualizada
+                    ReservaCyberStation reserva = reservaCyberStationController.atualizarReservaCyberStation(reservaId, reservaAtualizada);
+                    if (reserva != null) {
+                        confirmacaoPedidoView.atualizarDadosPedido();
+                        // Troca para a tela de confirmação de pedido
+                        cardLayout.show(mainPanel, "cyberSnacks");
+                    }
+                }
             }
         }
     }//GEN-LAST:event_botaoCyberStationReservarActionPerformed
