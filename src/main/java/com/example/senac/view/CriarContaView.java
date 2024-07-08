@@ -25,6 +25,7 @@ public class CriarContaView extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
         this.usuarioController = usuarioController;
         initComponents();
+        caixaCriarContaConcordaTermos.setSelected(true);
     }
 
     public void setLoginView(LoginView loginView) {
