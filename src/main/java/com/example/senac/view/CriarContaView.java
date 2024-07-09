@@ -8,6 +8,13 @@ import com.example.senac.model.Usuario;
 import javax.swing.JOptionPane;
 import java.util.*;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+
 public class CriarContaView extends javax.swing.JPanel {
 
     /**
@@ -58,6 +65,141 @@ public class CriarContaView extends javax.swing.JPanel {
         return false;
     }
 
+    private void addFocusListeners() {
+
+        
+
+        //COLOCAR TODOS NOS SEUS DEVIDOS LUGARES (CPF COM CPF NO SETTEXTCPF E OS OUTROS)
+
+        // FocusListener para campoCriarContaCPF
+        campoCriarContaCPF.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoCriarContaCPF.getText().equals("  CPF")) {
+                    campoCriarContaCPF.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoCriarContaCPF.getText().isEmpty()) {
+                    campoCriarContaCPF.setText("  CPF");
+                }
+            }
+        });
+
+        // FocusListener para campoCriarContaTelefone
+        campoCriarContaTelefone.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoCriarContaTelefone.getText().equals("  Número de telefone")) {
+                    campoCriarContaTelefone.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoCriarContaTelefone.getText().isEmpty()) {
+                    campoCriarContaTelefone.setText("  Número de telefone");
+                }
+            }
+        });
+
+        // FocusListener para campoCriarContaEmail
+        campoCriarContaEmail.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoCriarContaEmail.getText().equals("  E-mail")) {
+                    campoCriarContaEmail.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoCriarContaEmail.getText().isEmpty()) {
+                    campoCriarContaEmail.setText("  E-mail");
+                }
+            }
+        });
+
+        // FocusListener para senhaCriarConta
+        senhaCriarConta.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                senhaCriarConta.setText("");
+            }
+        });
+
+        // FocusListener para confirmarSenhaCriarConta
+        confirmarSenhaCriarConta.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                confirmarSenhaCriarConta.setText("");
+            }
+        });
+    
+
+        // Adicionar listeners para a tecla Tab
+        campoCriarContaNome.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    campoCriarContaCPF.requestFocus();
+                    e.consume();  // Evitar que o tab padrão ocorra
+                }
+            }
+        });
+
+        campoCriarContaCPF.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    campoCriarContaTelefone.requestFocus();
+                    e.consume();  // Evitar que o tab padrão ocorra
+                }
+            }
+        });
+
+        campoCriarContaTelefone.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    campoCriarContaEmail.requestFocus();
+                    e.consume();  // Evitar que o tab padrão ocorra
+                }
+            }
+        });
+
+        campoCriarContaEmail.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    senhaCriarConta.requestFocus();
+                    e.consume();  // Evitar que o tab padrão ocorra
+                }
+            }
+        });
+
+        senhaCriarConta.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    confirmarSenhaCriarConta.requestFocus();
+                    e.consume();  // Evitar que o tab padrão ocorra
+                }
+            }
+        });
+
+        confirmarSenhaCriarConta.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    caixaCriarContaConcordaTermos.requestFocus();
+                    e.consume();  // Evitar que o tab padrão ocorra
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,6 +256,21 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaNome.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaNome.setText("  Nome completo");
+        campoCriarContaNome.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoCriarContaNome.getText().equals("  Nome completo")) {
+                    campoCriarContaNome.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoCriarContaNome.getText().isEmpty()) {
+                    campoCriarContaNome.setText("  Nome completo");
+                }
+            }
+        });
         campoCriarContaNome.setToolTipText("Nome completo"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaNome.setCaretColor(new java.awt.Color(73, 84, 111));
