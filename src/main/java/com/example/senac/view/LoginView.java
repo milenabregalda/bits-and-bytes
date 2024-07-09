@@ -80,7 +80,7 @@ public class LoginView extends javax.swing.JPanel {
         campoLoginCPFEmail.setBackground(new java.awt.Color(73, 84, 111));
         campoLoginCPFEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoLoginCPFEmail.setForeground(new java.awt.Color(174, 174, 174));
-        campoLoginCPFEmail.setText("  CPF ou e-mail");
+        //campoLoginCPFEmail.setText("  CPF ou e-mail");
         campoLoginCPFEmail.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -96,7 +96,7 @@ public class LoginView extends javax.swing.JPanel {
                 }
             }
         });
-
+        campoLoginCPFEmail.setText("  CPF ou e-mail");
         campoLoginCPFEmail.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {

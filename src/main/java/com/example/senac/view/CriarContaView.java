@@ -66,63 +66,6 @@ public class CriarContaView extends javax.swing.JPanel {
     }
 
     private void addFocusListeners() {
-
-        
-
-        //COLOCAR TODOS NOS SEUS DEVIDOS LUGARES (CPF COM CPF NO SETTEXTCPF E OS OUTROS)
-
-        // FocusListener para campoCriarContaCPF
-        campoCriarContaCPF.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (campoCriarContaCPF.getText().equals("  CPF")) {
-                    campoCriarContaCPF.setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (campoCriarContaCPF.getText().isEmpty()) {
-                    campoCriarContaCPF.setText("  CPF");
-                }
-            }
-        });
-
-        // FocusListener para campoCriarContaTelefone
-        campoCriarContaTelefone.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (campoCriarContaTelefone.getText().equals("  Número de telefone")) {
-                    campoCriarContaTelefone.setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (campoCriarContaTelefone.getText().isEmpty()) {
-                    campoCriarContaTelefone.setText("  Número de telefone");
-                }
-            }
-        });
-
-        // FocusListener para campoCriarContaEmail
-        campoCriarContaEmail.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (campoCriarContaEmail.getText().equals("  E-mail")) {
-                    campoCriarContaEmail.setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (campoCriarContaEmail.getText().isEmpty()) {
-                    campoCriarContaEmail.setText("  E-mail");
-                }
-            }
-        });
-
-        // FocusListener para senhaCriarConta
         senhaCriarConta.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -242,6 +185,21 @@ public class CriarContaView extends javax.swing.JPanel {
         campoCriarContaEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaEmail.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaEmail.setText("  E-mail");
+        campoCriarContaEmail.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoCriarContaEmail.getText().equals("  E-mail")) {
+                    campoCriarContaEmail.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoCriarContaEmail.getText().isEmpty()) {
+                    campoCriarContaEmail.setText("  E-mail");
+                }
+            }
+        });
         campoCriarContaEmail.setToolTipText("E-mail"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaEmail.setCaretColor(new java.awt.Color(73, 84, 111));
@@ -251,7 +209,6 @@ public class CriarContaView extends javax.swing.JPanel {
                 campoCriarContaEmailActionPerformed(evt);
             }
         });
-
         campoCriarContaNome.setBackground(new java.awt.Color(73, 84, 111));
         campoCriarContaNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaNome.setForeground(new java.awt.Color(174, 174, 174));
@@ -280,11 +237,26 @@ public class CriarContaView extends javax.swing.JPanel {
                 campoCriarContaNomeActionPerformed(evt);
             }
         });
-
         campoCriarContaCPF.setBackground(new java.awt.Color(73, 84, 111));
         campoCriarContaCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaCPF.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaCPF.setText("  CPF");
+        campoCriarContaCPF.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoCriarContaCPF.getText().equals("  CPF")) {
+                    campoCriarContaCPF.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoCriarContaCPF.getText().isEmpty()) {
+                    campoCriarContaCPF.setText("  CPF");
+                }
+            }
+        });
+        
         campoCriarContaCPF.setToolTipText("CPF (somente números)"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaCPF.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaCPF.setCaretColor(new java.awt.Color(73, 84, 111));
@@ -294,11 +266,24 @@ public class CriarContaView extends javax.swing.JPanel {
                 campoCriarContaCPFActionPerformed(evt);
             }
         });
-
         campoCriarContaTelefone.setBackground(new java.awt.Color(73, 84, 111));
         campoCriarContaTelefone.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoCriarContaTelefone.setForeground(new java.awt.Color(174, 174, 174));
         campoCriarContaTelefone.setText("  Número de telefone");
+        campoCriarContaTelefone.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoCriarContaTelefone.getText().equals("  Número de telefone")) {
+                    campoCriarContaTelefone.setText("");
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoCriarContaTelefone.getText().isEmpty()) {
+                    campoCriarContaTelefone.setText("  Número de telefone");
+                }
+            }
+        });
         campoCriarContaTelefone.setToolTipText("Número de telefone"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoCriarContaTelefone.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoCriarContaTelefone.setCaretColor(new java.awt.Color(73, 84, 111));
@@ -308,7 +293,6 @@ public class CriarContaView extends javax.swing.JPanel {
                 campoCriarContaTelefoneActionPerformed(evt);
             }
         });
-
         senhaCriarConta.setBackground(new java.awt.Color(73, 84, 111));
         senhaCriarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         senhaCriarConta.setForeground(new java.awt.Color(174, 174, 174));
@@ -319,7 +303,6 @@ public class CriarContaView extends javax.swing.JPanel {
                 senhaCriarContaActionPerformed(evt);
             }
         });
-
         confirmarSenhaCriarConta.setBackground(new java.awt.Color(73, 84, 111));
         confirmarSenhaCriarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         confirmarSenhaCriarConta.setForeground(new java.awt.Color(174, 174, 174));
@@ -330,7 +313,6 @@ public class CriarContaView extends javax.swing.JPanel {
                 confirmarSenhaCriarContaActionPerformed(evt);
             }
         });
-
         caixaCriarContaConcordaTermos.setFocusPainted(false);
         caixaCriarContaConcordaTermos.setBackground(new java.awt.Color(50, 60, 83));
         caixaCriarContaConcordaTermos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -341,7 +323,6 @@ public class CriarContaView extends javax.swing.JPanel {
                 caixaCriarContaConcordaTermosActionPerformed(evt);
             }
         });
-
         caixaCriarContaGostariaEmails.setFocusPainted(false);
         caixaCriarContaGostariaEmails.setBackground(new java.awt.Color(50, 60, 83));
         caixaCriarContaGostariaEmails.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -352,7 +333,6 @@ public class CriarContaView extends javax.swing.JPanel {
                 caixaCriarContaGostariaEmailsActionPerformed(evt);
             }
         });
-
         botaoCriarContaConcordaTermos.setBackground(new java.awt.Color(50, 60, 83));
         botaoCriarContaConcordaTermos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         botaoCriarContaConcordaTermos.setForeground(new java.awt.Color(84, 182, 133));
