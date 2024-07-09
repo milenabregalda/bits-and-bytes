@@ -5,8 +5,6 @@ import javax.swing.JFrame;
 import com.example.senac.view.AppView;
 
 import com.example.senac.controller.CyberSnackController;
-import com.example.senac.model.CyberSnack;
-import com.example.senac.model.CyberSnack.Tipo;
 
 
 public class App extends JFrame {
@@ -25,26 +23,10 @@ public class App extends JFrame {
 
         System.out.println("Bits & Bytes CyberCafé.");
 
+        CyberSnackController controller = new CyberSnackController();
 
-// Instancia o controlador
-CyberSnackController controller = new CyberSnackController();
-
-// Cria um objeto CyberSnack
-CyberSnack novoCyberSnack = controller.criarObjetoCyberSnack("Cyber Burger", Tipo.SALGADO, 12.99f);
-System.out.println("Criou o objeto");
-
-// Persiste o objeto no banco de dados
-boolean sucesso = controller.criarCyberSnack(novoCyberSnack);
-
-// Verifica se a operação foi bem-sucedida
-if (sucesso) {
-    System.out.println("CyberSnack cadastrado com sucesso!");
-} else {
-    System.out.println("Falha ao cadastrar o CyberSnack.");
-}
-
-// Fecha o EntityManager e o EntityManagerFactory
-controller.fechar();
-        
+        // Lógica responsável por inicializar dados de CyberSnacks no banco de dados
+        controller.inicializarDados();
+        controller.fechar();
     }
 }
