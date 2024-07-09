@@ -71,9 +71,6 @@ public class UsuarioController {
         }
     }
 
-
-    
-
     // Método para obter um usuário pelo ID
     public Usuario obterUsuario(Long id) {
         try {

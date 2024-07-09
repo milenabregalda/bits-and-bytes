@@ -15,36 +15,31 @@ public class CyberSnackController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-
     private List<CyberSnack> cyberSnacks = new ArrayList<>();
 
-    public void criarObjetoCyberSnack(String nome, Tipo tipo, float preco) {
+    public CyberSnackController() {
+        this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
+        this.entityManager = entityManagerFactory.createEntityManager();
+    }
+
+    // Método para criar o objeto CyberSnack
+    public CyberSnack criarObjetoCyberSnack(String nome, Tipo tipo, float preco) {
         CyberSnack snack = new CyberSnack(nome, tipo, preco);
         cyberSnacks.add(snack);
+        return snack;
     }
 
-    public List<CyberSnack> getObjetosCyberSnacks() {
-        return cyberSnacks;
-    }
-
-    // LÓGICA PARA BANCO DE DADOS - POR ENQUANTO, NÃO SERÁ UTILIZADA
-
-    public CyberSnackController() {
-        //this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
-        //this.entityManager = entityManagerFactory.createEntityManager();
-    }
-
-    // Método para criar um novo CyberSnack
-    public CyberSnack criarCyberSnack(CyberSnack cyberSnack) {
+    // Método para criar um novo CyberSnack no banco de dados
+    public boolean criarCyberSnack(CyberSnack cyberSnack) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(cyberSnack);
             entityManager.getTransaction().commit();
-            return cyberSnack;
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
+            return false;
         }
     }
 
@@ -96,6 +91,10 @@ public class CyberSnackController {
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             return "Erro ao excluir o CyberSnack.";
         }
+    }
+
+    public List<CyberSnack> getObjetosCyberSnacks() {
+        return cyberSnacks;
     }
 
     // Método para listar todos os CyberSnacks
