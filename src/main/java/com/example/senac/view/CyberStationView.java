@@ -761,6 +761,18 @@ public class CyberStationView extends javax.swing.JPanel {
             int horaTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[0]);
             int minutoTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[1]);
     
+            // Verifica se o horário de término é maior que o horário de início
+            LocalTime inicio = LocalTime.of(horaInicio, minutoInicio);
+            LocalTime termino = LocalTime.of(horaTermino, minutoTermino);
+            
+            if (!termino.isAfter(inicio)) {
+                JOptionPane.showMessageDialog(CyberStationView.this, 
+                    "Você selecionou um horário inválido. O horário de término deve ser maior que o horário de início.", 
+                    "Erro", 
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             // Pega o usuário existente
             Usuario usuario = usuarioController.getObjetoUsuario();
             System.out.println(usuario.toString());
