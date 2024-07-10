@@ -58,6 +58,12 @@ public class AppView extends JPanel {
         // Como as referências dessas views são cruzadas, elas são adicionadas tardiamente para evitar problemas:
         loginView.setCriarContaView(criarContaView);
         criarContaView.setLoginView(loginView);
+        cyberSnacksView.setCyberStationView(cyberStationView);
+        confirmacaoPedidoView.setCyberStationView(cyberStationView);
+        pagamentoView.setCyberStationView(cyberStationView);
+        creditoView.setCyberStationView(cyberStationView);
+        debitoView.setCyberStationView(cyberStationView);
+        pixView.setCyberStationView(cyberStationView);
 
         // Painéis são adicionados ao cardLayout com um nome (String)
         painel.add(loginView, "login");

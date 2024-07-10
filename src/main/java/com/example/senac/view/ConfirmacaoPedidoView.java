@@ -16,37 +16,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
 
 
     public String dadosPedido;
-
-    public void atualizarDadosPedido() {
-        dadosPedido = definirDadosPedido();
-        areaConfirmacaoPedidoTexto.setText(dadosPedido); // Atualiza a área de texto com os dados do pedido
-    }
-
-    public String definirDadosPedido() {
-        String dados = "RESERVAS CYBERSTATION\n";
-        List<ReservaCyberStation> reservas = reservaCyberStationController.listarReservas();
-
-        if (reservas != null && !reservas.isEmpty()) {
-            System.out.println("Reservas encontradas: " + reservas.size());
-            ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1); // Pega a última reserva da lista
-
-            dados += "----------------------------------\n";
-            dados += "ID: " + ultimaReserva.getId() + "\n";
-            dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
-            dados += "Data: " + ultimaReserva.getDataReserva() + "\n";
-            dados += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
-            dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
-            dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
-            dados += "Status: " + ultimaReserva.getStatus() + "\n";
-            dados += "----------------------------------\n\n";
-        } else {
-            System.out.println("Nenhuma reserva encontrada.");
-        }
-
-        return dados;
-    }
-    
-    
+    private CyberStationView cyberStationView;
 
      /*String dadosPedidoPlaceHolder = "RESERVAS CYBERSTATION\n" +
         "----------------------------------------\n" +
@@ -95,6 +65,40 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         this.reservaCyberStationController = reservaCyberStationController;
         initComponents();
         atualizarDadosPedido(); // Atualiza os dados do pedido ao iniciar a view
+    }
+
+    public void setCyberStationView(CyberStationView cyberStationView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberStationView = cyberStationView;
+    }
+
+    public void atualizarDadosPedido() {
+        dadosPedido = definirDadosPedido();
+        areaConfirmacaoPedidoTexto.setText(dadosPedido); // Atualiza a área de texto com os dados do pedido
+    }
+
+    public String definirDadosPedido() {
+        String dados = "RESERVAS CYBERSTATION\n";
+        List<ReservaCyberStation> reservas = reservaCyberStationController.listarReservas();
+
+        if (reservas != null && !reservas.isEmpty()) {
+            System.out.println("Reservas encontradas: " + reservas.size());
+            ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1); // Pega a última reserva da lista
+
+            dados += "----------------------------------\n";
+            dados += "ID: " + ultimaReserva.getId() + "\n";
+            dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
+            dados += "Data: " + ultimaReserva.getDataReserva() + "\n";
+            dados += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
+            dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
+            dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
+            dados += "Status: " + ultimaReserva.getStatus() + "\n";
+            dados += "----------------------------------\n\n";
+        } else {
+            System.out.println("Nenhuma reserva encontrada.");
+        }
+
+        return dados;
     }
     
     /**
@@ -304,6 +308,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     private void botaoConfirmacaoPedidoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoCancelarActionPerformed
         JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
         // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        cyberStationView.cancelarReservaCyberStation();
         System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoConfirmacaoPedidoCancelarActionPerformed
 

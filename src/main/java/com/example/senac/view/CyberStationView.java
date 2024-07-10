@@ -113,6 +113,22 @@ public class CyberStationView extends javax.swing.JPanel {
         botoesDasMesas[13] = botaoCyberStationMesa14;
         botoesDasMesas[14] = botaoCyberStationMesa15;
       }
+
+      public void cancelarReservaCyberStation() {
+        if (reservaId != null) {
+            // Verifica se o usuário atual possui uma reserva ativa
+            ReservaCyberStation reserva = reservaCyberStationController.obterReservaCyberStation(reservaId);
+            if (reserva != null) {
+                // Exclui a reserva
+                reservaCyberStationController.excluirReservaCyberStation(reservaId);
+            } else {
+                JOptionPane.showMessageDialog(CyberStationView.this, "Reserva não encontrada.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(CyberStationView.this, "Nenhuma reserva ativa para cancelar.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+      
     
     /**
      * This method is called from within the constructor to initialize the form.
