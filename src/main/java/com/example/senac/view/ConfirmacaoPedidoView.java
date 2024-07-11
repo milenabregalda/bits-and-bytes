@@ -195,7 +195,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         botaoConfirmacaoPedidoPersonalizar.setBackground(new java.awt.Color(94, 34, 122));
         botaoConfirmacaoPedidoPersonalizar.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         botaoConfirmacaoPedidoPersonalizar.setForeground(new java.awt.Color(174, 174, 174));
-        botaoConfirmacaoPedidoPersonalizar.setText("Personalizar pedido");
+        botaoConfirmacaoPedidoPersonalizar.setText("Alterar pedido");
         botaoConfirmacaoPedidoPersonalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoConfirmacaoPedidoPersonalizarActionPerformed(evt);
