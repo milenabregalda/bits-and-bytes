@@ -4,6 +4,9 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
 public class DebitoView extends javax.swing.JPanel {
 
     /**
@@ -12,6 +15,7 @@ public class DebitoView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private boolean primeiraVezCampo = true;
     
     public DebitoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -56,6 +60,21 @@ public class DebitoView extends javax.swing.JPanel {
         textoNumCartao.setText("Número do Cartão");
 
         campoNumCartao.setText("                     Digite Aqui!");
+        campoNumCartao.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoNumCartao.getText().equals("                     Digite Aqui!")) {
+                    campoNumCartao.setText("");
+                }
+            }
+        
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoNumCartao.getText().isEmpty()) {
+                    campoNumCartao.setText("                     Digite Aqui!");
+                }
+            }
+        });
 
         botaoVoltar.setBorderPainted(false);
         botaoVoltar.setFocusPainted(false);
