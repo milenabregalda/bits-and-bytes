@@ -25,6 +25,8 @@ public class LoginView extends javax.swing.JPanel {
     private UsuarioController usuarioController;
     private CriarContaView criarContaView;
 
+    boolean primeiraVez = true;
+
     public LoginView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -82,19 +84,31 @@ public class LoginView extends javax.swing.JPanel {
         campoLoginCPFEmail.setForeground(new java.awt.Color(174, 174, 174));
         //campoLoginCPFEmail.setText("  CPF ou e-mail");
         campoLoginCPFEmail.addFocusListener(new FocusAdapter() {
-            @Override
+            /*@Override
             public void focusGained(FocusEvent e) {
                 if (campoLoginCPFEmail.getText().equals("  CPF ou e-mail")) {
                     campoLoginCPFEmail.setText("");
+                }
+            }*/
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (primeiraVez) {
+                    campoLoginCPFEmail.setText("  CPF ou e-mail");
+                    primeiraVez = false;
+                } else {
+                    if (campoLoginCPFEmail.getText().equals("  CPF ou e-mail")) {
+                        campoLoginCPFEmail.setText("");
+                    }
                 }
             }
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (campoLoginCPFEmail.getText().isEmpty()) {
-                    campoLoginCPFEmail.setText("  CPF ou e-mail");
-                }
+            if (campoLoginCPFEmail.getText().isEmpty()) {
+                campoLoginCPFEmail.setText("  CPF ou e-mail");
             }
+    }
         });
         campoLoginCPFEmail.setText("  CPF ou e-mail");
         campoLoginCPFEmail.addKeyListener(new KeyAdapter() {
