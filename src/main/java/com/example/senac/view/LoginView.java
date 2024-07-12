@@ -98,11 +98,12 @@ public class LoginView extends javax.swing.JPanel {
 
             @Override
             public void focusLost(FocusEvent e) {
-            if (campoLoginCPFEmail.getText().isEmpty()) {
-                campoLoginCPFEmail.setText("  CPF ou e-mail");
+                if (campoLoginCPFEmail.getText().isEmpty()) {
+                    campoLoginCPFEmail.setText("  CPF ou e-mail");
+                }
             }
-    }
         });
+        
         campoLoginCPFEmail.setText("  CPF ou e-mail");
         campoLoginCPFEmail.addKeyListener(new KeyAdapter() {
             @Override

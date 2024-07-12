@@ -1,6 +1,9 @@
 package com.example.senac.view;
 
 import java.awt.CardLayout;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
@@ -12,6 +15,7 @@ public class CreditoView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private boolean primeiraVezCampo = true;
     
     public CreditoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -58,6 +62,21 @@ public class CreditoView extends javax.swing.JPanel {
         textoNumCartao.setText("Número do Cartão");
 
         campoNumCartao.setText("                     Digite Aqui!");
+        campoNumCartao.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (campoNumCartao.getText().equals("                     Digite Aqui!")) {
+                    campoNumCartao.setText("");
+                }
+            }
+        
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoNumCartao.getText().isEmpty()) {
+                    campoNumCartao.setText("                     Digite Aqui!");
+                }
+            }
+        });
 
         textoParcelas.setFont(new java.awt.Font("Segoe UI", 1, 28)); // NOI18N
         textoParcelas.setForeground(new java.awt.Color(195, 195, 195));
