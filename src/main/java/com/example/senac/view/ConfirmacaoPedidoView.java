@@ -78,6 +78,13 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     }
 
     public String definirDadosPedido() {
+        String dadosReserva = definirDadosReserva();
+        String dadosCyberSnacks = definirDadosCyberSnacks();
+        String dados = dadosReserva + dadosCyberSnacks;
+        return dados;
+    }
+
+    public String definirDadosReserva() {
         String dados = "RESERVAS CYBERSTATION\n";
         List<ReservaCyberStation> reservas = reservaCyberStationController.listarReservas();
 
@@ -97,7 +104,22 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         } else {
             System.out.println("Nenhuma reserva encontrada.");
         }
-
+        return dados;
+    }
+    
+    public String definirDadosCyberSnacks() { // Depois, este método provavelmente vai receber um ArrayList
+        String dados = "\nCYBERSNACKS (em desenvolvimento)\n" +
+        "---------------------------------------\n";
+        for (int i = 0; i <= 5; i++) {
+            String cyberSnackIndividual = "Nome: Pão de Queijo\n" +
+            "Tipo: SALGADO\n" +
+            "Preço unitário: R$ 10.00\n" +
+            "Quantidade: 2\n\n";
+            dados += cyberSnackIndividual;
+        }
+        
+        dados += "\nTOTAL A PAGAR (em desenvolvimento)\n---------------------------------------\n" +
+        "R$ 74.40\n";
         return dados;
     }
     

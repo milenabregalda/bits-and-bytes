@@ -17,12 +17,17 @@ public class DocesView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private CyberSnackController cyberSnackController;
+    private CyberSnacksView cyberSnacksView;
 
     public DocesView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
         initComponents();
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
     }
     
     /**

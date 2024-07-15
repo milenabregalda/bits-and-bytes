@@ -16,12 +16,17 @@ public class CombosSemanaisView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private CyberSnacksView cyberSnacksView;
 
     public CombosSemanaisView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         initComponents();
         habilitarComboDoDia();
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
     }
     
     // Método que pega o dia de hoje e só habilita o combo desse dia para ser adicionado ao carrinho

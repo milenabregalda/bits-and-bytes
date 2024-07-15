@@ -15,7 +15,11 @@ public class CyberSnacksView extends javax.swing.JPanel {
 
     private CyberSnackController cyberSnackController;
     private CyberStationView cyberStationView;
-    
+
+    private SalgadosView salgadosView;
+    private BebidasView bebidasView;
+    private DocesView docesView;
+    private CombosSemanaisView combosSemanaisView;
 
     public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
@@ -27,6 +31,22 @@ public class CyberSnacksView extends javax.swing.JPanel {
     public void setCyberStationView(CyberStationView cyberStationView) {
         // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
+    }
+
+    public void setSalgadosView(SalgadosView salgadosView) {
+        this.salgadosView = salgadosView;
+    }
+
+    public void setBebidasView(BebidasView bebidasView) {
+        this.bebidasView = bebidasView;
+    }
+
+    public void setDocesView(DocesView docesView) {
+        this.docesView = docesView;
+    }
+
+    public void setCombosSemanaisView(CombosSemanaisView combosSemanaisView) {
+        this.combosSemanaisView = combosSemanaisView;
     }
 
     public static float converterStringPraNumero(String valorMonetario) {

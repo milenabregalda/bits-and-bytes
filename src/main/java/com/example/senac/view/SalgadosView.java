@@ -15,6 +15,7 @@ public class SalgadosView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private CyberSnackController cyberSnackController;
+    private CyberSnacksView cyberSnacksView;
     //String[] arraysalgado = new String[10];
 
     public SalgadosView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
@@ -23,8 +24,11 @@ public class SalgadosView extends javax.swing.JPanel {
         this.cyberSnackController = cyberSnackController;
         initComponents();
     }
-   
     
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
