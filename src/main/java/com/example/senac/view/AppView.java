@@ -92,9 +92,13 @@ public class AppView extends JPanel {
         painel.add(debitoView, "debito");
         painel.add(pixView, "pix");
 
-        add(painel);
-        cardLayout.show(painel, "login");
         // Esse é o método que é chamado para trocar o conteúdo da janela, também colocá-lo nos JButtons necessários
         // Se o nome do cardLayout estiver errado, ele abrirá login.
+        add(painel);
+        cardLayout.show(painel, "login");
+
+        // Lógica responsável por inicializar dados de CyberSnacks no banco de dados
+        cyberSnackController.inicializarDados();
+        cyberSnacksView.definirVetoresCyberSnacks();
     }
 }

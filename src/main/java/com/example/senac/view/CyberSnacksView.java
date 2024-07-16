@@ -31,7 +31,6 @@ public class CyberSnacksView extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
         this.todosOsCyberSnacks = new ArrayList<>(); // Inicializar a lista
-        definirVetoresCyberSnacks();
         initComponents();
     }
 
@@ -65,25 +64,36 @@ public class CyberSnacksView extends javax.swing.JPanel {
     public void definirVetoresCyberSnacks() {
         // Obter todos os CyberSnacks do banco de dados
         List<CyberSnack> cyberSnacks = cyberSnackController.listarCyberSnacks();
-
+    
         if (cyberSnacks != null) {
+            // Limpar lista antes de adicionar novos itens
+            todosOsCyberSnacks.clear();
+    
             // Filtrar e adicionar CyberSnacks com ID de 1 a 35 no ArrayList
             for (CyberSnack cyberSnack : cyberSnacks) {
                 if (cyberSnack.getId() >= 1 && cyberSnack.getId() <= 35) {
                     todosOsCyberSnacks.add(cyberSnack);
                 }
+    
+                // Verifica se o tipo é COMBO e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.COMBO) {
+                    combosSemanaisView.addComboCyberSnack(cyberSnack);
+                }
             }
-
+    
             System.out.println("\n\n\n\n\nTodos os cybersnacks:");
             // Mostrar todos os CyberSnacks no console
             for (CyberSnack cyberSnack : todosOsCyberSnacks) {
-                System.out.println(cyberSnack);
+                System.out.println(cyberSnack.toString());
             }
+
+            // Talvez no final da implementação, deletar este método
+            combosSemanaisView.imprimirCombosCyberSnacks();
+            
         } else {
             System.out.println("Erro ao listar os CyberSnacks.");
         }
         System.out.println("\n\n\n\n");
-
     }
     
     /**

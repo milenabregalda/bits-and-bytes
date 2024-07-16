@@ -2,6 +2,9 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import com.example.senac.model.CyberSnack;
+
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +20,12 @@ public class CombosSemanaisView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private CyberSnacksView cyberSnacksView;
+    private ArrayList<CyberSnack> combosCyberSnacks;
 
     public CombosSemanaisView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.combosCyberSnacks = new ArrayList<>();
         initComponents();
         habilitarComboDoDia();
     }
@@ -59,6 +64,19 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                 // Se for sábado ou domingo, nenhum comboBox é habilitado
                 break;
         }
+    }
+
+    public void addComboCyberSnack(CyberSnack comboCyberSnack) {
+        combosCyberSnacks.add(comboCyberSnack);
+    }
+
+    // Método para imprimir todos os combosCyberSnacks
+    public void imprimirCombosCyberSnacks() {
+        System.out.println("\n\nLista de combos CyberSnacks:");
+        for (CyberSnack cyberSnack : combosCyberSnacks) {
+            System.out.println(cyberSnack);
+        }
+        System.out.println("\n\n");
     }
 
     /**

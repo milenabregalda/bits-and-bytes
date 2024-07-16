@@ -22,11 +22,5 @@ public class App extends JFrame {
         new App(); // Faz a janela aparecer
 
         System.out.println("Bits & Bytes CyberCafé.");
-
-        CyberSnackController controller = new CyberSnackController();
-
-        // Lógica responsável por inicializar dados de CyberSnacks no banco de dados
-        controller.inicializarDados();
-        controller.fechar();
     }
 }

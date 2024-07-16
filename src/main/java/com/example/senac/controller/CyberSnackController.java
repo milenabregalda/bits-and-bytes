@@ -158,6 +158,8 @@ public class CyberSnackController {
         criarCyberSnack(new CyberSnack("COMBO SEXTA-FEIRA DELÍCIA", Tipo.COMBO, 31.50f));
         
         System.out.println("CyberSnacks cadastrados com sucesso!");
+
+        
     }
 
     // Método para fechar o EntityManager
