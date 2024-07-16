@@ -21,12 +21,23 @@ public class CombosSemanaisView extends javax.swing.JPanel {
     private JPanel mainPanel;
     private CyberSnacksView cyberSnacksView;
     private ArrayList<CyberSnack> combosCyberSnacks;
+    private ArrayList<Integer> qtdCombos;
+
 
     public CombosSemanaisView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.combosCyberSnacks = new ArrayList<>();
+        this.qtdCombos = new ArrayList<>();
         initComponents();
+
+        // Lógica para testes
+        /*comboCombosSemanaisSegunda.setSelectedIndex(0); // Seleciona o índice 1 (que é "1")
+        comboCombosSemanaisTerca.setSelectedIndex(2); // Seleciona o índice 2 (que é "2")
+        comboCombosSemanaisQuarta.setSelectedIndex(3); // Seleciona o índice 3 (que é "3")
+        comboCombosSemanaisQuinta.setSelectedIndex(4); // Seleciona o índice 4 (que é "4")
+        comboCombosSemanaisSexta.setSelectedIndex(5); // Seleciona o índice 5 (que é "5")*/
+
         habilitarComboDoDia();
     }
 
@@ -79,6 +90,19 @@ public class CombosSemanaisView extends javax.swing.JPanel {
         System.out.println("\n\n");
     }
 
+    private void obterQuantidades() {
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisSegunda.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisTerca.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisQuarta.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisQuinta.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisSexta.getSelectedItem()));
+
+        for (Integer numero : qtdCombos) {
+            System.out.println(numero);
+        }
+        System.out.println("\n"); // Adiciona uma linha em branco após os números
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -375,7 +399,11 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                 JOptionPane.ERROR_MESSAGE);   
       }
     }//GEN-LAST:event_botaoCombosSemanaisFinalizarCompraActionPerformed
+
     private void botaoCombosSemanaisAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {
+
+        // PARTE DO ANDRÉ
+
         // Verifica se alguma combobox foi selecionada com quantidade diferente de "0"
         if (!"0".equals(comboCombosSemanaisSegunda.getSelectedItem()) ||
             !"0".equals(comboCombosSemanaisTerca.getSelectedItem()) ||
@@ -407,6 +435,9 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
         }
+
+        // PARTE DA MILENA
+        obterQuantidades();
     }
 
     // Método para adicionar ou atualizar combo selecionado à lista
