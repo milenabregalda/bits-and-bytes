@@ -38,6 +38,7 @@ public class AppView extends JPanel {
         // Criação dos objetos controllers
         usuarioController = new UsuarioController();
         reservaCyberStationController = new ReservaCyberStationController();
+        cyberSnackController = new CyberSnackController();
 
         // O construtor das views passa o cardLayout e o painel para que elas possam trocar o card (conteúdo da janela) mostrado nos ActionListeners:
         loginView = new LoginView(cardLayout, painel, usuarioController); // Controller passado aqui

@@ -1,8 +1,12 @@
 package com.example.senac.view;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import com.example.senac.controller.CyberSnackController;
+import com.example.senac.model.CyberSnack;
 
 public class CyberSnacksView extends javax.swing.JPanel {
 
@@ -20,11 +24,14 @@ public class CyberSnacksView extends javax.swing.JPanel {
     private BebidasView bebidasView;
     private DocesView docesView;
     private CombosSemanaisView combosSemanaisView;
+    private ArrayList<CyberSnack> todosOsCyberSnacks;
 
     public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
+        this.todosOsCyberSnacks = new ArrayList<>(); // Inicializar a lista
+        definirVetoresCyberSnacks();
         initComponents();
     }
 
@@ -53,6 +60,30 @@ public class CyberSnacksView extends javax.swing.JPanel {
         String numeroString = valorMonetario.replaceAll("[^0-9.]", "");
         float numero = Float.parseFloat(numeroString);
         return numero;
+    }
+
+    public void definirVetoresCyberSnacks() {
+        // Obter todos os CyberSnacks do banco de dados
+        List<CyberSnack> cyberSnacks = cyberSnackController.listarCyberSnacks();
+
+        if (cyberSnacks != null) {
+            // Filtrar e adicionar CyberSnacks com ID de 1 a 35 no ArrayList
+            for (CyberSnack cyberSnack : cyberSnacks) {
+                if (cyberSnack.getId() >= 1 && cyberSnack.getId() <= 35) {
+                    todosOsCyberSnacks.add(cyberSnack);
+                }
+            }
+
+            System.out.println("\n\n\n\n\nTodos os cybersnacks:");
+            // Mostrar todos os CyberSnacks no console
+            for (CyberSnack cyberSnack : todosOsCyberSnacks) {
+                System.out.println(cyberSnack);
+            }
+        } else {
+            System.out.println("Erro ao listar os CyberSnacks.");
+        }
+        System.out.println("\n\n\n\n");
+
     }
     
     /**
