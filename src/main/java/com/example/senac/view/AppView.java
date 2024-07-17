@@ -76,6 +76,8 @@ public class AppView extends JPanel {
         bebidasView.setCyberSnacksView(cyberSnacksView);
         docesView.setCyberSnacksView(cyberSnacksView);
         combosSemanaisView.setCyberSnacksView(cyberSnacksView);
+        confirmacaoPedidoView.setCyberSnacksView(cyberSnacksView);
+        cyberSnacksView.setConfirmacaoPedidoView(confirmacaoPedidoView);
 
         // Painéis são adicionados ao cardLayout com um nome (String)
         painel.add(loginView, "login");

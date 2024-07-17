@@ -19,18 +19,23 @@ public class CyberSnacksView extends javax.swing.JPanel {
 
     private CyberSnackController cyberSnackController;
     private CyberStationView cyberStationView;
+    private ConfirmacaoPedidoView confirmacaoPedidoView;
 
     private SalgadosView salgadosView;
     private BebidasView bebidasView;
     private DocesView docesView;
     private CombosSemanaisView combosSemanaisView;
     private ArrayList<CyberSnack> todosOsCyberSnacks;
+    private ArrayList<CyberSnack>cyberSnacksSelecionados;
+    private ArrayList<Integer>quantidadesSelecionadas;
 
     public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
         this.todosOsCyberSnacks = new ArrayList<>(); // Inicializar a lista
+        this.cyberSnacksSelecionados = new ArrayList<>();
+        this.quantidadesSelecionadas = new ArrayList<>();
         initComponents();
     }
 
@@ -55,6 +60,10 @@ public class CyberSnacksView extends javax.swing.JPanel {
         this.combosSemanaisView = combosSemanaisView;
     }
 
+    public void setConfirmacaoPedidoView(ConfirmacaoPedidoView confirmacaoPedidoView) {
+        this.confirmacaoPedidoView = confirmacaoPedidoView;
+    }
+
     public static float converterStringPraNumero(String valorMonetario) {
         String numeroString = valorMonetario.replaceAll("[^0-9.]", "");
         float numero = Float.parseFloat(numeroString);
@@ -77,7 +86,7 @@ public class CyberSnacksView extends javax.swing.JPanel {
     
                 // Verifica se o tipo é COMBO e adiciona na lista específica
                 if (cyberSnack.getTipo() == CyberSnack.Tipo.COMBO) {
-                    combosSemanaisView.addComboCyberSnack(cyberSnack);
+                    combosSemanaisView.addComboCyberSnack(cyberSnack); // Fazer para os outros tipos
                 }
             }
     
@@ -94,6 +103,47 @@ public class CyberSnacksView extends javax.swing.JPanel {
             System.out.println("Erro ao listar os CyberSnacks.");
         }
         System.out.println("\n\n\n\n");
+    }
+
+    public void definirDadosCyberSnacksSelecionados() {
+        cyberSnacksSelecionados = combosSemanaisView.combosSelecionados;
+        quantidadesSelecionadas = combosSemanaisView.qtdsSelecionadas;
+    }
+
+    // Novo
+    public String definirDadosCyberSnacks() {
+        
+        String dados = "\nCYBERSNACKS (em desenvolvimento)\n" +
+                       "---------------------------------------\n";
+        float total = 0.0f; // Por enquanto
+    
+        if (cyberSnacksSelecionados.isEmpty()) {
+            dados += "Nenhum CyberSnack foi selecionado.\n\n";
+        }
+
+        else if (cyberSnacksSelecionados != null) {
+            for (int i = 0; i < cyberSnacksSelecionados.size(); i++) {
+                CyberSnack cyberSnack = cyberSnacksSelecionados.get(i);
+                int quantidade = quantidadesSelecionadas.get(i);
+                float precoCyberSnacks = cyberSnack.getPreco() * quantidade;
+                total += precoCyberSnacks; // Cálculo de cyberSnacks foi feito, mas falta de reserva CyberStation
+        
+                dados += "Nome: " + cyberSnack.getNome() + "\n" +
+                         "Tipo: " + cyberSnack.getTipo() + "\n" +
+                         "Preço unitário: R$ " + String.format("%.2f", cyberSnack.getPreco()) + "\n" +
+                         "Quantidade: " + quantidade + "\n\n";
+            }
+        }
+        
+        dados += "\nTOTAL A PAGAR (em desenvolvimento)\n" +
+                 "---------------------------------------\n" +
+                 "R$ " + total + "\n"; // A definir depois
+        
+        return dados;
+    }
+
+    public void atualizarDadosConfirmacaoPedido() {
+        confirmacaoPedidoView.atualizarDadosPedido();
     }
     
     /**
@@ -334,6 +384,9 @@ public class CyberSnacksView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCyberSnacksCombosSemanaisActionPerformed
 
     private void botaoCyberSnacksFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksFinalizarCompraActionPerformed
+        definirDadosCyberSnacksSelecionados();
+        atualizarDadosConfirmacaoPedido();
+        
         cardLayout.show(mainPanel, "confirmacaoPedido");
     }//GEN-LAST:event_botaoCyberSnacksFinalizarCompraActionPerformed
 

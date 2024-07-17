@@ -22,23 +22,27 @@ public class CombosSemanaisView extends javax.swing.JPanel {
     private CyberSnacksView cyberSnacksView;
     private ArrayList<CyberSnack> combosCyberSnacks;
     private ArrayList<Integer> qtdCombos;
-
+    public ArrayList<CyberSnack> combosSelecionados;
+    public ArrayList<Integer>qtdsSelecionadas;
 
     public CombosSemanaisView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.combosCyberSnacks = new ArrayList<>();
         this.qtdCombos = new ArrayList<>();
+        this.combosSelecionados = new ArrayList<>();
+        this.qtdsSelecionadas = new ArrayList<>();
+
         initComponents();
 
-        // Lógica para testes
-        /*comboCombosSemanaisSegunda.setSelectedIndex(0); // Seleciona o índice 1 (que é "1")
-        comboCombosSemanaisTerca.setSelectedIndex(2); // Seleciona o índice 2 (que é "2")
-        comboCombosSemanaisQuarta.setSelectedIndex(3); // Seleciona o índice 3 (que é "3")
-        comboCombosSemanaisQuinta.setSelectedIndex(4); // Seleciona o índice 4 (que é "4")
-        comboCombosSemanaisSexta.setSelectedIndex(5); // Seleciona o índice 5 (que é "5")*/
-
         habilitarComboDoDia();
+
+        // Lógica para testes
+        comboCombosSemanaisSegunda.setEnabled(true);
+        comboCombosSemanaisTerca.setEnabled(true);
+        comboCombosSemanaisQuarta.setEnabled(true);
+        comboCombosSemanaisQuinta.setEnabled(true);
+        comboCombosSemanaisSexta.setEnabled(true);
     }
 
     public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
@@ -91,6 +95,8 @@ public class CombosSemanaisView extends javax.swing.JPanel {
     }
 
     private void obterQuantidades() {
+        qtdCombos.clear();
+
         qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisSegunda.getSelectedItem()));
         qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisTerca.getSelectedItem()));
         qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisQuarta.getSelectedItem()));
@@ -101,8 +107,30 @@ public class CombosSemanaisView extends javax.swing.JPanel {
             System.out.println(numero);
         }
         System.out.println("\n"); // Adiciona uma linha em branco após os números
-        
     }
+
+    public void definirCombosSelecionados() {
+        combosSelecionados.clear();
+        qtdsSelecionadas.clear();
+    
+        for (int i = 0; i < combosCyberSnacks.size(); i++) {
+            if (qtdCombos.get(i) != 0) {
+                combosSelecionados.add(combosCyberSnacks.get(i));
+                qtdsSelecionadas.add(qtdCombos.get(i));
+            }
+        }
+    
+        // Para verificar o resultado
+        System.out.println("\n\nCombos Selecionados:");
+        for (int i = 0; i < combosSelecionados.size(); i++) {
+            CyberSnack combo = combosSelecionados.get(i);
+            int quantidade = qtdsSelecionadas.get(i);
+            System.out.println("Nome: " + combo.getNome() + ", Tipo: " + combo.getTipo() + ", Quantidade: " + quantidade);
+        }
+        System.out.println("\n\n");
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -436,11 +464,20 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
         }
 
+        
+        
+        combosSelecionados.clear();
+        qtdsSelecionadas.clear();
+
         // PARTE DA MILENA
         obterQuantidades();
+        definirCombosSelecionados();
+
+        cyberSnacksView.definirDadosCyberSnacksSelecionados();
+        cyberSnacksView.atualizarDadosConfirmacaoPedido();
     }
 
-    // Método para adicionar ou atualizar combo selecionado à lista
+    // Método para adicionar ou atualizar combo selecionado à lista (antigo do André)
     private void adicionarComboSelecionado(List<String> lista, JComboBox<String> comboBox, String nomeCombo) {
         String quantidade = (String) comboBox.getSelectedItem();
         if (!"0".equals(quantidade)) {

@@ -2,10 +2,13 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.example.senac.controller.ReservaCyberStationController;
+import com.example.senac.model.CyberSnack;
 import com.example.senac.model.ReservaCyberStation;
 
 public class ConfirmacaoPedidoView extends javax.swing.JPanel {
@@ -17,6 +20,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
 
     public String dadosPedido;
     private CyberStationView cyberStationView;
+    private CyberSnacksView cyberSnacksView;
 
      /*String dadosPedidoPlaceHolder = "RESERVAS CYBERSTATION\n" +
         "----------------------------------------\n" +
@@ -64,12 +68,17 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
         this.reservaCyberStationController = reservaCyberStationController;
         initComponents();
-        atualizarDadosPedido(); // Atualiza os dados do pedido ao iniciar a view
+        //atualizarDadosPedido(); // Atualiza os dados do pedido ao iniciar a view
     }
 
     public void setCyberStationView(CyberStationView cyberStationView) {
         // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberSnacksView = cyberSnacksView;
     }
 
     public void atualizarDadosPedido() {
@@ -79,8 +88,9 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
 
     public String definirDadosPedido() {
         String dadosReserva = definirDadosReserva();
-        String dadosCyberSnacks = definirDadosCyberSnacks();
+        String dadosCyberSnacks = cyberSnacksView.definirDadosCyberSnacks(); // Por enquanto só de combos, depois vai receber mais tipos
         String dados = dadosReserva + dadosCyberSnacks;
+        //String dados = "";
         return dados;
     }
 
@@ -107,22 +117,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         return dados;
     }
     
-    public String definirDadosCyberSnacks() { // Depois, este método provavelmente vai receber um ArrayList
-        String dados = "\nCYBERSNACKS (em desenvolvimento)\n" +
-        "---------------------------------------\n";
-        for (int i = 0; i <= 5; i++) {
-            String cyberSnackIndividual = "Nome: Pão de Queijo\n" +
-            "Tipo: SALGADO\n" +
-            "Preço unitário: R$ 10.00\n" +
-            "Quantidade: 2\n\n";
-            dados += cyberSnackIndividual;
-        }
-        
-        dados += "\nTOTAL A PAGAR (em desenvolvimento)\n---------------------------------------\n" +
-        "R$ 74.40\n";
-        return dados;
-    }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
