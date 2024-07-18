@@ -145,6 +145,11 @@ public class CyberSnacksView extends javax.swing.JPanel {
     public void atualizarDadosConfirmacaoPedido() {
         confirmacaoPedidoView.atualizarDadosPedido();
     }
+
+    public void atualizarDadosCyberSnacks() {
+        definirDadosCyberSnacksSelecionados();
+        atualizarDadosConfirmacaoPedido();
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -384,8 +389,7 @@ public class CyberSnacksView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCyberSnacksCombosSemanaisActionPerformed
 
     private void botaoCyberSnacksFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksFinalizarCompraActionPerformed
-        definirDadosCyberSnacksSelecionados();
-        atualizarDadosConfirmacaoPedido();
+        atualizarDadosCyberSnacks();
         
         cardLayout.show(mainPanel, "confirmacaoPedido");
     }//GEN-LAST:event_botaoCyberSnacksFinalizarCompraActionPerformed

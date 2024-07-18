@@ -473,8 +473,7 @@ public class CombosSemanaisView extends javax.swing.JPanel {
         obterQuantidades();
         definirCombosSelecionados();
 
-        cyberSnacksView.definirDadosCyberSnacksSelecionados();
-        cyberSnacksView.atualizarDadosConfirmacaoPedido();
+        cyberSnacksView.atualizarDadosCyberSnacks();
     }
 
     // Método para adicionar ou atualizar combo selecionado à lista (antigo do André)

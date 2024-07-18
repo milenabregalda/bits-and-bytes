@@ -103,8 +103,6 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
             ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1); // Pega a última reserva da lista
 
             dados += "----------------------------------\n";
-            dados += "ID: " + ultimaReserva.getId() + "\n";
-            dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
             dados += "Data: " + ultimaReserva.getDataReserva() + "\n";
             dados += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
             dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
