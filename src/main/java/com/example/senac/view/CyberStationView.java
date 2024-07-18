@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.util.List;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JButton;
@@ -751,75 +752,83 @@ public class CyberStationView extends javax.swing.JPanel {
                 "Erro", 
                 JOptionPane.ERROR_MESSAGE);   
         } else {
-            // Obtém os dados da reserva
-            int mesaSelecionada = Integer.parseInt(botaoSelecionado.getText());
-            int dia = Integer.parseInt((String) comboCyberStationDia.getSelectedItem());
-            int mes = Integer.parseInt((String) comboCyberStationMes.getSelectedItem());
-            int ano = Integer.parseInt((String) comboCyberStationAno.getSelectedItem());
-            int horaInicio = Integer.parseInt(((String) comboCyberStationHoraInicio.getSelectedItem()).split(":")[0]);
-            int minutoInicio = Integer.parseInt(((String) comboCyberStationHoraInicio.getSelectedItem()).split(":")[1]);
-            int horaTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[0]);
-            int minutoTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[1]);
-    
-            // Verifica se o horário de término é maior que o horário de início
-            LocalTime inicio = LocalTime.of(horaInicio, minutoInicio);
-            LocalTime termino = LocalTime.of(horaTermino, minutoTermino);
-            
-            if (!termino.isAfter(inicio)) {
+            try {
+                // Obtém os dados da reserva
+                int mesaSelecionada = Integer.parseInt(botaoSelecionado.getText());
+                int dia = Integer.parseInt((String) comboCyberStationDia.getSelectedItem());
+                int mes = Integer.parseInt((String) comboCyberStationMes.getSelectedItem());
+                int ano = Integer.parseInt((String) comboCyberStationAno.getSelectedItem());
+                int horaInicio = Integer.parseInt(((String) comboCyberStationHoraInicio.getSelectedItem()).split(":")[0]);
+                int minutoInicio = Integer.parseInt(((String) comboCyberStationHoraInicio.getSelectedItem()).split(":")[1]);
+                int horaTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[0]);
+                int minutoTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[1]);
+        
+                // Verifica se o horário de término é maior que o horário de início
+                LocalTime inicio = LocalTime.of(horaInicio, minutoInicio);
+                LocalTime termino = LocalTime.of(horaTermino, minutoTermino);
+                
+                if (!termino.isAfter(inicio)) {
+                    JOptionPane.showMessageDialog(CyberStationView.this, 
+                        "Você selecionou um horário inválido. O horário de término deve ser maior que o horário de início.", 
+                        "Erro", 
+                        JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                // Pega o usuário existente
+                Usuario usuario = usuarioController.getObjetoUsuario();
+                System.out.println(usuario.toString());
+        
+                if (primeiraVez) {
+                    // Cria uma nova reserva
+                    if (usuario != null) {
+                        ReservaCyberStation reserva = reservaCyberStationController.criarObjetoReservaCyberStation(
+                            usuario,
+                            LocalDate.of(ano, mes, dia),
+                            LocalTime.of(horaInicio, minutoInicio),
+                            LocalTime.of(horaTermino, minutoTermino),
+                            mesaSelecionada,
+                            Status.DISPONIVEL
+                        );
+                        System.out.println(reserva.toString());
+        
+                        // Cadastra a reserva
+                        boolean sucesso = reservaCyberStationController.cadastrarReservaCyberStation(reserva);
+                        if (sucesso) {
+                            reservaId = reserva.getId();
+                            primeiraVez = false;
+                            confirmacaoPedidoView.atualizarDadosPedido();
+                            cardLayout.show(mainPanel, "cyberSnacks");
+                        }
+                    }
+                } else {
+                    // Atualiza a reserva existente
+                    if (usuario != null && reservaId != null) {
+                        ReservaCyberStation reservaAtualizada = reservaCyberStationController.criarObjetoReservaCyberStation(
+                            usuario,
+                            LocalDate.of(ano, mes, dia),
+                            LocalTime.of(horaInicio, minutoInicio),
+                            LocalTime.of(horaTermino, minutoTermino),
+                            mesaSelecionada,
+                            Status.DISPONIVEL
+                        );
+                        reservaAtualizada.setId(reservaId); // Define o ID da reserva a ser atualizada
+                        ReservaCyberStation reserva = reservaCyberStationController.atualizarReservaCyberStation(reservaId, reservaAtualizada);
+                        if (reserva != null) {
+                            confirmacaoPedidoView.atualizarDadosPedido();
+                            // Troca para a tela de confirmação de pedido
+                            cardLayout.show(mainPanel, "cyberSnacks");
+                        }
+                    }
+                }
+            } catch (DateTimeException e) {
                 JOptionPane.showMessageDialog(CyberStationView.this, 
-                    "Você selecionou um horário inválido. O horário de término deve ser maior que o horário de início.", 
-                    "Erro", 
-                    JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            
-            // Pega o usuário existente
-            Usuario usuario = usuarioController.getObjetoUsuario();
-            System.out.println(usuario.toString());
-    
-            if (primeiraVez) {
-                // Cria uma nova reserva
-                if (usuario != null) {
-                    ReservaCyberStation reserva = reservaCyberStationController.criarObjetoReservaCyberStation(
-                        usuario,
-                        LocalDate.of(ano, mes, dia),
-                        LocalTime.of(horaInicio, minutoInicio),
-                        LocalTime.of(horaTermino, minutoTermino),
-                        mesaSelecionada,
-                        Status.DISPONIVEL
-                    );
-                    System.out.println(reserva.toString());
-    
-                    // Cadastra a reserva
-                    boolean sucesso = reservaCyberStationController.cadastrarReservaCyberStation(reserva);
-                    if (sucesso) {
-                        reservaId = reserva.getId();
-                        primeiraVez = false;
-                        confirmacaoPedidoView.atualizarDadosPedido();
-                        cardLayout.show(mainPanel, "cyberSnacks");
-                    }
-                }
-            } else {
-                // Atualiza a reserva existente
-                if (usuario != null && reservaId != null) {
-                    ReservaCyberStation reservaAtualizada = reservaCyberStationController.criarObjetoReservaCyberStation(
-                        usuario,
-                        LocalDate.of(ano, mes, dia),
-                        LocalTime.of(horaInicio, minutoInicio),
-                        LocalTime.of(horaTermino, minutoTermino),
-                        mesaSelecionada,
-                        Status.DISPONIVEL
-                    );
-                    reservaAtualizada.setId(reservaId); // Define o ID da reserva a ser atualizada
-                    ReservaCyberStation reserva = reservaCyberStationController.atualizarReservaCyberStation(reservaId, reservaAtualizada);
-                    if (reserva != null) {
-                        confirmacaoPedidoView.atualizarDadosPedido();
-                        // Troca para a tela de confirmação de pedido
-                        cardLayout.show(mainPanel, "cyberSnacks");
-                    }
-                }
+                "Data inválida. Por favor, selecione uma data válida.", 
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE);
             }
         }
+            
     }//GEN-LAST:event_botaoCyberStationReservarActionPerformed
 
 

@@ -463,8 +463,6 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
         }
-
-        
         
         combosSelecionados.clear();
         qtdsSelecionadas.clear();
