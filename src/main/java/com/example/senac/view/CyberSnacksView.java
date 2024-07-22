@@ -116,16 +116,12 @@ public class CyberSnacksView extends javax.swing.JPanel {
         System.out.println("\n\n\n\n");
     }
 
-    /*public void definirDadosCyberSnacksSelecionados() {
-        cyberSnacksSelecionados = combosSemanaisView.combosSelecionados;
-        quantidadesSelecionadas = combosSemanaisView.qtdsSelecionadas;
-    }*/
-
     public void definirDadosCyberSnacksSelecionados() {
-        // Adiciona todos os tipos de cybersnacks selecionados para um arraylist só
         cyberSnacksSelecionados.clear();
         quantidadesSelecionadas.clear();
 
+        // Adiciona todos os tipos de cybersnacks selecionados para um arraylist só
+        // (precisa estar na mesma ordem do debaixo):
         if (salgadosView.salgadosSelecionados != null) {
             for (int i = 0; i < salgadosView.salgadosSelecionados.size(); i++) {
                 cyberSnacksSelecionados.add(salgadosView.salgadosSelecionados.get(i));
@@ -139,19 +135,18 @@ public class CyberSnacksView extends javax.swing.JPanel {
         }   
     
         // Adiciona as qtdsSelecionadas de todos os cybersnacks e adiciona para um arraylist só
-        if (combosSemanaisView.qtdsSelecionadas != null) {
-            for (int i = 0; i < combosSemanaisView.qtdsSelecionadas.size(); i++) {
-                quantidadesSelecionadas.add(combosSemanaisView.qtdsSelecionadas.get(i));
-            }
-        }
-
+        // (precisa estar na mesma ordem do de cima):
         if (salgadosView.qtdsSelecionadas != null) {
             for (int i = 0; i < salgadosView.qtdsSelecionadas.size(); i++) {
                 quantidadesSelecionadas.add(salgadosView.qtdsSelecionadas.get(i));
             }
         }
 
-        
+        if (combosSemanaisView.qtdsSelecionadas != null) {
+            for (int i = 0; i < combosSemanaisView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(combosSemanaisView.qtdsSelecionadas.get(i));
+            }
+        }
     }
 
     // Novo
