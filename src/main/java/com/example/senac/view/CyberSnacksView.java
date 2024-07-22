@@ -29,6 +29,8 @@ public class CyberSnacksView extends javax.swing.JPanel {
     private ArrayList<CyberSnack>cyberSnacksSelecionados;
     private ArrayList<Integer>quantidadesSelecionadas;
 
+    private double precoCyberSnacks = 0;
+
     public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -62,6 +64,10 @@ public class CyberSnacksView extends javax.swing.JPanel {
 
     public void setConfirmacaoPedidoView(ConfirmacaoPedidoView confirmacaoPedidoView) {
         this.confirmacaoPedidoView = confirmacaoPedidoView;
+    }
+
+    public double getPrecoCyberSnacks() {
+        return precoCyberSnacks;
     }
 
     public static float converterStringPraNumero(String valorMonetario) {
@@ -115,7 +121,7 @@ public class CyberSnacksView extends javax.swing.JPanel {
         
         String dados = "\nCYBERSNACKS (em desenvolvimento)\n" +
                        "---------------------------------------\n";
-        float total = 0.0f; // Por enquanto
+        precoCyberSnacks = 0; // Por enquanto
     
         if (cyberSnacksSelecionados.isEmpty()) {
             dados += "Nenhum CyberSnack foi selecionado.\n\n";
@@ -125,8 +131,8 @@ public class CyberSnacksView extends javax.swing.JPanel {
             for (int i = 0; i < cyberSnacksSelecionados.size(); i++) {
                 CyberSnack cyberSnack = cyberSnacksSelecionados.get(i);
                 int quantidade = quantidadesSelecionadas.get(i);
-                float precoCyberSnacks = cyberSnack.getPreco() * quantidade;
-                total += precoCyberSnacks; // Cálculo de cyberSnacks foi feito, mas falta de reserva CyberStation
+                double precoCyberSnack = cyberSnack.getPreco() * quantidade;
+                precoCyberSnacks += precoCyberSnack;
         
                 dados += "Nome: " + cyberSnack.getNome() + "\n" +
                          "Tipo: " + cyberSnack.getTipo() + "\n" +
@@ -135,9 +141,9 @@ public class CyberSnacksView extends javax.swing.JPanel {
             }
         }
         
-        dados += "\nTOTAL A PAGAR (em desenvolvimento)\n" +
+        /*dados += "\nTOTAL A PAGAR (em desenvolvimento)\n" +
                  "---------------------------------------\n" +
-                 "R$ " + total + "\n"; // A definir depois
+                 "R$ " + precoCyberSnacks + "\n";*/
         
         return dados;
     }

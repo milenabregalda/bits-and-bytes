@@ -25,7 +25,11 @@ public class PagamentoView extends javax.swing.JPanel {
         // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
     }
-    
+
+    public void atualizarPreco(String preco) {
+        areaValorTotal.setText("R$ "+ preco);   
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,7 +79,7 @@ public class PagamentoView extends javax.swing.JPanel {
         areaValorTotal.setForeground(new java.awt.Color(174, 174, 174));
         areaValorTotal.setRows(5);
         //areaValorTotal.setText("Aqui fica o valor total.");
-        areaValorTotal.setText("R$ 74.40");
+        areaValorTotal.setText("");
         areaValorTotal.setBorder(null);
         barraValorTotal.setViewportView(areaValorTotal);
 

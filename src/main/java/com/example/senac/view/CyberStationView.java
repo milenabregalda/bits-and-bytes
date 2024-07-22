@@ -33,6 +33,8 @@ public class CyberStationView extends javax.swing.JPanel {
     private ReservaCyberStationController reservaCyberStationController;
     private ConfirmacaoPedidoView confirmacaoPedidoView;
 
+    int horasReservadas;
+
     public CyberStationView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController, ReservaCyberStationController reservaCyberStationController, ConfirmacaoPedidoView confirmacaoPedidoView) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -45,7 +47,6 @@ public class CyberStationView extends javax.swing.JPanel {
         definirCorDosBotoesDeMesas();
     }
 
-    // Por enquanto, esse método define que todas as mesas não estão ocupadas. Futuramente, terá conexão com banco:
     public void verificarSeMesasOcupadas() {
         for (int i = 0; i < seMesasCyberStationOcupadas.length; i++) {
           seMesasCyberStationOcupadas[i] = false;
@@ -94,6 +95,15 @@ public class CyberStationView extends javax.swing.JPanel {
                 break;
         }
         botaoDefinido.revalidate();
+    }
+
+    public static int calcularHorasReservadas(int horaInicio, int horaTermino) {
+        int horasReservadas = horaTermino - horaInicio;
+        return horasReservadas;
+    }
+
+    public int getHorasReservadas() {
+        return horasReservadas;
     }
 
     // Adiciona botões a vetor para facilitar definição do estado dos botões:
@@ -762,6 +772,8 @@ public class CyberStationView extends javax.swing.JPanel {
                 int minutoInicio = Integer.parseInt(((String) comboCyberStationHoraInicio.getSelectedItem()).split(":")[1]);
                 int horaTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[0]);
                 int minutoTermino = Integer.parseInt(((String) comboCyberStationHoraTermino.getSelectedItem()).split(":")[1]);
+
+                horasReservadas = calcularHorasReservadas(horaInicio, horaTermino);
         
                 // Verifica se o horário de término é maior que o horário de início
                 LocalTime inicio = LocalTime.of(horaInicio, minutoInicio);

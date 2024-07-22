@@ -1,6 +1,8 @@
 package com.example.senac.view;
 
 import java.awt.CardLayout;
+import java.text.DecimalFormat;
+
 import javax.swing.JPanel;
 
 import java.util.ArrayList;
@@ -17,51 +19,20 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
      * Creates new form Interface
      */
 
-
     public String dadosPedido;
     private CyberStationView cyberStationView;
     private CyberSnacksView cyberSnacksView;
 
-     /*String dadosPedidoPlaceHolder = "RESERVAS CYBERSTATION\n" +
-        "----------------------------------------\n" +
-        "ID: 1\n" +
-        "Usuário: Usuário\n" +
-        "Data: 2024-06-11\n" +
-        "Hora de Início: 13:00\n" +
-        "Hora de Término: 14:00\n" +
-        "Status: DISPONIVEL\n" +
-        "Preço (R$ 10.00/hora): R$ 10.00\n\n\n" +
-        
-        "CYBERSNACKS\n" +
-        "---------------------------------------\n" +
-        "Quantidade: 2\n" +
-        "Nome: Pão de Queijo\n" +
-        "Tipo: SALGADO\n" +
-        "Preço: 2x de R$ 10.00\n\n" +
-
-        "Quantidade: 1\n" +
-        "Nome: Sorvete Misto\n" +
-        "Tipo: DOCE\n" +
-        "Preço: R$ 11.00\n\n" +
-
-        "Quantidade: 1\n" +
-        "Nome: Café com Leite\n" +
-        "Tipo: BEBIDA\n" +
-        "Preço: R$ 10.00\n\n" +
-
-        "Quantidade: 1\n" +
-        "Nome: COMBO TERÇA-FEIRA SABOROSA\n" +
-        "Tipo: COMBO\n" +
-        "Preço: R$ 23.40\n\n" +
-
-        "\nTOTAL\n---------------------------------------\n" +
-        "R$ 74.40\n";*/
-
+    private double precoReservas;
+    private double precoTotal;
+    private String precoFormatado;
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private ReservaCyberStationController reservaCyberStationController;
     List<ReservaCyberStation> reservas;
+
+    private PagamentoView pagamentoView;
 
     public ConfirmacaoPedidoView(CardLayout cardLayout, JPanel mainPanel, ReservaCyberStationController reservaCyberStationController) {
         this.cardLayout = cardLayout;
@@ -81,6 +52,18 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         this.cyberSnacksView = cyberSnacksView;
     }
 
+    public void setPagamentoView(PagamentoView pagamentoView) {
+        this.pagamentoView = pagamentoView;
+    }
+
+    public double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public String getPrecoFormatado() {
+        return precoFormatado;
+    }
+
     public void atualizarDadosPedido() {
         dadosPedido = definirDadosPedido();
         areaConfirmacaoPedidoTexto.setText(dadosPedido); // Atualiza a área de texto com os dados do pedido
@@ -89,8 +72,9 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     public String definirDadosPedido() {
         String dadosReserva = definirDadosReserva();
         String dadosCyberSnacks = cyberSnacksView.definirDadosCyberSnacks(); // Por enquanto só de combos, depois vai receber mais tipos
-        String dados = dadosReserva + dadosCyberSnacks;
-        //String dados = "";
+        String dadosTotal = definirDadosTotal();
+        String dados = dadosReserva + dadosCyberSnacks + dadosTotal;
+        
         return dados;
     }
 
@@ -108,13 +92,25 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
             dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
             dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
             dados += "Status: " + ultimaReserva.getStatus() + "\n";
+            dados += "Preço por hora: R$ 10,00\n";
+            dados += "Horas reservadas: " + cyberStationView.getHorasReservadas() + "\n";
             dados += "----------------------------------\n\n";
+            precoReservas = 10 * cyberStationView.getHorasReservadas();
         } else {
             System.out.println("Nenhuma reserva encontrada.");
         }
         return dados;
     }
-    
+
+    public String definirDadosTotal() {
+        precoTotal = precoReservas + cyberSnacksView.getPrecoCyberSnacks();
+        DecimalFormat df = new DecimalFormat("#.00");
+        precoFormatado = df.format(precoTotal);
+        String dados = "\nTOTAL A PAGAR (em desenvolvimento)\n" +
+            "---------------------------------------\n" +
+            "R$ " + precoFormatado + "\n";
+        return dados;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -317,6 +313,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoConfirmacaoPedidoPersonalizarActionPerformed
 
     private void botaoConfirmacaoPedidoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoConcluirActionPerformed
+        pagamentoView.atualizarPreco(precoFormatado);
         cardLayout.show(mainPanel, "pagamento");
     }//GEN-LAST:event_botaoConfirmacaoPedidoConcluirActionPerformed
 
