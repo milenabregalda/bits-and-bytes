@@ -94,6 +94,11 @@ public class CyberSnacksView extends javax.swing.JPanel {
                 if (cyberSnack.getTipo() == CyberSnack.Tipo.COMBO) {
                     combosSemanaisView.addComboCyberSnack(cyberSnack); // Fazer para os outros tipos
                 }
+
+                // Verifica se o tipo é SALGADO e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.SALGADO) {
+                    salgadosView.addSalgadoCyberSnack(cyberSnack); // Fazer para os outros tipos
+                }
             }
     
             System.out.println("\n\n\n\n\nTodos os cybersnacks:");
@@ -111,15 +116,48 @@ public class CyberSnacksView extends javax.swing.JPanel {
         System.out.println("\n\n\n\n");
     }
 
-    public void definirDadosCyberSnacksSelecionados() {
+    /*public void definirDadosCyberSnacksSelecionados() {
         cyberSnacksSelecionados = combosSemanaisView.combosSelecionados;
         quantidadesSelecionadas = combosSemanaisView.qtdsSelecionadas;
+    }*/
+
+    public void definirDadosCyberSnacksSelecionados() {
+        // Adiciona todos os tipos de cybersnacks selecionados para um arraylist só
+        cyberSnacksSelecionados.clear();
+        quantidadesSelecionadas.clear();
+
+        if (salgadosView.salgadosSelecionados != null) {
+            for (int i = 0; i < salgadosView.salgadosSelecionados.size(); i++) {
+                cyberSnacksSelecionados.add(salgadosView.salgadosSelecionados.get(i));
+            }   
+        }   
+
+        if (combosSemanaisView.combosSelecionados != null) {
+            for (int i = 0; i < combosSemanaisView.combosSelecionados.size(); i++) {
+                cyberSnacksSelecionados.add(combosSemanaisView.combosSelecionados.get(i));
+            }   
+        }   
+    
+        // Adiciona as qtdsSelecionadas de todos os cybersnacks e adiciona para um arraylist só
+        if (combosSemanaisView.qtdsSelecionadas != null) {
+            for (int i = 0; i < combosSemanaisView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(combosSemanaisView.qtdsSelecionadas.get(i));
+            }
+        }
+
+        if (salgadosView.qtdsSelecionadas != null) {
+            for (int i = 0; i < salgadosView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(salgadosView.qtdsSelecionadas.get(i));
+            }
+        }
+
+        
     }
 
     // Novo
     public String definirDadosCyberSnacks() {
         
-        String dados = "\nCYBERSNACKS (em desenvolvimento)\n" +
+        String dados = "\nCYBERSNACKS\n" +
                        "---------------------------------------\n";
         precoCyberSnacks = 0; // Por enquanto
     
@@ -140,10 +178,6 @@ public class CyberSnacksView extends javax.swing.JPanel {
                          "Quantidade: " + quantidade + "\n\n";
             }
         }
-        
-        /*dados += "\nTOTAL A PAGAR (em desenvolvimento)\n" +
-                 "---------------------------------------\n" +
-                 "R$ " + precoCyberSnacks + "\n";*/
         
         return dados;
     }

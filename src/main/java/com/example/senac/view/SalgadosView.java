@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import com.example.senac.controller.CyberSnackController;
+import com.example.senac.model.CyberSnack;
 
 public class SalgadosView extends javax.swing.JPanel {
     /**
@@ -18,15 +19,66 @@ public class SalgadosView extends javax.swing.JPanel {
     private CyberSnacksView cyberSnacksView;
     //String[] arraysalgado = new String[10];
 
+    private ArrayList<CyberSnack> salgadosCyberSnacks;
+    private ArrayList<Integer> qtdSalgados;
+    public ArrayList<CyberSnack> salgadosSelecionados;
+    public ArrayList<Integer>qtdsSelecionadas;
+
+
     public SalgadosView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
+        this.salgadosCyberSnacks = new ArrayList<>();
+        this.qtdSalgados = new ArrayList<>();
+        this.salgadosSelecionados = new ArrayList<>();
+        this.qtdsSelecionadas = new ArrayList<>();
         initComponents();
     }
     
     public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
         this.cyberSnacksView = cyberSnacksView;
+    }
+
+    public void addSalgadoCyberSnack(CyberSnack salgadoCyberSnack) {
+        salgadosCyberSnacks.add(salgadoCyberSnack);
+
+        // Para imprimir
+        System.out.println(salgadoCyberSnack);
+    }
+
+    private void obterQuantidades() {
+        qtdSalgados.clear();
+
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosPaoQueijo.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosPastelCarne.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosPastelQueijo.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosPastelFrango.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosPastelCoracao.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosCoxinha.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosEnroladinho.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosEmpadaFrango.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosEmpadaCalabresa.getSelectedItem()));
+        qtdSalgados.add(Integer.parseInt((String) comboSalgadosEmpada.getSelectedItem()));
+        
+
+        // Para imprimir
+        for (Integer numero : qtdSalgados) {
+            System.out.println(numero);
+        }
+        System.out.println("\n"); // Adiciona uma linha em branco após os números
+    }
+
+    public void definirSalgadosSelecionados() {
+        salgadosSelecionados.clear();
+        qtdsSelecionadas.clear();
+    
+        for (int i = 0; i < salgadosCyberSnacks.size(); i++) {
+            if (qtdSalgados.get(i) != 0) {
+                salgadosSelecionados.add(salgadosCyberSnacks.get(i));
+                qtdsSelecionadas.add(qtdSalgados.get(i));
+            }
+        }
     }
 
     /**
@@ -476,6 +528,12 @@ public class SalgadosView extends javax.swing.JPanel {
             adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosPastelFrango, "Pastel Frango");
             adicionarSalgadoSelecionado(salgadosSelecionados, comboSalgadosPastelQueijo, "Pastel Queijo");
     
+
+            // LÓGICA DA MILENA
+            obterQuantidades();
+            definirSalgadosSelecionados();
+            cyberSnacksView.atualizarDadosCyberSnacks();
+
             // Mostra a próxima tela
             cardLayout.show(mainPanel, "cyberSnacks");
     

@@ -106,7 +106,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         precoTotal = precoReservas + cyberSnacksView.getPrecoCyberSnacks();
         DecimalFormat df = new DecimalFormat("#.00");
         precoFormatado = df.format(precoTotal);
-        String dados = "\nTOTAL A PAGAR (em desenvolvimento)\n" +
+        String dados = "\nTOTAL A PAGAR\n" +
             "---------------------------------------\n" +
             "R$ " + precoFormatado + "\n";
         return dados;
