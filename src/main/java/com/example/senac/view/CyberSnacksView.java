@@ -92,12 +92,17 @@ public class CyberSnacksView extends javax.swing.JPanel {
     
                 // Verifica se o tipo é COMBO e adiciona na lista específica
                 if (cyberSnack.getTipo() == CyberSnack.Tipo.COMBO) {
-                    combosSemanaisView.addComboCyberSnack(cyberSnack); // Fazer para os outros tipos
+                    combosSemanaisView.addComboCyberSnack(cyberSnack);
                 }
 
                 // Verifica se o tipo é SALGADO e adiciona na lista específica
                 if (cyberSnack.getTipo() == CyberSnack.Tipo.SALGADO) {
-                    salgadosView.addSalgadoCyberSnack(cyberSnack); // Fazer para os outros tipos
+                    salgadosView.addSalgadoCyberSnack(cyberSnack);
+                }
+
+                // Verifica se o tipo é BEBIDA e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.BEBIDA) {
+                    bebidasView.addBebidaCyberSnack(cyberSnack);
                 }
             }
     
@@ -126,6 +131,12 @@ public class CyberSnacksView extends javax.swing.JPanel {
             for (int i = 0; i < salgadosView.salgadosSelecionados.size(); i++) {
                 cyberSnacksSelecionados.add(salgadosView.salgadosSelecionados.get(i));
             }   
+        }  
+
+        if (bebidasView.bebidasSelecionadas != null) {
+            for (int i = 0; i < bebidasView.bebidasSelecionadas.size(); i++) {
+                cyberSnacksSelecionados.add(bebidasView.bebidasSelecionadas.get(i));
+            }   
         }   
 
         if (combosSemanaisView.combosSelecionados != null) {
@@ -139,6 +150,12 @@ public class CyberSnacksView extends javax.swing.JPanel {
         if (salgadosView.qtdsSelecionadas != null) {
             for (int i = 0; i < salgadosView.qtdsSelecionadas.size(); i++) {
                 quantidadesSelecionadas.add(salgadosView.qtdsSelecionadas.get(i));
+            }
+        }
+
+        if (bebidasView.qtdsSelecionadas != null) {
+            for (int i = 0; i < bebidasView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(bebidasView.qtdsSelecionadas.get(i));
             }
         }
 

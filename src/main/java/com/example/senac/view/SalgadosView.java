@@ -24,7 +24,6 @@ public class SalgadosView extends javax.swing.JPanel {
     public ArrayList<CyberSnack> salgadosSelecionados;
     public ArrayList<Integer>qtdsSelecionadas;
 
-
     public SalgadosView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
