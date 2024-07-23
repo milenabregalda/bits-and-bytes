@@ -104,6 +104,11 @@ public class CyberSnacksView extends javax.swing.JPanel {
                 if (cyberSnack.getTipo() == CyberSnack.Tipo.BEBIDA) {
                     bebidasView.addBebidaCyberSnack(cyberSnack);
                 }
+
+                // Verifica se o tipo é DOCE e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.DOCE) {
+                    docesView.addDoceCyberSnack(cyberSnack);
+                }
             }
     
             System.out.println("\n\n\n\n\nTodos os cybersnacks:");
@@ -133,6 +138,12 @@ public class CyberSnacksView extends javax.swing.JPanel {
             }   
         }  
 
+        if (docesView.docesSelecionados != null) {
+            for (int i = 0; i < docesView.docesSelecionados.size(); i++) {
+                cyberSnacksSelecionados.add(docesView.docesSelecionados.get(i));
+            }   
+        }
+
         if (bebidasView.bebidasSelecionadas != null) {
             for (int i = 0; i < bebidasView.bebidasSelecionadas.size(); i++) {
                 cyberSnacksSelecionados.add(bebidasView.bebidasSelecionadas.get(i));
@@ -150,6 +161,12 @@ public class CyberSnacksView extends javax.swing.JPanel {
         if (salgadosView.qtdsSelecionadas != null) {
             for (int i = 0; i < salgadosView.qtdsSelecionadas.size(); i++) {
                 quantidadesSelecionadas.add(salgadosView.qtdsSelecionadas.get(i));
+            }
+        }
+
+        if (docesView.qtdsSelecionadas != null) {
+            for (int i = 0; i < docesView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(docesView.qtdsSelecionadas.get(i));
             }
         }
 
