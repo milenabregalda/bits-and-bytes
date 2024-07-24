@@ -17,16 +17,16 @@ public class PedidoCyberSnackIdController {
     }
 
     // Método para criar um novo PedidoCyberSnackId
-    public PedidoCyberSnackId criarPedidoCyberSnackId(PedidoCyberSnackId pedidoCyberSnackId) {
+    public boolean criarPedidoCyberSnackId(PedidoCyberSnackId pedidoCyberSnackId) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(pedidoCyberSnackId);
             entityManager.getTransaction().commit();
-            return pedidoCyberSnackId;
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
+            return false;
         }
     }
 

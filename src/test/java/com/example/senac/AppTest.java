@@ -15,8 +15,8 @@ public class AppTest {
 
     @Test
     public void deveLancarExcecaoQuandoCadastrarUsuarioComNomeJaCadastrado() {
-        final UsuarioController usuarioController = new UsuarioController();
-        final Usuario usuario = new Usuario("Nome", "CPF", "E-mail", "Senha", "Telefone");
+        UsuarioController usuarioController = new UsuarioController();
+        Usuario usuario = new Usuario("Nome", "CPF", "E-mail", "Senha", "Telefone");
 
         // Cadastra o usuário pela primeira vez 
         try {

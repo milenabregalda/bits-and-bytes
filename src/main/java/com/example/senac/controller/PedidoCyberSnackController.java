@@ -5,7 +5,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import com.example.senac.model.CyberSnack;
+import com.example.senac.model.Pedido;
 import com.example.senac.model.PedidoCyberSnack;
 import com.example.senac.model.PedidoCyberSnackId;
 
@@ -13,23 +18,34 @@ public class PedidoCyberSnackController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
+    private List<PedidoCyberSnack> pedidosCyberSnacks = new ArrayList<>();
 
     public PedidoCyberSnackController() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");
         this.entityManager = entityManagerFactory.createEntityManager();
     }
 
-    // Método para criar um novo PedidoCyberSnack
-    public PedidoCyberSnack criarPedidoCyberSnack(PedidoCyberSnack pedidoCyberSnack) {
+    // Método para criar o objeto PedidoCyberSnack
+    public PedidoCyberSnack criarObjetoPedidoCyberSnack(Pedido pedido, CyberSnack cyberSnack, int quantidade, float preco) {
+        PedidoCyberSnackId id = new PedidoCyberSnackId(pedido.getId(), cyberSnack.getId());
+        PedidoCyberSnack pedidoCyberSnack = new PedidoCyberSnack(pedido, cyberSnack, quantidade, preco);
+        pedidoCyberSnack.setId(id);
+
+        pedidosCyberSnacks.add(pedidoCyberSnack);
+        return pedidoCyberSnack;
+    }
+
+    // Método para criar um novo PedidoCyberSnack no banco de dados
+    public boolean criarPedidoCyberSnack(PedidoCyberSnack pedidoCyberSnack) {
         try {
             entityManager.getTransaction().begin();
             entityManager.persist(pedidoCyberSnack);
             entityManager.getTransaction().commit();
-            return pedidoCyberSnack;
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
+            return false;
         }
     }
 
