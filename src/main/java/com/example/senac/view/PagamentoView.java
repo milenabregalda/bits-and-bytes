@@ -12,13 +12,24 @@ public class PagamentoView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+
+    private CyberStationView cyberStationView;
     
     public PagamentoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         initComponents();
     }
-    
+
+    public void setCyberStationView(CyberStationView cyberStationView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberStationView = cyberStationView;
+    }
+
+    public void atualizarPreco(String preco) {
+        areaValorTotal.setText("R$ "+ preco);   
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -68,7 +79,7 @@ public class PagamentoView extends javax.swing.JPanel {
         areaValorTotal.setForeground(new java.awt.Color(174, 174, 174));
         areaValorTotal.setRows(5);
         //areaValorTotal.setText("Aqui fica o valor total.");
-        areaValorTotal.setText("R$ 74.40");
+        areaValorTotal.setText("");
         areaValorTotal.setBorder(null);
         barraValorTotal.setViewportView(areaValorTotal);
 
@@ -254,6 +265,7 @@ public class PagamentoView extends javax.swing.JPanel {
     private void botaoCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarPedidoActionPerformed
         JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
         // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        cyberStationView.cancelarReservaCyberStation();
         System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoCancelarPedidoActionPerformed
 

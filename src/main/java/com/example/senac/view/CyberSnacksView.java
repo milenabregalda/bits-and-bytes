@@ -1,8 +1,12 @@
 package com.example.senac.view;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import com.example.senac.controller.CyberSnackController;
+import com.example.senac.model.CyberSnack;
 
 public class CyberSnacksView extends javax.swing.JPanel {
 
@@ -14,19 +18,206 @@ public class CyberSnacksView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private CyberSnackController cyberSnackController;
-    
+    private CyberStationView cyberStationView;
+    private ConfirmacaoPedidoView confirmacaoPedidoView;
+
+    private SalgadosView salgadosView;
+    private BebidasView bebidasView;
+    private DocesView docesView;
+    private CombosSemanaisView combosSemanaisView;
+    private ArrayList<CyberSnack> todosOsCyberSnacks;
+    private ArrayList<CyberSnack>cyberSnacksSelecionados;
+    private ArrayList<Integer>quantidadesSelecionadas;
+
+    private double precoCyberSnacks = 0;
 
     public CyberSnacksView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
+        this.todosOsCyberSnacks = new ArrayList<>(); // Inicializar a lista
+        this.cyberSnacksSelecionados = new ArrayList<>();
+        this.quantidadesSelecionadas = new ArrayList<>();
         initComponents();
+    }
+
+    public void setCyberStationView(CyberStationView cyberStationView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberStationView = cyberStationView;
+    }
+
+    public void setSalgadosView(SalgadosView salgadosView) {
+        this.salgadosView = salgadosView;
+    }
+
+    public void setBebidasView(BebidasView bebidasView) {
+        this.bebidasView = bebidasView;
+    }
+
+    public void setDocesView(DocesView docesView) {
+        this.docesView = docesView;
+    }
+
+    public void setCombosSemanaisView(CombosSemanaisView combosSemanaisView) {
+        this.combosSemanaisView = combosSemanaisView;
+    }
+
+    public void setConfirmacaoPedidoView(ConfirmacaoPedidoView confirmacaoPedidoView) {
+        this.confirmacaoPedidoView = confirmacaoPedidoView;
+    }
+
+    public double getPrecoCyberSnacks() {
+        return precoCyberSnacks;
     }
 
     public static float converterStringPraNumero(String valorMonetario) {
         String numeroString = valorMonetario.replaceAll("[^0-9.]", "");
         float numero = Float.parseFloat(numeroString);
         return numero;
+    }
+
+    public void definirVetoresCyberSnacks() {
+        // Obter todos os CyberSnacks do banco de dados
+        List<CyberSnack> cyberSnacks = cyberSnackController.listarCyberSnacks();
+    
+        if (cyberSnacks != null) {
+            // Limpar lista antes de adicionar novos itens
+            todosOsCyberSnacks.clear();
+    
+            // Filtrar e adicionar CyberSnacks com ID de 1 a 35 no ArrayList
+            for (CyberSnack cyberSnack : cyberSnacks) {
+                if (cyberSnack.getId() >= 1 && cyberSnack.getId() <= 35) {
+                    todosOsCyberSnacks.add(cyberSnack);
+                }
+    
+                // Verifica se o tipo é COMBO e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.COMBO) {
+                    combosSemanaisView.addComboCyberSnack(cyberSnack);
+                }
+
+                // Verifica se o tipo é SALGADO e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.SALGADO) {
+                    salgadosView.addSalgadoCyberSnack(cyberSnack);
+                }
+
+                // Verifica se o tipo é BEBIDA e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.BEBIDA) {
+                    bebidasView.addBebidaCyberSnack(cyberSnack);
+                }
+
+                // Verifica se o tipo é DOCE e adiciona na lista específica
+                if (cyberSnack.getTipo() == CyberSnack.Tipo.DOCE) {
+                    docesView.addDoceCyberSnack(cyberSnack);
+                }
+            }
+    
+            System.out.println("\n\n\n\n\nTodos os cybersnacks:");
+            // Mostrar todos os CyberSnacks no console
+            for (CyberSnack cyberSnack : todosOsCyberSnacks) {
+                System.out.println(cyberSnack.toString());
+            }
+
+            // Talvez no final da implementação, deletar este método
+            combosSemanaisView.imprimirCombosCyberSnacks();
+            
+        } else {
+            System.out.println("Erro ao listar os CyberSnacks.");
+        }
+        System.out.println("\n\n\n\n");
+    }
+
+    public void definirDadosCyberSnacksSelecionados() {
+        cyberSnacksSelecionados.clear();
+        quantidadesSelecionadas.clear();
+
+        // Adiciona todos os tipos de cybersnacks selecionados para um arraylist só
+        // (precisa estar na mesma ordem do debaixo):
+        if (salgadosView.salgadosSelecionados != null) {
+            for (int i = 0; i < salgadosView.salgadosSelecionados.size(); i++) {
+                cyberSnacksSelecionados.add(salgadosView.salgadosSelecionados.get(i));
+            }   
+        }  
+
+        if (docesView.docesSelecionados != null) {
+            for (int i = 0; i < docesView.docesSelecionados.size(); i++) {
+                cyberSnacksSelecionados.add(docesView.docesSelecionados.get(i));
+            }   
+        }
+
+        if (bebidasView.bebidasSelecionadas != null) {
+            for (int i = 0; i < bebidasView.bebidasSelecionadas.size(); i++) {
+                cyberSnacksSelecionados.add(bebidasView.bebidasSelecionadas.get(i));
+            }   
+        }   
+
+        if (combosSemanaisView.combosSelecionados != null) {
+            for (int i = 0; i < combosSemanaisView.combosSelecionados.size(); i++) {
+                cyberSnacksSelecionados.add(combosSemanaisView.combosSelecionados.get(i));
+            }   
+        }   
+    
+        // Adiciona as qtdsSelecionadas de todos os cybersnacks e adiciona para um arraylist só
+        // (precisa estar na mesma ordem do de cima):
+        if (salgadosView.qtdsSelecionadas != null) {
+            for (int i = 0; i < salgadosView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(salgadosView.qtdsSelecionadas.get(i));
+            }
+        }
+
+        if (docesView.qtdsSelecionadas != null) {
+            for (int i = 0; i < docesView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(docesView.qtdsSelecionadas.get(i));
+            }
+        }
+
+        if (bebidasView.qtdsSelecionadas != null) {
+            for (int i = 0; i < bebidasView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(bebidasView.qtdsSelecionadas.get(i));
+            }
+        }
+
+        if (combosSemanaisView.qtdsSelecionadas != null) {
+            for (int i = 0; i < combosSemanaisView.qtdsSelecionadas.size(); i++) {
+                quantidadesSelecionadas.add(combosSemanaisView.qtdsSelecionadas.get(i));
+            }
+        }
+    }
+
+    // Novo
+    public String definirDadosCyberSnacks() {
+        
+        String dados = "\nCYBERSNACKS\n" +
+                       "---------------------------------------\n";
+        precoCyberSnacks = 0; // Por enquanto
+    
+        if (cyberSnacksSelecionados.isEmpty()) {
+            dados += "Nenhum CyberSnack foi selecionado.\n\n";
+        }
+
+        else if (cyberSnacksSelecionados != null) {
+            for (int i = 0; i < cyberSnacksSelecionados.size(); i++) {
+                CyberSnack cyberSnack = cyberSnacksSelecionados.get(i);
+                int quantidade = quantidadesSelecionadas.get(i);
+                double precoCyberSnack = cyberSnack.getPreco() * quantidade;
+                precoCyberSnacks += precoCyberSnack;
+        
+                dados += "Nome: " + cyberSnack.getNome() + "\n" +
+                         "Tipo: " + cyberSnack.getTipo() + "\n" +
+                         "Preço unitário: R$ " + String.format("%.2f", cyberSnack.getPreco()) + "\n" +
+                         "Quantidade: " + quantidade + "\n\n";
+            }
+        }
+        
+        return dados;
+    }
+
+    public void atualizarDadosConfirmacaoPedido() {
+        confirmacaoPedidoView.atualizarDadosPedido();
+    }
+
+    public void atualizarDadosCyberSnacks() {
+        definirDadosCyberSnacksSelecionados();
+        atualizarDadosConfirmacaoPedido();
     }
     
     /**
@@ -258,6 +449,7 @@ public class CyberSnacksView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCyberSnacksBebidasActionPerformed
 
     private void botaoCyberSnacksSairActionPerformed(java.awt.event.ActionEvent evt) {
+        cyberStationView.cancelarReservaCyberStation();
         System.exit(0);
     }
 
@@ -266,6 +458,8 @@ public class CyberSnacksView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCyberSnacksCombosSemanaisActionPerformed
 
     private void botaoCyberSnacksFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksFinalizarCompraActionPerformed
+        //atualizarDadosCyberSnacks();
+        
         cardLayout.show(mainPanel, "confirmacaoPedido");
     }//GEN-LAST:event_botaoCyberSnacksFinalizarCompraActionPerformed
 

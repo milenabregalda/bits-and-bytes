@@ -16,13 +16,19 @@ public class CreditoView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private boolean primeiraVezCampo = true;
+    private CyberStationView cyberStationView;
     
     public CreditoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         initComponents();
     }
-    
+
+    public void setCyberStationView(CyberStationView cyberStationView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberStationView = cyberStationView;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -228,6 +234,7 @@ public class CreditoView extends javax.swing.JPanel {
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
         // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        cyberStationView.cancelarReservaCyberStation();
         System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoCancelarActionPerformed
 

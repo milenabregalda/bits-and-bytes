@@ -2,6 +2,9 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import com.example.senac.model.CyberSnack;
+
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +19,26 @@ public class CombosSemanaisView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
+    private CyberSnacksView cyberSnacksView;
+    private ArrayList<CyberSnack> combosCyberSnacks;
+    private ArrayList<Integer> qtdCombos;
+    public ArrayList<CyberSnack> combosSelecionados;
+    public ArrayList<Integer>qtdsSelecionadas;
 
     public CombosSemanaisView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
+        this.combosCyberSnacks = new ArrayList<>();
+        this.qtdCombos = new ArrayList<>();
+        this.combosSelecionados = new ArrayList<>();
+        this.qtdsSelecionadas = new ArrayList<>();
+
         initComponents();
         habilitarComboDoDia();
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
     }
     
     // Método que pega o dia de hoje e só habilita o combo desse dia para ser adicionado ao carrinho
@@ -55,6 +72,56 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                 break;
         }
     }
+
+    public void addComboCyberSnack(CyberSnack comboCyberSnack) {
+        combosCyberSnacks.add(comboCyberSnack);
+    }
+
+    // Método para imprimir todos os combosCyberSnacks
+    public void imprimirCombosCyberSnacks() {
+        System.out.println("\n\nLista de combos CyberSnacks:");
+        for (CyberSnack cyberSnack : combosCyberSnacks) {
+            System.out.println(cyberSnack);
+        }
+        System.out.println("\n\n");
+    }
+
+    private void obterQuantidades() {
+        qtdCombos.clear();
+
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisSegunda.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisTerca.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisQuarta.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisQuinta.getSelectedItem()));
+        qtdCombos.add(Integer.parseInt((String) comboCombosSemanaisSexta.getSelectedItem()));
+
+        for (Integer numero : qtdCombos) {
+            System.out.println(numero);
+        }
+        System.out.println("\n"); // Adiciona uma linha em branco após os números
+    }
+
+    public void definirCombosSelecionados() {
+        combosSelecionados.clear();
+        qtdsSelecionadas.clear();
+    
+        for (int i = 0; i < combosCyberSnacks.size(); i++) {
+            if (qtdCombos.get(i) != 0) {
+                combosSelecionados.add(combosCyberSnacks.get(i));
+                qtdsSelecionadas.add(qtdCombos.get(i));
+            }
+        }
+    
+        // Para verificar o resultado
+        System.out.println("\n\nCombos Selecionados:");
+        for (int i = 0; i < combosSelecionados.size(); i++) {
+            CyberSnack combo = combosSelecionados.get(i);
+            int quantidade = qtdsSelecionadas.get(i);
+            System.out.println("Nome: " + combo.getNome() + ", Tipo: " + combo.getTipo() + ", Quantidade: " + quantidade);
+        }
+        System.out.println("\n\n");
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -344,6 +411,12 @@ public class CombosSemanaisView extends javax.swing.JPanel {
 
     private void botaoCombosSemanaisFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCombosSemanaisFinalizarCompraActionPerformed
       if(comboCombosSemanaisQuarta.getSelectedItem()!="0" || comboCombosSemanaisQuinta.getSelectedItem()!="0" || comboCombosSemanaisSegunda.getSelectedItem()!="0" || comboCombosSemanaisSexta.getSelectedItem()!="0" || comboCombosSemanaisTerca.getSelectedItem()!="0"){
+        // PARTE DA MILENA
+        combosSelecionados.clear();
+        qtdsSelecionadas.clear();
+        obterQuantidades();
+        definirCombosSelecionados();
+        cyberSnacksView.atualizarDadosCyberSnacks();
         cardLayout.show(mainPanel, "confirmacaoPedido");
       }else{
  JOptionPane.showMessageDialog(CombosSemanaisView.this, 
@@ -352,7 +425,11 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                 JOptionPane.ERROR_MESSAGE);   
       }
     }//GEN-LAST:event_botaoCombosSemanaisFinalizarCompraActionPerformed
+
     private void botaoCombosSemanaisAdicionarAoCarrinhoActionPerformed(java.awt.event.ActionEvent evt) {
+
+        // PARTE DO ANDRÉ
+
         // Verifica se alguma combobox foi selecionada com quantidade diferente de "0"
         if (!"0".equals(comboCombosSemanaisSegunda.getSelectedItem()) ||
             !"0".equals(comboCombosSemanaisTerca.getSelectedItem()) ||
@@ -384,9 +461,16 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
         }
+
+        // PARTE DA MILENA
+        combosSelecionados.clear();
+        qtdsSelecionadas.clear();
+        obterQuantidades();
+        definirCombosSelecionados();
+        cyberSnacksView.atualizarDadosCyberSnacks();
     }
 
-    // Método para adicionar ou atualizar combo selecionado à lista
+    // Método para adicionar ou atualizar combo selecionado à lista (antigo do André)
     private void adicionarComboSelecionado(List<String> lista, JComboBox<String> comboBox, String nomeCombo) {
         String quantidade = (String) comboBox.getSelectedItem();
         if (!"0".equals(quantidade)) {

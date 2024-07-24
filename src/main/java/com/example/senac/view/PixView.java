@@ -27,11 +27,18 @@ public class PixView extends javax.swing.JPanel {
     
     private CardLayout cardLayout;
     private JPanel mainPanel;
+
+    private CyberStationView cyberStationView;
     
     public PixView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         initComponents();
+    }
+
+    public void setCyberStationView(CyberStationView cyberStationView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberStationView = cyberStationView;
     }
     
     /**
@@ -207,6 +214,7 @@ public class PixView extends javax.swing.JPanel {
     private void botaoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarActionPerformed
         JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
         // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        cyberStationView.cancelarReservaCyberStation();
         System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoCancelarActionPerformed
 

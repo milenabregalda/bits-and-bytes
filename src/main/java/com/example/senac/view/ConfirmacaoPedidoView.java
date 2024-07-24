@@ -1,11 +1,16 @@
 package com.example.senac.view;
 
 import java.awt.CardLayout;
+import java.text.DecimalFormat;
+
 import javax.swing.JPanel;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.example.senac.controller.ReservaCyberStationController;
+import com.example.senac.model.CyberSnack;
 import com.example.senac.model.ReservaCyberStation;
 
 public class ConfirmacaoPedidoView extends javax.swing.JPanel {
@@ -14,8 +19,50 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
      * Creates new form Interface
      */
 
-
     public String dadosPedido;
+    private CyberStationView cyberStationView;
+    private CyberSnacksView cyberSnacksView;
+
+    private double precoReservas;
+    private double precoTotal;
+    private String precoFormatado;
+
+    private CardLayout cardLayout;
+    private JPanel mainPanel;
+    private ReservaCyberStationController reservaCyberStationController;
+    List<ReservaCyberStation> reservas;
+
+    private PagamentoView pagamentoView;
+
+    public ConfirmacaoPedidoView(CardLayout cardLayout, JPanel mainPanel, ReservaCyberStationController reservaCyberStationController) {
+        this.cardLayout = cardLayout;
+        this.mainPanel = mainPanel;
+        this.reservaCyberStationController = reservaCyberStationController;
+        initComponents();
+        //atualizarDadosPedido(); // Atualiza os dados do pedido ao iniciar a view
+    }
+
+    public void setCyberStationView(CyberStationView cyberStationView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberStationView = cyberStationView;
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
+        this.cyberSnacksView = cyberSnacksView;
+    }
+
+    public void setPagamentoView(PagamentoView pagamentoView) {
+        this.pagamentoView = pagamentoView;
+    }
+
+    public double getPrecoTotal() {
+        return precoTotal;
+    }
+
+    public String getPrecoFormatado() {
+        return precoFormatado;
+    }
 
     public void atualizarDadosPedido() {
         dadosPedido = definirDadosPedido();
@@ -23,6 +70,15 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     }
 
     public String definirDadosPedido() {
+        String dadosReserva = definirDadosReserva();
+        String dadosCyberSnacks = cyberSnacksView.definirDadosCyberSnacks(); // Por enquanto só de combos, depois vai receber mais tipos
+        String dadosTotal = definirDadosTotal();
+        String dados = dadosReserva + dadosCyberSnacks + dadosTotal;
+        
+        return dados;
+    }
+
+    public String definirDadosReserva() {
         String dados = "RESERVAS CYBERSTATION\n";
         List<ReservaCyberStation> reservas = reservaCyberStationController.listarReservas();
 
@@ -31,72 +87,31 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
             ReservaCyberStation ultimaReserva = reservas.get(reservas.size() - 1); // Pega a última reserva da lista
 
             dados += "----------------------------------\n";
-            dados += "ID: " + ultimaReserva.getId() + "\n";
-            dados += "Usuário: " + ultimaReserva.getUsuario().getNome() + "\n";
             dados += "Data: " + ultimaReserva.getDataReserva() + "\n";
             dados += "Hora de Início: " + ultimaReserva.getHoraInicio() + "\n";
             dados += "Hora de Término: " + ultimaReserva.getHoraTermino() + "\n";
             dados += "Mesa: " + ultimaReserva.getMesa() + "\n";
             dados += "Status: " + ultimaReserva.getStatus() + "\n";
+            dados += "Preço por hora: R$ 10,00\n";
+            dados += "Horas reservadas: " + cyberStationView.getHorasReservadas() + "\n";
             dados += "----------------------------------\n\n";
+            precoReservas = 10 * cyberStationView.getHorasReservadas();
         } else {
             System.out.println("Nenhuma reserva encontrada.");
         }
-
         return dados;
     }
-    
-    
 
-     /*String dadosPedidoPlaceHolder = "RESERVAS CYBERSTATION\n" +
-        "----------------------------------------\n" +
-        "ID: 1\n" +
-        "Usuário: Usuário\n" +
-        "Data: 2024-06-11\n" +
-        "Hora de Início: 13:00\n" +
-        "Hora de Término: 14:00\n" +
-        "Status: DISPONIVEL\n" +
-        "Preço (R$ 10.00/hora): R$ 10.00\n\n\n" +
-        
-        "CYBERSNACKS\n" +
-        "---------------------------------------\n" +
-        "Quantidade: 2\n" +
-        "Nome: Pão de Queijo\n" +
-        "Tipo: SALGADO\n" +
-        "Preço: 2x de R$ 10.00\n\n" +
+    public String definirDadosTotal() {
+        precoTotal = precoReservas + cyberSnacksView.getPrecoCyberSnacks();
+        DecimalFormat df = new DecimalFormat("#.00");
+        precoFormatado = df.format(precoTotal);
+        String dados = "\nTOTAL A PAGAR\n" +
+            "---------------------------------------\n" +
+            "R$ " + precoFormatado + "\n";
+        return dados;
+}
 
-        "Quantidade: 1\n" +
-        "Nome: Sorvete Misto\n" +
-        "Tipo: DOCE\n" +
-        "Preço: R$ 11.00\n\n" +
-
-        "Quantidade: 1\n" +
-        "Nome: Café com Leite\n" +
-        "Tipo: BEBIDA\n" +
-        "Preço: R$ 10.00\n\n" +
-
-        "Quantidade: 1\n" +
-        "Nome: COMBO TERÇA-FEIRA SABOROSA\n" +
-        "Tipo: COMBO\n" +
-        "Preço: R$ 23.40\n\n" +
-
-        "\nTOTAL\n---------------------------------------\n" +
-        "R$ 74.40\n";*/
-
-
-    private CardLayout cardLayout;
-    private JPanel mainPanel;
-    private ReservaCyberStationController reservaCyberStationController;
-    List<ReservaCyberStation> reservas;
-
-    public ConfirmacaoPedidoView(CardLayout cardLayout, JPanel mainPanel, ReservaCyberStationController reservaCyberStationController) {
-        this.cardLayout = cardLayout;
-        this.mainPanel = mainPanel;
-        this.reservaCyberStationController = reservaCyberStationController;
-        initComponents();
-        atualizarDadosPedido(); // Atualiza os dados do pedido ao iniciar a view
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -191,7 +206,7 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
         botaoConfirmacaoPedidoPersonalizar.setBackground(new java.awt.Color(94, 34, 122));
         botaoConfirmacaoPedidoPersonalizar.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         botaoConfirmacaoPedidoPersonalizar.setForeground(new java.awt.Color(174, 174, 174));
-        botaoConfirmacaoPedidoPersonalizar.setText("Personalizar pedido");
+        botaoConfirmacaoPedidoPersonalizar.setText("Alterar pedido");
         botaoConfirmacaoPedidoPersonalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoConfirmacaoPedidoPersonalizarActionPerformed(evt);
@@ -298,12 +313,14 @@ public class ConfirmacaoPedidoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoConfirmacaoPedidoPersonalizarActionPerformed
 
     private void botaoConfirmacaoPedidoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoConcluirActionPerformed
+        pagamentoView.atualizarPreco(precoFormatado);
         cardLayout.show(mainPanel, "pagamento");
     }//GEN-LAST:event_botaoConfirmacaoPedidoConcluirActionPerformed
 
     private void botaoConfirmacaoPedidoCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConfirmacaoPedidoCancelarActionPerformed
         JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
         // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
+        cyberStationView.cancelarReservaCyberStation();
         System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoConfirmacaoPedidoCancelarActionPerformed
 

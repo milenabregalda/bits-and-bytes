@@ -3,6 +3,8 @@ package com.example.senac.view;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import com.example.senac.controller.UsuarioController;
+import com.example.senac.exception.UsuarioComCPFJaCadastradoException;
+import com.example.senac.exception.UsuarioComEmailJaCadastradoException;
 import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 import javax.swing.JOptionPane;
@@ -32,6 +34,7 @@ public class CriarContaView extends javax.swing.JPanel {
         this.mainPanel = mainPanel;
         this.usuarioController = usuarioController;
         initComponents();
+        caixaCriarContaConcordaTermos.setSelected(true);
     }
 
     public void setLoginView(LoginView loginView) {
@@ -573,7 +576,7 @@ public class CriarContaView extends javax.swing.JPanel {
                 if (sucesso) {
                     cardLayout.show(mainPanel, "cyberStation");
                 }
-            } catch (UsuarioComNomeJaCadastradoException e) {
+            } catch (UsuarioComNomeJaCadastradoException | UsuarioComCPFJaCadastradoException | UsuarioComEmailJaCadastradoException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }

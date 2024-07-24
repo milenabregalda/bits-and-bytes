@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import com.example.senac.controller.CyberSnackController;
+import com.example.senac.model.CyberSnack;
 
 
 public class BebidasView extends javax.swing.JPanel {
@@ -18,14 +19,68 @@ public class BebidasView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private CyberSnackController cyberSnackController;
+    private CyberSnacksView cyberSnacksView;
+    
+    private ArrayList<CyberSnack> bebidasCyberSnacks;
+    private ArrayList<Integer> qtdBebidas;
+    public ArrayList<CyberSnack> bebidasSelecionadas;
+    public ArrayList<Integer>qtdsSelecionadas;
     
     public BebidasView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
+        this.bebidasCyberSnacks = new ArrayList<>();
+        this.qtdBebidas = new ArrayList<>();
+        this.bebidasSelecionadas = new ArrayList<>();
+        this.qtdsSelecionadas = new ArrayList<>();
         initComponents();
     }
     
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
+    }
+
+    public void addBebidaCyberSnack(CyberSnack bebidaCyberSnack) {
+        bebidasCyberSnacks.add(bebidaCyberSnack);
+
+        // Para imprimir
+        System.out.println(bebidaCyberSnack);
+    }
+
+    private void obterQuantidades() {
+        qtdBebidas.clear();
+
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasEspresso.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasCafePreto.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasCafeComLeite.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasCappuccinoBaunilha.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasCappuccinoCaramelo.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasMoccha.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasCafeGeladoCremoso.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasCafeGeladoFrutasVermelhas.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasSmoothieRefrescante.getSelectedItem()));
+        qtdBebidas.add(Integer.parseInt((String) comboBebidasLimonadaFresca.getSelectedItem()));
+
+        // Para imprimir
+        for (Integer numero : qtdBebidas) {
+            System.out.println(numero);
+        }
+        System.out.println("\n"); // Adiciona uma linha em branco após os números
+    }
+
+    public void definirBebidasSelecionadas() {
+        bebidasSelecionadas.clear();
+        qtdsSelecionadas.clear();
+    
+        for (int i = 0; i < bebidasCyberSnacks.size(); i++) {
+            if (qtdBebidas.get(i) != 0) {
+                bebidasSelecionadas.add(bebidasCyberSnacks.get(i));
+                qtdsSelecionadas.add(qtdBebidas.get(i));
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -428,6 +483,9 @@ public class BebidasView extends javax.swing.JPanel {
 
     private void botaoBebidasFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBebidasFinalizarCompraActionPerformed
         if(comboBebidasCafeComLeite.getSelectedItem()!="0" || comboBebidasCafeGeladoCremoso.getSelectedItem()!="0" || comboBebidasCafeGeladoFrutasVermelhas.getSelectedItem()!="0" || comboBebidasCafePreto.getSelectedItem()!="0" || comboBebidasCappuccinoBaunilha.getSelectedItem()!="0" || comboBebidasCappuccinoCaramelo.getSelectedItem()!="0" || comboBebidasEspresso.getSelectedItem()!="0" || comboBebidasLimonadaFresca.getSelectedItem()!="0" || comboBebidasMoccha.getSelectedItem()!="0" || comboBebidasSmoothieRefrescante.getSelectedItem()!="0"){
+            obterQuantidades();
+            definirBebidasSelecionadas();
+            cyberSnacksView.atualizarDadosCyberSnacks();
             cardLayout.show(mainPanel, "confirmacaoPedido");
         }else{
             JOptionPane.showMessageDialog(BebidasView.this, 
@@ -469,6 +527,11 @@ public class BebidasView extends javax.swing.JPanel {
             adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasLimonadaFresca, "Limonada Fresca");
             adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasMoccha, "Moccha");
             adicionarBebidaSelecionada(bebidasSelecionadas, comboBebidasSmoothieRefrescante, "Smoothie Refrescante");
+
+            // LÓGICA DA MILENA
+            obterQuantidades();
+            definirBebidasSelecionadas();
+            cyberSnacksView.atualizarDadosCyberSnacks();
 
             // Mostra a próxima tela
             cardLayout.show(mainPanel, "cyberSnacks");

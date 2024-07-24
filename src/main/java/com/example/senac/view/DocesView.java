@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import com.example.senac.controller.CyberSnackController;
+import com.example.senac.model.CyberSnack;
 
 public class DocesView extends javax.swing.JPanel {
 
@@ -17,12 +18,66 @@ public class DocesView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private CyberSnackController cyberSnackController;
+    private CyberSnacksView cyberSnacksView;
+
+    private ArrayList<CyberSnack> docesCyberSnacks;
+    private ArrayList<Integer> qtdDoces;
+    public ArrayList<CyberSnack> docesSelecionados;
+    public ArrayList<Integer>qtdsSelecionadas;
 
     public DocesView(CardLayout cardLayout, JPanel mainPanel, CyberSnackController cyberSnackController) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
         this.cyberSnackController = cyberSnackController;
+        this.docesCyberSnacks = new ArrayList<>();
+        this.qtdDoces = new ArrayList<>();
+        this.docesSelecionados = new ArrayList<>();
+        this.qtdsSelecionadas = new ArrayList<>();
         initComponents();
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
+    }
+
+    public void addDoceCyberSnack(CyberSnack doceCyberSnack) {
+        docesCyberSnacks.add(doceCyberSnack);
+
+        // Para imprimir
+        System.out.println(doceCyberSnack);
+    }
+
+    private void obterQuantidades() {
+        qtdDoces.clear();
+        
+        qtdDoces.add(Integer.parseInt((String) comboDocesBrigadeiro.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesSonho.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesSorveteChocolate.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesSorveteMorango.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesSorveteMisto.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesMilkshakeChocolate.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesMilkshakeMorango.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesMilkshakeBaunilha.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesSaladaDeFrutas.getSelectedItem()));
+        qtdDoces.add(Integer.parseInt((String) comboDocesCheesecake.getSelectedItem()));
+
+        // Para imprimir
+        for (Integer numero : qtdDoces) {
+            System.out.println(numero);
+        }
+        System.out.println("\n"); // Adiciona uma linha em branco após os números
+    }
+
+    public void definirDocesSelecionados() {
+        docesSelecionados.clear();
+        qtdsSelecionadas.clear();
+    
+        for (int i = 0; i < docesCyberSnacks.size(); i++) {
+            if (qtdDoces.get(i) != 0) {
+                docesSelecionados.add(docesCyberSnacks.get(i));
+                qtdsSelecionadas.add(qtdDoces.get(i));
+            }
+        }
     }
     
     /**
@@ -431,6 +486,12 @@ public class DocesView extends javax.swing.JPanel {
 
     private void botaoDocesFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDocesFinalizarCompraActionPerformed
     if(comboDocesBrigadeiro.getSelectedItem()!="0" || comboDocesCheesecake.getSelectedItem()!="0" || comboDocesMilkshakeBaunilha.getSelectedItem()!="0" || comboDocesMilkshakeChocolate.getSelectedItem()!="0" || comboDocesMilkshakeMorango.getSelectedItem()!="0" || comboDocesSaladaDeFrutas.getSelectedItem()!="0" || comboDocesSonho.getSelectedItem()!="0" || comboDocesSorveteChocolate.getSelectedItem()!="0" || comboDocesSorveteMisto.getSelectedItem()!="0" || comboDocesSorveteMorango.getSelectedItem()!="0"){
+
+        // LÓGICA DA MILENA
+        obterQuantidades();
+        definirDocesSelecionados();
+        cyberSnacksView.atualizarDadosCyberSnacks();
+        
         cardLayout.show(mainPanel, "confirmacaoPedido");
     }else{
                 JOptionPane.showMessageDialog(DocesView.this, 
@@ -467,6 +528,11 @@ public class DocesView extends javax.swing.JPanel {
         adicionarDoceSelecionado(docesSelecionados, comboDocesSorveteChocolate, "Sorvete de Chocolate");
         adicionarDoceSelecionado(docesSelecionados, comboDocesSorveteMisto, "Sorvete Misto");
         adicionarDoceSelecionado(docesSelecionados, comboDocesSorveteMorango, "Sorvete de Morango");
+
+        // LÓGICA DA MILENA
+        obterQuantidades();
+        definirDocesSelecionados();
+        cyberSnacksView.atualizarDadosCyberSnacks();
 
         // Mostra a próxima tela
         cardLayout.show(mainPanel, "cyberSnacks");

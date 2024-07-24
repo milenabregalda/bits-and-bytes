@@ -4,6 +4,9 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import com.example.senac.view.AppView;
 
+import com.example.senac.controller.CyberSnackController;
+
+
 public class App extends JFrame {
 
     public App() {

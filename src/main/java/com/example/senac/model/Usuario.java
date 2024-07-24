@@ -23,15 +23,12 @@ public class Usuario {
     @Column(name = "telefone", length = 100)
     private String telefone;
 
-    //private static Long idContador = 0L;
-
     public Usuario(String nome, String cpf, String email, String senha, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
         this.senha = senha;
         this.telefone = telefone;
-        //this.id = ++idContador; // Lógica que não é necessária com banco de dados
     }
 
     public Usuario() {

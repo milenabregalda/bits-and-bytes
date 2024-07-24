@@ -38,6 +38,7 @@ public class AppView extends JPanel {
         // Criação dos objetos controllers
         usuarioController = new UsuarioController();
         reservaCyberStationController = new ReservaCyberStationController();
+        cyberSnackController = new CyberSnackController();
 
         // O construtor das views passa o cardLayout e o painel para que elas possam trocar o card (conteúdo da janela) mostrado nos ActionListeners:
         loginView = new LoginView(cardLayout, painel, usuarioController); // Controller passado aqui
@@ -58,6 +59,26 @@ public class AppView extends JPanel {
         // Como as referências dessas views são cruzadas, elas são adicionadas tardiamente para evitar problemas:
         loginView.setCriarContaView(criarContaView);
         criarContaView.setLoginView(loginView);
+        cyberSnacksView.setCyberStationView(cyberStationView);
+
+        confirmacaoPedidoView.setCyberStationView(cyberStationView);
+        pagamentoView.setCyberStationView(cyberStationView);
+        creditoView.setCyberStationView(cyberStationView);
+        debitoView.setCyberStationView(cyberStationView);
+        pixView.setCyberStationView(cyberStationView);
+
+        cyberSnacksView.setSalgadosView(salgadosView);
+        cyberSnacksView.setBebidasView(bebidasView);
+        cyberSnacksView.setDocesView(docesView);
+        cyberSnacksView.setCombosSemanaisView(combosSemanaisView);
+
+        salgadosView.setCyberSnacksView(cyberSnacksView);
+        bebidasView.setCyberSnacksView(cyberSnacksView);
+        docesView.setCyberSnacksView(cyberSnacksView);
+        combosSemanaisView.setCyberSnacksView(cyberSnacksView);
+        confirmacaoPedidoView.setCyberSnacksView(cyberSnacksView);
+        cyberSnacksView.setConfirmacaoPedidoView(confirmacaoPedidoView);
+        confirmacaoPedidoView.setPagamentoView(pagamentoView);
 
         // Painéis são adicionados ao cardLayout com um nome (String)
         painel.add(loginView, "login");
@@ -74,9 +95,13 @@ public class AppView extends JPanel {
         painel.add(debitoView, "debito");
         painel.add(pixView, "pix");
 
-        add(painel);
-        cardLayout.show(painel, "login");
         // Esse é o método que é chamado para trocar o conteúdo da janela, também colocá-lo nos JButtons necessários
         // Se o nome do cardLayout estiver errado, ele abrirá login.
+        add(painel);
+        cardLayout.show(painel, "login");
+
+        // Lógica responsável por inicializar dados de CyberSnacks no banco de dados
+        cyberSnackController.inicializarDados();
+        cyberSnacksView.definirVetoresCyberSnacks();
     }
 }
