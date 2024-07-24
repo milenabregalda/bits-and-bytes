@@ -486,6 +486,12 @@ public class DocesView extends javax.swing.JPanel {
 
     private void botaoDocesFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDocesFinalizarCompraActionPerformed
     if(comboDocesBrigadeiro.getSelectedItem()!="0" || comboDocesCheesecake.getSelectedItem()!="0" || comboDocesMilkshakeBaunilha.getSelectedItem()!="0" || comboDocesMilkshakeChocolate.getSelectedItem()!="0" || comboDocesMilkshakeMorango.getSelectedItem()!="0" || comboDocesSaladaDeFrutas.getSelectedItem()!="0" || comboDocesSonho.getSelectedItem()!="0" || comboDocesSorveteChocolate.getSelectedItem()!="0" || comboDocesSorveteMisto.getSelectedItem()!="0" || comboDocesSorveteMorango.getSelectedItem()!="0"){
+
+        // LÓGICA DA MILENA
+        obterQuantidades();
+        definirDocesSelecionados();
+        cyberSnacksView.atualizarDadosCyberSnacks();
+        
         cardLayout.show(mainPanel, "confirmacaoPedido");
     }else{
                 JOptionPane.showMessageDialog(DocesView.this, 

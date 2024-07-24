@@ -34,15 +34,7 @@ public class CombosSemanaisView extends javax.swing.JPanel {
         this.qtdsSelecionadas = new ArrayList<>();
 
         initComponents();
-
         habilitarComboDoDia();
-
-        // Lógica para testes
-        comboCombosSemanaisSegunda.setEnabled(true);
-        comboCombosSemanaisTerca.setEnabled(true);
-        comboCombosSemanaisQuarta.setEnabled(true);
-        comboCombosSemanaisQuinta.setEnabled(true);
-        comboCombosSemanaisSexta.setEnabled(true);
     }
 
     public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
@@ -419,6 +411,12 @@ public class CombosSemanaisView extends javax.swing.JPanel {
 
     private void botaoCombosSemanaisFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCombosSemanaisFinalizarCompraActionPerformed
       if(comboCombosSemanaisQuarta.getSelectedItem()!="0" || comboCombosSemanaisQuinta.getSelectedItem()!="0" || comboCombosSemanaisSegunda.getSelectedItem()!="0" || comboCombosSemanaisSexta.getSelectedItem()!="0" || comboCombosSemanaisTerca.getSelectedItem()!="0"){
+        // PARTE DA MILENA
+        combosSelecionados.clear();
+        qtdsSelecionadas.clear();
+        obterQuantidades();
+        definirCombosSelecionados();
+        cyberSnacksView.atualizarDadosCyberSnacks();
         cardLayout.show(mainPanel, "confirmacaoPedido");
       }else{
  JOptionPane.showMessageDialog(CombosSemanaisView.this, 
@@ -463,14 +461,12 @@ public class CombosSemanaisView extends javax.swing.JPanel {
                     "Erro",
                     JOptionPane.ERROR_MESSAGE);
         }
-        
-        combosSelecionados.clear();
-        qtdsSelecionadas.clear();
 
         // PARTE DA MILENA
+        combosSelecionados.clear();
+        qtdsSelecionadas.clear();
         obterQuantidades();
         definirCombosSelecionados();
-
         cyberSnacksView.atualizarDadosCyberSnacks();
     }
 

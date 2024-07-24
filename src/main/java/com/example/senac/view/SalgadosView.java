@@ -489,7 +489,11 @@ public class SalgadosView extends javax.swing.JPanel {
 
     private void botaoSalgadosFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalgadosFinalizarCompraActionPerformed
             if(comboSalgadosEmpadaFrango.getSelectedItem()!="0" || comboSalgadosCoxinha.getSelectedItem()!="0" || comboSalgadosEmpada.getSelectedItem()!="0" || comboSalgadosEmpadaCalabresa.getSelectedItem()!="0" || comboSalgadosEnroladinho.getSelectedItem()!="0" || comboSalgadosPaoQueijo.getSelectedItem()!="0" || comboSalgadosPastelCarne.getSelectedItem()!="0" || comboSalgadosPastelCoracao.getSelectedItem()!="0" || comboSalgadosPastelFrango.getSelectedItem()!="0" || comboSalgadosPastelQueijo.getSelectedItem()!="0"){
-                cardLayout.show(mainPanel, "confirmacaoPedido");
+                // LÓGICA DA MILENA
+                obterQuantidades();
+                definirSalgadosSelecionados();
+                cyberSnacksView.atualizarDadosCyberSnacks();
+            cardLayout.show(mainPanel, "confirmacaoPedido");
             }else{
                 JOptionPane.showMessageDialog(SalgadosView.this, 
                 "Insira uma opção ou volte.", 

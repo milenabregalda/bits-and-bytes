@@ -483,6 +483,9 @@ public class BebidasView extends javax.swing.JPanel {
 
     private void botaoBebidasFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBebidasFinalizarCompraActionPerformed
         if(comboBebidasCafeComLeite.getSelectedItem()!="0" || comboBebidasCafeGeladoCremoso.getSelectedItem()!="0" || comboBebidasCafeGeladoFrutasVermelhas.getSelectedItem()!="0" || comboBebidasCafePreto.getSelectedItem()!="0" || comboBebidasCappuccinoBaunilha.getSelectedItem()!="0" || comboBebidasCappuccinoCaramelo.getSelectedItem()!="0" || comboBebidasEspresso.getSelectedItem()!="0" || comboBebidasLimonadaFresca.getSelectedItem()!="0" || comboBebidasMoccha.getSelectedItem()!="0" || comboBebidasSmoothieRefrescante.getSelectedItem()!="0"){
+            obterQuantidades();
+            definirBebidasSelecionadas();
+            cyberSnacksView.atualizarDadosCyberSnacks();
             cardLayout.show(mainPanel, "confirmacaoPedido");
         }else{
             JOptionPane.showMessageDialog(BebidasView.this, 

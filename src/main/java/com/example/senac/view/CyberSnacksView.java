@@ -458,7 +458,7 @@ public class CyberSnacksView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCyberSnacksCombosSemanaisActionPerformed
 
     private void botaoCyberSnacksFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCyberSnacksFinalizarCompraActionPerformed
-        atualizarDadosCyberSnacks();
+        //atualizarDadosCyberSnacks();
         
         cardLayout.show(mainPanel, "confirmacaoPedido");
     }//GEN-LAST:event_botaoCyberSnacksFinalizarCompraActionPerformed
