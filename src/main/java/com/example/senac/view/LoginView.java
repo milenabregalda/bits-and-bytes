@@ -1,5 +1,15 @@
 package com.example.senac.view;
 
+
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.JTextField;
+
+
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -14,6 +24,8 @@ public class LoginView extends javax.swing.JPanel {
     private JPanel mainPanel;
     private UsuarioController usuarioController;
     private CriarContaView criarContaView;
+
+    boolean primeiraVez = true;
 
     public LoginView(CardLayout cardLayout, JPanel mainPanel, UsuarioController usuarioController) {
         this.cardLayout = cardLayout;
@@ -70,7 +82,38 @@ public class LoginView extends javax.swing.JPanel {
         campoLoginCPFEmail.setBackground(new java.awt.Color(73, 84, 111));
         campoLoginCPFEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         campoLoginCPFEmail.setForeground(new java.awt.Color(174, 174, 174));
+        campoLoginCPFEmail.addFocusListener(new FocusAdapter() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (primeiraVez) {
+                    campoLoginCPFEmail.setText("  CPF ou e-mail");
+                    primeiraVez = false;
+                } else {
+                    if (campoLoginCPFEmail.getText().equals("  CPF ou e-mail")) {
+                        campoLoginCPFEmail.setText("");
+                    }
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (campoLoginCPFEmail.getText().isEmpty()) {
+                    campoLoginCPFEmail.setText("  CPF ou e-mail");
+                }
+            }
+        });
+        
         campoLoginCPFEmail.setText("  CPF ou e-mail");
+        campoLoginCPFEmail.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    campoLoginSenha.requestFocus();
+                    e.consume();  // Evitar que o tab padrão ocorra
+                }
+            }
+        });
         campoLoginCPFEmail.setToolTipText("CPF ou e-mail"); // Quando o usuário passa o mouse sobre o campo, aparece isso aqui
         campoLoginCPFEmail.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(90, 90, 90)));
         campoLoginCPFEmail.setCaretColor(new java.awt.Color(73, 84, 111));
