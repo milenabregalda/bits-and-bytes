@@ -3,6 +3,7 @@ package com.example.senac;
 import java.awt.Container;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -34,19 +35,78 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) {
-        new App(); // Faz a janela aparecer
+        //new App(); // Faz a janela aparecer
+
+        // Janela comentada para facilitar testes
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
+        EntityManager em = emf.createEntityManager();
+        PedidoController pedidoController = new PedidoController();
+        PedidoCyberSnackController pedidoCyberSnackController = new PedidoCyberSnackController();
+        UsuarioController usuarioController = new UsuarioController();
+        CyberSnackController cyberSnackController = new CyberSnackController();
+
+        try {
+            em.getTransaction().begin();
+
+            Usuario usuario = usuarioController.criarObjetoUsuario("Testando Usuário 19", "12345678919", "testandousuario19@email.com", "senha123", "(11) 91234-5678");
+            usuarioController.cadastrarUsuario(usuario);
+
+            // Obter os CyberSnacks do banco de dados pelo ID
+
+            /*if (cyberSnack1 == null || cyberSnack2 == null) {
+                throw new RuntimeException("CyberSnacks não encontrados.");
+            }*/
+
+            List<PedidoCyberSnack> itensPedido = new ArrayList<>();
+
+            System.out.println("\n\n\n\n\n\nAté cadastrar os cybersnacks foi\n\n\n\n\n\n\n\n");
+            // Criar o pedido e itens PedidoCyberSnack
+            Pedido pedido = pedidoController.criarObjetoPedido(usuario, LocalDate.now(), 15.0f, TipoPagamento.PIX, 1, itensPedido);
+            System.out.println("\n\n\n\n\n\nAté criar o pedido foi\n\n\n\n\n\n\n\n");
+
+            CyberSnack cyberSnack1 = cyberSnackController.obterCyberSnack(1L);
+            PedidoCyberSnack item1 = pedidoCyberSnackController.criarObjetoPedidoCyberSnack(pedido, cyberSnack1, 2, cyberSnack1.getPreco());
+            System.out.println("\n\n\n\n\n\nAté cadastrar o primeiro pedidocybersnack foi\n\n\n\n\n\n\n\n");
+
+            CyberSnack cyberSnack2 = cyberSnackController.obterCyberSnack(2L);
+            PedidoCyberSnack item2 = pedidoCyberSnackController.criarObjetoPedidoCyberSnack(pedido, cyberSnack2, 1, cyberSnack2.getPreco());
+            System.out.println("\n\n\n\n\n\nAté cadastrar o segundo pedidocybersnack foi\n\n\n\n\n\n\n\n");
+
+            // Adicionar os itens ao pedido
+            pedido.getItensPedido().add(item1);
+            pedido.getItensPedido().add(item2);
+
+            System.out.println("\n\n\n\n\n\nAté adicionar os itens no pedido foi\n\n\n\n\n\n\n\n");
+            // Persistir o pedido e os itens na mesma transação
+            pedidoController.cadastrarPedido(pedido);
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+        /*EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
         EntityManager em = emf.createEntityManager();
 
         CyberSnack cyberSnack1 = new CyberSnack("Nome do Snack 1", CyberSnack.Tipo.SALGADO, 10.0f);
         CyberSnack cyberSnack2 = new CyberSnack("Nome do Snack 2", CyberSnack.Tipo.DOCE, 5.0f);
         // Persistir os snacks
+        em.getTransaction().begin();
         em.persist(cyberSnack1);
         em.persist(cyberSnack2);
+        em.getTransaction().commit();
+
 
         UsuarioController usuarioController = new UsuarioController();
-        Usuario usuario = usuarioController.criarObjetoUsuario("Testando Usuário 11", "12345678911", "testandousuario11@email.com", "senha123", "(11) 91234-5678");
+        Usuario usuario = usuarioController.criarObjetoUsuario("Testando Usuário 15", "12345678915", "testandousuario15@email.com", "senha123", "(11) 91234-5678");
         try {
             usuarioController.cadastrarUsuario(usuario);
         } catch (Exception e) {
@@ -55,56 +115,23 @@ public class App extends JFrame {
 
         List<PedidoCyberSnack> itensPedido = new ArrayList<>();
 
+
+        System.out.println("\n\n\n\n\nComeça aqui lógica nova\n\n\n\n\n");
         PedidoController pedidoController = new PedidoController();
         // Passo 1: Criar e cadastrar o pedido
         Pedido pedido = pedidoController.criarObjetoPedido(usuario, LocalDate.now(), 10.0f, TipoPagamento.PIX, 1, itensPedido);
-
         boolean pedidoCadastrado = pedidoController.cadastrarPedido(pedido);
 
+        if (pedidoCadastrado) {
+            // Passo 2: Criar os itens PedidoCyberSnack
+            PedidoCyberSnack item1 = new PedidoCyberSnack(pedido, cyberSnack1, 2, cyberSnack1.getPreco());
+            PedidoCyberSnack item2 = new PedidoCyberSnack(pedido, cyberSnack2, 1, cyberSnack2.getPreco());
 
-        /*  org.hibernate.PersistentObjectException: detached entity passed to persist: com.example.senac.model.Pedido
+            List<PedidoCyberSnack> itens = Arrays.asList(item1, item2);
 
-        
-
-        // Criar controladores
-        UsuarioController usuarioController = new UsuarioController();
-        PedidoController pedidoController = new PedidoController();
-        PedidoCyberSnackController pedidoCyberSnackController = new PedidoCyberSnackController();
-
-        // Criar e cadastrar usuário
-        Usuario usuario = usuarioController.criarObjetoUsuario("Testando Usuário 10", "12345678910", "testandousuario10@email.com", "senha123", "(11) 91234-5678");
-        try {
-            usuarioController.cadastrarUsuario(usuario);
-        } catch (Exception e) {
-            e.printStackTrace();
+            // Passo 3: Adicionar os itens ao pedido existente
+            pedidoController.adicionarItensAoPedido(pedido.getId(), itens);
         }
-
-        // Método para criar e persistir CyberSnack
-CyberSnack cyberSnack = new CyberSnack("Cybersnack", Tipo.SALGADO, 10.0f);
-try {
-    em.getTransaction().begin();
-    em.persist(cyberSnack);
-    em.getTransaction().commit();
-} catch (Exception e) {
-    e.printStackTrace();
-    em.getTransaction().rollback();
-}
-
-// Antes de criar PedidoCyberSnack, buscar o CyberSnack do banco para garantir que ele está anexado
-CyberSnack managedCyberSnack = em.find(CyberSnack.class, cyberSnack.getId());
-
-if (managedCyberSnack != null) {
-    // Criar pedido e persistir
-    List<PedidoCyberSnack> itensPedido = new ArrayList<>();
-    Pedido pedido = pedidoController.criarObjetoPedido(usuario, LocalDate.now(), 150.00f, Pedido.TipoPagamento.CREDITO, 3, itensPedido);
-    pedido = pedidoController.cadastrarPedido(pedido); // Receba o pedido gerenciado
-
-    // Criar e cadastrar PedidoCyberSnack com o objeto CyberSnack gerenciado
-    PedidoCyberSnack pedidoCyberSnack = pedidoCyberSnackController.criarObjetoPedidoCyberSnack(pedido, managedCyberSnack, 2, 20.00f);
-    pedidoCyberSnackController.criarPedidoCyberSnack(pedidoCyberSnack);
-
-        }
-        */
-    }
+    }*/
     
 }
