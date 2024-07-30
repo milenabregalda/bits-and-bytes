@@ -27,13 +27,31 @@ public class PedidoCyberSnackController {
 
     // Método para criar o objeto PedidoCyberSnack
     public PedidoCyberSnack criarObjetoPedidoCyberSnack(Pedido pedido, CyberSnack cyberSnack, int quantidade, float preco) {
+        // Garantir que o Pedido e o CyberSnack estão anexados ao EntityManager
+        if (!entityManager.contains(pedido)) {
+            pedido = entityManager.merge(pedido);
+        }
+        if (!entityManager.contains(cyberSnack)) {
+            cyberSnack = entityManager.merge(cyberSnack);
+        }
+        
+        PedidoCyberSnackId id = new PedidoCyberSnackId(pedido.getId(), cyberSnack.getId());
+        PedidoCyberSnack pedidoCyberSnack = new PedidoCyberSnack(pedido, cyberSnack, quantidade, preco);
+        pedidoCyberSnack.setId(id);
+    
+        pedidosCyberSnacks.add(pedidoCyberSnack);
+        return pedidoCyberSnack;
+    }
+
+    /*// Antes de 30/07/24 - Método para criar o objeto PedidoCyberSnack
+    public PedidoCyberSnack criarObjetoPedidoCyberSnack(Pedido pedido, CyberSnack cyberSnack, int quantidade, float preco) {
         PedidoCyberSnackId id = new PedidoCyberSnackId(pedido.getId(), cyberSnack.getId());
         PedidoCyberSnack pedidoCyberSnack = new PedidoCyberSnack(pedido, cyberSnack, quantidade, preco);
         pedidoCyberSnack.setId(id);
 
         pedidosCyberSnacks.add(pedidoCyberSnack);
         return pedidoCyberSnack;
-    }
+    }*/
 
     /*// Método para criar um novo PedidoCyberSnack no banco de dados
     public boolean criarPedidoCyberSnack(PedidoCyberSnack pedidoCyberSnack) {

@@ -33,7 +33,21 @@ public class PedidoController {
     public boolean cadastrarPedido(Pedido pedido) {
         try {
             entityManager.getTransaction().begin();
+            // Persistir o Pedido
             entityManager.persist(pedido);
+    
+            // Garantir que os itens do pedido estejam anexados
+            for (PedidoCyberSnack item : pedido.getItensPedido()) {
+                // O pedido e o CyberSnack já devem estar gerenciados
+                if (!entityManager.contains(item.getPedido())) {
+                    item.setPedido(entityManager.merge(item.getPedido()));
+                }
+                if (!entityManager.contains(item.getCyberSnack())) {
+                    item.setCyberSnack(entityManager.merge(item.getCyberSnack()));
+                }
+                entityManager.persist(item);
+            }
+    
             entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
@@ -43,6 +57,20 @@ public class PedidoController {
             return false;
         }
     }
+
+    /*public boolean cadastrarPedido(Pedido pedido) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(pedido);
+            entityManager.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            return false;
+        }
+    }*/
 
     // Método para obter um Pedido pelo ID
     public Pedido obterPedido(Long id) {
@@ -108,7 +136,7 @@ public class PedidoController {
         }
     }
 
-    public boolean adicionarItensAoPedido(Long pedidoId, List<PedidoCyberSnack> itens) {
+    /*public boolean adicionarItensAoPedido(Long pedidoId, List<PedidoCyberSnack> itens) {
         try {
             entityManager.getTransaction().begin();
             
@@ -138,7 +166,7 @@ public class PedidoController {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
     
 
     // Método para fechar o EntityManager
