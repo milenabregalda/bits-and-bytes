@@ -2,6 +2,9 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import com.example.senac.model.Pedido.TipoPagamento;
+
 import javax.swing.JOptionPane;
 
 public class PagamentoView extends javax.swing.JPanel {
@@ -14,7 +17,10 @@ public class PagamentoView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private CyberStationView cyberStationView;
-    
+
+    private TipoPagamento tipoPagamento;
+    public int qtdParcelas;
+
     public PagamentoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -28,6 +34,18 @@ public class PagamentoView extends javax.swing.JPanel {
 
     public void atualizarPreco(String preco) {
         areaValorTotal.setText("R$ "+ preco);   
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public void setQtdParcelas(int qtdParcelas) {
+        this.qtdParcelas = qtdParcelas;
+    }
+
+    public int getQtdParcelas() {
+        return qtdParcelas;
     }
 
     /**
@@ -259,7 +277,9 @@ public class PagamentoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoFinalizarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarPagamentoActionPerformed
+        tipoPagamento = TipoPagamento.CREDITO;
         cardLayout.show(mainPanel, "credito");
+        
     }//GEN-LAST:event_botaoFinalizarPagamentoActionPerformed
 
     private void botaoCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarPedidoActionPerformed
@@ -270,14 +290,19 @@ public class PagamentoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoCancelarPedidoActionPerformed
 
     private void botaoCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCreditoActionPerformed
+        tipoPagamento = TipoPagamento.CREDITO;
         cardLayout.show(mainPanel, "credito");
     }//GEN-LAST:event_botaoCreditoActionPerformed
 
     private void botaoDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDebitoActionPerformed
+        tipoPagamento = TipoPagamento.DEBITO;
+        qtdParcelas = 1;
         cardLayout.show(mainPanel, "debito");
     }//GEN-LAST:event_botaoDebitoActionPerformed
 
     private void botaoPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPixActionPerformed
+        tipoPagamento = TipoPagamento.PIX;
+        qtdParcelas = 1;
         cardLayout.show(mainPanel, "pix");
     }//GEN-LAST:event_botaoPixActionPerformed
 

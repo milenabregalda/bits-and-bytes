@@ -37,7 +37,7 @@ public class App extends JFrame {
     public static void main(String[] args) {
         new App(); // Faz a janela aparecer
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
+        /*EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
         EntityManager em = emf.createEntityManager();
         PedidoController pedidoController = new PedidoController();
         PedidoCyberSnackController pedidoCyberSnackController = new PedidoCyberSnackController();
@@ -85,6 +85,6 @@ public class App extends JFrame {
         } finally {
             em.close();
             emf.close();
-        }
+        }*/
     }
 }

@@ -24,6 +24,20 @@ public class CreditoView extends javax.swing.JPanel {
         initComponents();
     }
 
+    // Método para converter uma string de parcelas em um inteiro
+    public static int converterParcelasParaInt(String parcelas) {
+        if (parcelas == null || parcelas.isEmpty()) {
+            throw new IllegalArgumentException("O valor de parcelas não pode ser nulo ou vazio.");
+        }
+
+        try {
+            // Remove o caractere 'x' do final e converte a string para inteiro
+            return Integer.parseInt(parcelas.substring(0, parcelas.length() - 1));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("O valor de parcelas está em um formato inválido.", e);
+        }
+    }
+
     public void setCyberStationView(CyberStationView cyberStationView) {
         // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
@@ -226,6 +240,9 @@ public class CreditoView extends javax.swing.JPanel {
         if (campoNumCartao.getText().trim().equals("Digite Aqui!")) {
             JOptionPane.showMessageDialog(null, "Informe o número do cartão para fazer o pagamento!");
         } else {
+            int parcelasConvertidas = converterParcelasParaInt(comboParcelas.getSelectedItem().toString());
+            // Passar para qtdParcelas de PagamentoView aqui            
+            
             JOptionPane.showMessageDialog(null, "Seu pedido foi concluído com sucesso. Agradecemos por escolher o Bits & Bytes, volte sempre!");
             System.exit(0); // Fecha o programa
         }
