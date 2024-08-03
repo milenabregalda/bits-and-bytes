@@ -1,5 +1,7 @@
 package com.example.senac.view;
 import javax.swing.JPanel;
+import javax.swing.text.View;
+
 import java.awt.CardLayout;
 import com.example.senac.controller.UsuarioController;
 import com.example.senac.controller.ReservaCyberStationController;
@@ -80,10 +82,14 @@ public class AppView extends JPanel {
         cyberSnacksView.setConfirmacaoPedidoView(confirmacaoPedidoView);
         confirmacaoPedidoView.setPagamentoView(pagamentoView);
 
+        creditoView.setPagamentoView(pagamentoView);
+        debitoView.setPagamentoView(pagamentoView);
+        pixView.setPagamentoView(pagamentoView);
+
         // Painéis são adicionados ao cardLayout com um nome (String)
         painel.add(loginView, "login");
         painel.add(criarContaView, "criarConta");
-        painel.add(cyberStationView, "cyberStation");
+        painel.add(cyberStationView, "cyberStation"); 
         painel.add(cyberSnacksView, "cyberSnacks");
         painel.add(salgadosView, "salgados");
         painel.add(docesView, "doces");

@@ -16,7 +16,9 @@ public class CreditoView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private boolean primeiraVezCampo = true;
+    
     private CyberStationView cyberStationView;
+    private PagamentoView pagamentoView;
     
     public CreditoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -41,6 +43,10 @@ public class CreditoView extends javax.swing.JPanel {
     public void setCyberStationView(CyberStationView cyberStationView) {
         // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
+    }
+
+    public void setPagamentoView(PagamentoView pagamentoView) {
+        this.pagamentoView = pagamentoView;
     }
 
     /**
@@ -241,8 +247,10 @@ public class CreditoView extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Informe o número do cartão para fazer o pagamento!");
         } else {
             int parcelasConvertidas = converterParcelasParaInt(comboParcelas.getSelectedItem().toString());
-            // Passar para qtdParcelas de PagamentoView aqui            
-            
+            // Passar para qtdParcelas de PagamentoView aqui        
+                
+            pagamentoView.cadastrarDadosDoPedido();
+
             JOptionPane.showMessageDialog(null, "Seu pedido foi concluído com sucesso. Agradecemos por escolher o Bits & Bytes, volte sempre!");
             System.exit(0); // Fecha o programa
         }

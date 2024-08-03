@@ -18,6 +18,7 @@ public class DebitoView extends javax.swing.JPanel {
     private boolean primeiraVezCampo = true;
     
     private CyberStationView cyberStationView;
+    private PagamentoView pagamentoView;
 
     public DebitoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -30,7 +31,10 @@ public class DebitoView extends javax.swing.JPanel {
         this.cyberStationView = cyberStationView;
     }
 
-    
+    public void setPagamentoView(PagamentoView pagamentoView) {
+        this.pagamentoView = pagamentoView;
+    }
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -209,6 +213,8 @@ public class DebitoView extends javax.swing.JPanel {
         if (campoNumCartao.getText().trim().equals("Digite Aqui!")) {
             JOptionPane.showMessageDialog(null, "Informe o número do cartão para fazer o pagamento!");
         } else {
+            pagamentoView.cadastrarDadosDoPedido();
+
             JOptionPane.showMessageDialog(null, "Seu pedido foi concluído com sucesso. Agradecemos por escolher o Bits & Bytes, volte sempre!");
             System.exit(0); // Fecha o programa
         }

@@ -29,6 +29,7 @@ public class PixView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private CyberStationView cyberStationView;
+    private PagamentoView pagamentoView;
     
     public PixView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -39,6 +40,10 @@ public class PixView extends javax.swing.JPanel {
     public void setCyberStationView(CyberStationView cyberStationView) {
         // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
+    }
+
+    public void setPagamentoView(PagamentoView pagamentoView) {
+        this.pagamentoView = pagamentoView;
     }
     
     /**
@@ -207,6 +212,8 @@ public class PixView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoConcluirActionPerformed
+        pagamentoView.cadastrarDadosDoPedido();
+        
         JOptionPane.showMessageDialog(null, "Seu pedido foi concluído com sucesso. Agradecemos por escolher o Bits & Bytes, volte sempre!");
         System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoConcluirActionPerformed
