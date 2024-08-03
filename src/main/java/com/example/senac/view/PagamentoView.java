@@ -3,6 +3,7 @@ package com.example.senac.view;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
+import com.example.senac.controller.UsuarioController;
 import com.example.senac.model.Pedido.TipoPagamento;
 
 import javax.swing.JOptionPane;
@@ -17,6 +18,9 @@ public class PagamentoView extends javax.swing.JPanel {
     private JPanel mainPanel;
 
     private CyberStationView cyberStationView;
+    private ConfirmacaoPedidoView confirmacaoPedidoView;
+    private UsuarioController usuarioController;
+    private CyberSnacksView cyberSnacksView;
 
     private TipoPagamento tipoPagamento;
     public int qtdParcelas;
@@ -30,6 +34,18 @@ public class PagamentoView extends javax.swing.JPanel {
     public void setCyberStationView(CyberStationView cyberStationView) {
         // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
+    }
+
+    public void setConfirmacaoPedidoView(ConfirmacaoPedidoView confirmacaoPedidoView) {
+        this.confirmacaoPedidoView = confirmacaoPedidoView;
+    }
+
+    public void setUsuarioController(UsuarioController usuarioController) {
+        this.usuarioController = usuarioController;
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
     }
 
     public void atualizarPreco(String preco) {
