@@ -1,11 +1,24 @@
 package com.example.senac.view;
 
 import java.awt.CardLayout;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 
+import com.example.senac.controller.CyberSnackController;
+import com.example.senac.controller.PedidoController;
+import com.example.senac.controller.PedidoCyberSnackController;
 import com.example.senac.controller.UsuarioController;
+import com.example.senac.model.Pedido;
 import com.example.senac.model.Pedido.TipoPagamento;
+import com.example.senac.model.PedidoCyberSnack;
+import com.example.senac.model.Usuario;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 
 public class PagamentoView extends javax.swing.JPanel {
@@ -17,13 +30,17 @@ public class PagamentoView extends javax.swing.JPanel {
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
-    private CyberStationView cyberStationView;
-    private ConfirmacaoPedidoView confirmacaoPedidoView;
-    private UsuarioController usuarioController;
-    private CyberSnacksView cyberSnacksView;
-
     private TipoPagamento tipoPagamento;
     public int qtdParcelas;
+
+    private CyberStationView cyberStationView;
+    private ConfirmacaoPedidoView confirmacaoPedidoView;
+    private CyberSnacksView cyberSnacksView;
+
+    private UsuarioController usuarioController;
+    private PedidoController pedidoController;
+    private CyberSnackController cyberSnackController;
+    private PedidoCyberSnackController pedidoCyberSnackController;
 
     public PagamentoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
@@ -40,12 +57,24 @@ public class PagamentoView extends javax.swing.JPanel {
         this.confirmacaoPedidoView = confirmacaoPedidoView;
     }
 
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
+    }
+
     public void setUsuarioController(UsuarioController usuarioController) {
         this.usuarioController = usuarioController;
     }
 
-    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
-        this.cyberSnacksView = cyberSnacksView;
+    public void setPedidoController(PedidoController pedidoController) {
+        this.pedidoController = pedidoController;
+    }
+
+    public void setCyberSnackController(CyberSnackController cyberSnackController) {
+        this.cyberSnackController = cyberSnackController;
+    }
+
+    public void setPedidoCyberSnackController(PedidoCyberSnackController pedidoCyberSnackController) {
+        this.pedidoCyberSnackController = pedidoCyberSnackController;
     }
 
     public TipoPagamento getTipoPagamento() {
@@ -61,7 +90,43 @@ public class PagamentoView extends javax.swing.JPanel {
     }
 
     public void cadastrarDadosDoPedido() {
-        System.out.println("Funcionou!");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
+        EntityManager em = emf.createEntityManager();
+        float precoTotal = (float) confirmacaoPedidoView.getPrecoTotal();
+
+        try {
+            em.getTransaction().begin();
+
+            // Pega o usuário existente
+            Usuario usuario = usuarioController.getObjetoUsuario();
+            List<PedidoCyberSnack> itensPedido = new ArrayList<>();
+
+            // Cria o pedido e cadastra no banco de dados
+            Pedido pedido = pedidoController.criarObjetoPedido(usuario, LocalDate.now(), precoTotal, tipoPagamento, qtdParcelas, itensPedido);
+            boolean pedidoCadastrado = pedidoController.cadastrarPedido(pedido);
+
+
+            // Depois coisas de Pedido_CyberSnack
+
+            boolean sucesso = pedidoCadastrado; // isso ser validado de acordo com os métodos depois
+
+            if (sucesso) {
+                em.getTransaction().commit();
+                System.out.println("\n\n\n\n\n\n\n\nFuncionou a implementação do pedido!\n\n\n\n\n\n\n\n");
+
+
+            } else {
+                em.getTransaction().rollback();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            em.close();
+            emf.close();
+        }
     }
 
     public void atualizarPreco(String preco) {

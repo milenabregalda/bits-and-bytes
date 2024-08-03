@@ -789,7 +789,6 @@ public class CyberStationView extends javax.swing.JPanel {
                 
                 // Pega o usuário existente
                 Usuario usuario = usuarioController.getObjetoUsuario();
-                System.out.println(usuario.toString());
         
                 if (primeiraVez) {
                     // Cria uma nova reserva
