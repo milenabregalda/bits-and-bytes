@@ -48,10 +48,6 @@ public class PagamentoView extends javax.swing.JPanel {
         this.cyberSnacksView = cyberSnacksView;
     }
 
-    public void atualizarPreco(String preco) {
-        areaValorTotal.setText("R$ "+ preco);   
-    }
-
     public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
     }
@@ -66,6 +62,10 @@ public class PagamentoView extends javax.swing.JPanel {
 
     public void cadastrarDadosDoPedido() {
         System.out.println("Funcionou!");
+    }
+
+    public void atualizarPreco(String preco) {
+        areaValorTotal.setText("R$ "+ preco);   
     }
 
     /**
