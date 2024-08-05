@@ -15,7 +15,6 @@ public class CreditoView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
-    private boolean primeiraVezCampo = true;
 
     private CyberStationView cyberStationView;
     private PagamentoView pagamentoView;

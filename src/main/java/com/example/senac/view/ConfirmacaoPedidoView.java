@@ -2,15 +2,12 @@ package com.example.senac.view;
 
 import java.awt.CardLayout;
 import java.text.DecimalFormat;
-
 import javax.swing.JPanel;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.example.senac.controller.ReservaCyberStationController;
-import com.example.senac.model.CyberSnack;
 import com.example.senac.model.ReservaCyberStation;
 
 public class ConfirmacaoPedidoView extends javax.swing.JPanel {

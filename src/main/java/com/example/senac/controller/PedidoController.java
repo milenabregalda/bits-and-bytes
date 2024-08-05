@@ -16,7 +16,6 @@ public class PedidoController {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-    private Pedido pedido;
 
     public PedidoController() {
         this.entityManagerFactory = Persistence.createEntityManagerFactory("jpa");

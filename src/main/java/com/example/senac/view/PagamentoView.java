@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import com.example.senac.controller.CyberSnackController;
 import com.example.senac.controller.PedidoController;
@@ -16,11 +17,6 @@ import com.example.senac.model.Pedido;
 import com.example.senac.model.Pedido.TipoPagamento;
 import com.example.senac.model.PedidoCyberSnack;
 import com.example.senac.model.Usuario;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.swing.JOptionPane;
 
 public class PagamentoView extends javax.swing.JPanel {
 
@@ -90,9 +86,7 @@ public class PagamentoView extends javax.swing.JPanel {
         return qtdParcelas;
     }
 
-    public void cadastrarDadosDoPedido() {
-        boolean sucesso = false;
-    
+    public void cadastrarDadosDoPedido() {    
         try {
             // Obtém os dados necessários
             float precoTotal = (float) confirmacaoPedidoView.getPrecoTotal();
@@ -105,7 +99,7 @@ public class PagamentoView extends javax.swing.JPanel {
     
             // Cria o pedido e cadastra no banco de dados
             Pedido pedido = pedidoController.criarObjetoPedido(usuario, LocalDate.now(), precoTotal, tipoPagamento, qtdParcelas, itensPedido);
-            sucesso = pedidoController.cadastrarPedido(pedido);
+            pedidoController.cadastrarPedido(pedido);
     
             // Se tiverem cyberSnacks selecionados, eles são cadastrados no banco de dados com as suas quantidades
             if (cyberSnacks != null && quantidades != null) {
@@ -119,7 +113,7 @@ public class PagamentoView extends javax.swing.JPanel {
     
                     // Cria o pedido_cybersnack e cadastra no banco de dados
                     PedidoCyberSnack pedidoCyberSnack = pedidoCyberSnackController.criarObjetoPedidoCyberSnack(pedido, cyberSnackPersistence, quantidade, precoTotal);
-                    sucesso = pedidoCyberSnackController.criarPedidoCyberSnack(pedidoCyberSnack);
+                    pedidoCyberSnackController.criarPedidoCyberSnack(pedidoCyberSnack);
                 }
             }
         } catch (Exception e) {

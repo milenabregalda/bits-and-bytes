@@ -3,7 +3,6 @@ package com.example.senac.view;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.util.List;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;

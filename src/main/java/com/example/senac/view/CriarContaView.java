@@ -8,14 +8,11 @@ import com.example.senac.exception.UsuarioComEmailJaCadastradoException;
 import com.example.senac.exception.UsuarioComNomeJaCadastradoException;
 import com.example.senac.model.Usuario;
 import javax.swing.JOptionPane;
-import java.util.*;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 
 public class CriarContaView extends javax.swing.JPanel {
 
