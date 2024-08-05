@@ -16,6 +16,6 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) {
-        new App(); // Faz a janela aparecer
+        new App();
     }
 }

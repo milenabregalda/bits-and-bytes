@@ -51,9 +51,9 @@ public class AppView extends JPanel {
         loginView = new LoginView(cardLayout, painel, usuarioController); // Controller passado aqui
         criarContaView = new CriarContaView(cardLayout, painel, usuarioController);
         cyberSnacksView = new CyberSnacksView(cardLayout, painel, cyberSnackController);
-        salgadosView = new SalgadosView(cardLayout, painel, cyberSnackController);
-        docesView = new DocesView(cardLayout, painel, cyberSnackController);
-        bebidasView = new BebidasView(cardLayout, painel, cyberSnackController);
+        salgadosView = new SalgadosView(cardLayout, painel);
+        docesView = new DocesView(cardLayout, painel);
+        bebidasView = new BebidasView(cardLayout, painel);
         combosSemanaisView = new CombosSemanaisView(cardLayout, painel);
         confirmacaoPedidoView = new ConfirmacaoPedidoView(cardLayout, painel, reservaCyberStationController);
         cyberStationView = new CyberStationView(cardLayout, painel, usuarioController, reservaCyberStationController, confirmacaoPedidoView);

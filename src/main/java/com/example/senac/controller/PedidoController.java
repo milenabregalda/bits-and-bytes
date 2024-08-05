@@ -57,20 +57,6 @@ public class PedidoController {
         }
     }
 
-    /*public boolean cadastrarPedido(Pedido pedido) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(pedido);
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-            return false;
-        }
-    }*/
-
     // Método para obter um Pedido pelo ID
     public Pedido obterPedido(Long id) {
         try {
@@ -134,39 +120,6 @@ public class PedidoController {
             return null;
         }
     }
-
-    /*public boolean adicionarItensAoPedido(Long pedidoId, List<PedidoCyberSnack> itens) {
-        try {
-            entityManager.getTransaction().begin();
-            
-            // Recuperar o pedido existente
-            Pedido pedido = entityManager.find(Pedido.class, pedidoId);
-            if (pedido == null) {
-                throw new RuntimeException("Pedido não encontrado.");
-            }
-            
-            // Adicionar os itens ao pedido
-            pedido.getItensPedido().addAll(itens);
-            
-            // Persistir cada item, se necessário
-            for (PedidoCyberSnack item : itens) {
-                entityManager.persist(item);
-                // aqui add algo a mais
-            }
-            
-            // Atualizar o pedido com os novos itens
-            entityManager.merge(pedido);
-            
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-            return false;
-        }
-    }*/
-    
 
     // Método para fechar o EntityManager
     public void fechar() {

@@ -43,31 +43,7 @@ public class PedidoCyberSnackController {
         return pedidoCyberSnack;
     }
 
-    /*// Antes de 30/07/24 - Método para criar o objeto PedidoCyberSnack
-    public PedidoCyberSnack criarObjetoPedidoCyberSnack(Pedido pedido, CyberSnack cyberSnack, int quantidade, float preco) {
-        PedidoCyberSnackId id = new PedidoCyberSnackId(pedido.getId(), cyberSnack.getId());
-        PedidoCyberSnack pedidoCyberSnack = new PedidoCyberSnack(pedido, cyberSnack, quantidade, preco);
-        pedidoCyberSnack.setId(id);
-
-        pedidosCyberSnacks.add(pedidoCyberSnack);
-        return pedidoCyberSnack;
-    }*/
-
-    /*// Método para criar um novo PedidoCyberSnack no banco de dados
-    public boolean criarPedidoCyberSnack(PedidoCyberSnack pedidoCyberSnack) {
-        try {
-            entityManager.getTransaction().begin();
-            entityManager.persist(pedidoCyberSnack);
-            entityManager.getTransaction().commit();
-            return true;
-        } catch (Exception e) {
-            entityManager.getTransaction().rollback();
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-            return false;
-        }
-    }*/
-
+    // Método para criar um novo PedidoCyberSnack no banco de dados
     public boolean criarPedidoCyberSnack(PedidoCyberSnack pedidoCyberSnack) {
         try {
             // Garantir que o CyberSnack está anexado ao EntityManager
