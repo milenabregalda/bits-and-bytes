@@ -1,14 +1,9 @@
 package com.example.senac.view;
 
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JTextField;
-
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -264,11 +259,9 @@ public class LoginView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoLoginCPFEmailActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
     }
 
     private void campoLoginSenhaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
     }
 
     private void botaoLoginEntrarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -296,8 +289,8 @@ public class LoginView extends javax.swing.JPanel {
     private javax.swing.JButton botaoLoginEntrar;
     private javax.swing.JPanel cardLayoutPrincipal;
     private javax.swing.JPanel cardLogin;
-    public static javax.swing.JTextField campoLoginCPFEmail;
-    public javax.swing.JPasswordField campoLoginSenha;
+    private javax.swing.JTextField campoLoginCPFEmail;
+    private javax.swing.JPasswordField campoLoginSenha;
     private javax.swing.JPanel quadradoLogin;
     private javax.swing.JLabel sloganLoginBitsBytes;
     private javax.swing.JLabel textoLoginAindaNaoConta;

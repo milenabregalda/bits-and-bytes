@@ -1,7 +1,7 @@
 package com.example.senac.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -17,8 +17,7 @@ public class Pedido {
     private Usuario usuario;
 
     @Column(name = "data_pedido", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date dataPedido;
+    private LocalDate dataPedido;
 
     @Column(name = "valor_total", nullable = false)
     private float valorTotal;
@@ -36,7 +35,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(Usuario usuario, Date dataPedido, float valorTotal, TipoPagamento tipoPagamento, int parcelas,
+    public Pedido(Usuario usuario, LocalDate dataPedido, float valorTotal, TipoPagamento tipoPagamento, int parcelas,
             List<PedidoCyberSnack> itensPedido) {
         this.usuario = usuario;
         this.dataPedido = dataPedido;
@@ -62,11 +61,11 @@ public class Pedido {
         this.usuario = usuario;
     }
 
-    public Date getDataPedido() {
+    public LocalDate getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(Date dataPedido) {
+    public void setDataPedido(LocalDate dataPedido) {
         this.dataPedido = dataPedido;
     }
 

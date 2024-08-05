@@ -5,8 +5,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
+
+import java.time.LocalDate;
 import java.util.List;
 import com.example.senac.model.Pedido;
+import com.example.senac.model.PedidoCyberSnack;
+import com.example.senac.model.Usuario;
 
 public class PedidoController {
 
@@ -18,17 +22,38 @@ public class PedidoController {
         this.entityManager = entityManagerFactory.createEntityManager();
     }
 
-    // Método para criar um novo Pedido
-    public Pedido criarPedido(Pedido pedido) {
+    // Método para criar o objeto Pedido com os dados inseridos na aplicação
+    public Pedido criarObjetoPedido(Usuario usuario, LocalDate dataPedido, float valorTotal, Pedido.TipoPagamento tipoPagamento, int parcelas, List<PedidoCyberSnack> itensPedido) {
+        Pedido pedido = new Pedido(usuario, dataPedido, valorTotal, tipoPagamento, parcelas, itensPedido);
+        return pedido;
+    }
+
+    // Método para cadastrar Pedido no banco de dados
+    public boolean cadastrarPedido(Pedido pedido) {
         try {
             entityManager.getTransaction().begin();
+            // Persistir o Pedido
             entityManager.persist(pedido);
+    
+            // Garantir que os itens do pedido estejam anexados
+            for (PedidoCyberSnack item : pedido.getItensPedido()) {
+                // O pedido e o CyberSnack já devem estar gerenciados
+                if (!entityManager.contains(item.getPedido())) {
+                    item.setPedido(entityManager.merge(item.getPedido()));
+                }
+                if (!entityManager.contains(item.getCyberSnack())) {
+                    item.setCyberSnack(entityManager.merge(item.getCyberSnack()));
+                }
+                entityManager.persist(item);
+            }
+    
             entityManager.getTransaction().commit();
-            return pedido;
+            return true;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
             JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return null;
+            e.printStackTrace();
+            return false;
         }
     }
 

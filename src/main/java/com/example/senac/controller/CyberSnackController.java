@@ -113,7 +113,7 @@ public class CyberSnackController {
         if (listarCyberSnacks().isEmpty()) {
             adicionarCyberSnacksPredefinidos();
         } else {
-            System.out.println("CyberSnacks já estavam cadastrados.");
+            //System.out.println("CyberSnacks já estavam cadastrados.");
         }
     }
 
@@ -156,10 +156,6 @@ public class CyberSnackController {
         criarCyberSnack(new CyberSnack("COMBO QUARTA-FEIRA QUENTE", Tipo.COMBO, 27.00f));
         criarCyberSnack(new CyberSnack("COMBO QUINTA-FEIRA GELADA", Tipo.COMBO, 35.10f));
         criarCyberSnack(new CyberSnack("COMBO SEXTA-FEIRA DELÍCIA", Tipo.COMBO, 31.50f));
-        
-        System.out.println("CyberSnacks cadastrados com sucesso!");
-
-        
     }
 
     // Método para fechar o EntityManager

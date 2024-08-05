@@ -1,20 +1,40 @@
 package com.example.senac.view;
 
 import java.awt.CardLayout;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 
-public class PagamentoView extends javax.swing.JPanel {
+import com.example.senac.controller.CyberSnackController;
+import com.example.senac.controller.PedidoController;
+import com.example.senac.controller.PedidoCyberSnackController;
+import com.example.senac.controller.UsuarioController;
+import com.example.senac.model.CyberSnack;
+import com.example.senac.model.Pedido;
+import com.example.senac.model.Pedido.TipoPagamento;
+import com.example.senac.model.PedidoCyberSnack;
+import com.example.senac.model.Usuario;
 
-    /**
-     * Creates new form Interface
-     */
+public class PagamentoView extends javax.swing.JPanel {
 
     private CardLayout cardLayout;
     private JPanel mainPanel;
 
+    private TipoPagamento tipoPagamento;
+    public int qtdParcelas;
+
     private CyberStationView cyberStationView;
-    
+    private ConfirmacaoPedidoView confirmacaoPedidoView;
+    private CyberSnacksView cyberSnacksView;
+
+    private UsuarioController usuarioController;
+    private PedidoController pedidoController;
+    private CyberSnackController cyberSnackController;
+    private PedidoCyberSnackController pedidoCyberSnackController;
+
     public PagamentoView(CardLayout cardLayout, JPanel mainPanel) {
         this.cardLayout = cardLayout;
         this.mainPanel = mainPanel;
@@ -22,21 +42,85 @@ public class PagamentoView extends javax.swing.JPanel {
     }
 
     public void setCyberStationView(CyberStationView cyberStationView) {
-        // Ao invés de adicionar no controller, adiciona tardiamente para limpeza de campos na outra view
         this.cyberStationView = cyberStationView;
+    }
+
+    public void setConfirmacaoPedidoView(ConfirmacaoPedidoView confirmacaoPedidoView) {
+        this.confirmacaoPedidoView = confirmacaoPedidoView;
+    }
+
+    public void setCyberSnacksView(CyberSnacksView cyberSnacksView) {
+        this.cyberSnacksView = cyberSnacksView;
+    }
+
+    public void setUsuarioController(UsuarioController usuarioController) {
+        this.usuarioController = usuarioController;
+    }
+
+    public void setPedidoController(PedidoController pedidoController) {
+        this.pedidoController = pedidoController;
+    }
+
+    public void setCyberSnackController(CyberSnackController cyberSnackController) {
+        this.cyberSnackController = cyberSnackController;
+    }
+
+    public void setPedidoCyberSnackController(PedidoCyberSnackController pedidoCyberSnackController) {
+        this.pedidoCyberSnackController = pedidoCyberSnackController;
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public void setQtdParcelas(int qtdParcelas) {
+        this.qtdParcelas = qtdParcelas;
+    }
+
+    public int getQtdParcelas() {
+        return qtdParcelas;
+    }
+
+    public void cadastrarDadosDoPedido() {    
+        try {
+            // Obtém os dados necessários
+            float precoTotal = (float) confirmacaoPedidoView.getPrecoTotal();
+            ArrayList<CyberSnack> cyberSnacks = cyberSnacksView.getCyberSnacksSelecionados();
+            ArrayList<Integer> quantidades = cyberSnacksView.getQuantidadesSelecionadas();
+    
+            // Pega o usuário existente
+            Usuario usuario = usuarioController.getObjetoUsuario();
+            List<PedidoCyberSnack> itensPedido = new ArrayList<>();
+    
+            // Cria o pedido e cadastra no banco de dados
+            Pedido pedido = pedidoController.criarObjetoPedido(usuario, LocalDate.now(), precoTotal, tipoPagamento, qtdParcelas, itensPedido);
+            pedidoController.cadastrarPedido(pedido);
+    
+            // Se tiverem cyberSnacks selecionados, eles são cadastrados no banco de dados com as suas quantidades
+            if (cyberSnacks != null && quantidades != null) {
+                for (int i = 0; i < cyberSnacks.size(); i++) {
+                    CyberSnack cybersnack = cyberSnacks.get(i); // Pega o CyberSnack do loop
+                    Integer quantidade = quantidades.get(i); // Pega a quantidade que está relacionada
+    
+                    Long cyberSnackId = cybersnack.getId();
+                    CyberSnack cyberSnackPersistence = cyberSnackController.obterCyberSnack(cyberSnackId);
+                    // Pega o CyberSnack do banco de dados para que a persistência funcione
+    
+                    // Cria o pedido_cybersnack e cadastra no banco de dados
+                    PedidoCyberSnack pedidoCyberSnack = pedidoCyberSnackController.criarObjetoPedidoCyberSnack(pedido, cyberSnackPersistence, quantidade, precoTotal);
+                    pedidoCyberSnackController.criarPedidoCyberSnack(pedidoCyberSnack);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     public void atualizarPreco(String preco) {
         areaValorTotal.setText("R$ "+ preco);   
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    // @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         cardLayoutPrincipal = new javax.swing.JPanel();
@@ -259,25 +343,30 @@ public class PagamentoView extends javax.swing.JPanel {
     }//GEN-LAST:event_botaoVoltarActionPerformed
 
     private void botaoFinalizarPagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarPagamentoActionPerformed
+        tipoPagamento = TipoPagamento.CREDITO;
         cardLayout.show(mainPanel, "credito");
     }//GEN-LAST:event_botaoFinalizarPagamentoActionPerformed
 
     private void botaoCancelarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCancelarPedidoActionPerformed
         JOptionPane.showMessageDialog(null, "Seu pedido foi cancelado.");
-        // TALVEZ AQUI REMOVER DO BANCO OU SÓ GRAVAR NO BOTÃO CONCLUIR
         cyberStationView.cancelarReservaCyberStation();
         System.exit(0); // Fecha o programa
     }//GEN-LAST:event_botaoCancelarPedidoActionPerformed
 
     private void botaoCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCreditoActionPerformed
+        tipoPagamento = TipoPagamento.CREDITO;
         cardLayout.show(mainPanel, "credito");
     }//GEN-LAST:event_botaoCreditoActionPerformed
 
     private void botaoDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDebitoActionPerformed
+        tipoPagamento = TipoPagamento.DEBITO;
+        qtdParcelas = 1;
         cardLayout.show(mainPanel, "debito");
     }//GEN-LAST:event_botaoDebitoActionPerformed
 
     private void botaoPixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPixActionPerformed
+        tipoPagamento = TipoPagamento.PIX;
+        qtdParcelas = 1;
         cardLayout.show(mainPanel, "pix");
     }//GEN-LAST:event_botaoPixActionPerformed
 

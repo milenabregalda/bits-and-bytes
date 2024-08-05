@@ -1,9 +1,12 @@
 package com.example.senac.view;
 import javax.swing.JPanel;
+
 import java.awt.CardLayout;
 import com.example.senac.controller.UsuarioController;
 import com.example.senac.controller.ReservaCyberStationController;
 import com.example.senac.controller.CyberSnackController;
+import com.example.senac.controller.PedidoController;
+import com.example.senac.controller.PedidoCyberSnackController;
 
 public class AppView extends JPanel {
     private JPanel painel;
@@ -25,6 +28,8 @@ public class AppView extends JPanel {
     private UsuarioController usuarioController;
     private ReservaCyberStationController reservaCyberStationController;
     private CyberSnackController cyberSnackController;
+    private PedidoController pedidoController;
+    private PedidoCyberSnackController pedidoCyberSnackController;
 
     /* Classe responsável por gerenciar todas as outras views. Uma instância dessa view é criada em App.java (main)
     E uma instância de todas as outras views são criadas aqui e gerenciadas por cardLayout. CardLayout dessa classe é
@@ -39,14 +44,16 @@ public class AppView extends JPanel {
         usuarioController = new UsuarioController();
         reservaCyberStationController = new ReservaCyberStationController();
         cyberSnackController = new CyberSnackController();
+        pedidoController = new PedidoController();
+        pedidoCyberSnackController = new PedidoCyberSnackController();
 
         // O construtor das views passa o cardLayout e o painel para que elas possam trocar o card (conteúdo da janela) mostrado nos ActionListeners:
         loginView = new LoginView(cardLayout, painel, usuarioController); // Controller passado aqui
         criarContaView = new CriarContaView(cardLayout, painel, usuarioController);
         cyberSnacksView = new CyberSnacksView(cardLayout, painel, cyberSnackController);
-        salgadosView = new SalgadosView(cardLayout, painel, cyberSnackController);
-        docesView = new DocesView(cardLayout, painel, cyberSnackController);
-        bebidasView = new BebidasView(cardLayout, painel, cyberSnackController);
+        salgadosView = new SalgadosView(cardLayout, painel);
+        docesView = new DocesView(cardLayout, painel);
+        bebidasView = new BebidasView(cardLayout, painel);
         combosSemanaisView = new CombosSemanaisView(cardLayout, painel);
         confirmacaoPedidoView = new ConfirmacaoPedidoView(cardLayout, painel, reservaCyberStationController);
         cyberStationView = new CyberStationView(cardLayout, painel, usuarioController, reservaCyberStationController, confirmacaoPedidoView);
@@ -56,7 +63,7 @@ public class AppView extends JPanel {
         debitoView = new DebitoView(cardLayout, painel);
         pixView = new PixView(cardLayout, painel);
         
-        // Como as referências dessas views são cruzadas, elas são adicionadas tardiamente para evitar problemas:
+        // Como as referências de algumas dessas views são cruzadas, elas são adicionadas tardiamente para evitar problemas:
         loginView.setCriarContaView(criarContaView);
         criarContaView.setLoginView(loginView);
         cyberSnacksView.setCyberStationView(cyberStationView);
@@ -79,6 +86,17 @@ public class AppView extends JPanel {
         confirmacaoPedidoView.setCyberSnacksView(cyberSnacksView);
         cyberSnacksView.setConfirmacaoPedidoView(confirmacaoPedidoView);
         confirmacaoPedidoView.setPagamentoView(pagamentoView);
+
+        creditoView.setPagamentoView(pagamentoView);
+        debitoView.setPagamentoView(pagamentoView);
+        pixView.setPagamentoView(pagamentoView);
+
+        pagamentoView.setConfirmacaoPedidoView(confirmacaoPedidoView);
+        pagamentoView.setCyberSnacksView(cyberSnacksView);
+        pagamentoView.setUsuarioController(usuarioController);
+        pagamentoView.setCyberSnackController(cyberSnackController);
+        pagamentoView.setPedidoController(pedidoController);
+        pagamentoView.setPedidoCyberSnackController(pedidoCyberSnackController);
 
         // Painéis são adicionados ao cardLayout com um nome (String)
         painel.add(loginView, "login");

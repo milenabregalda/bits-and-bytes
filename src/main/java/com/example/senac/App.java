@@ -4,9 +4,6 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import com.example.senac.view.AppView;
 
-import com.example.senac.controller.CyberSnackController;
-
-
 public class App extends JFrame {
 
     public App() {
@@ -19,8 +16,6 @@ public class App extends JFrame {
     }
 
     public static void main(String[] args) {
-        new App(); // Faz a janela aparecer
-
-        System.out.println("Bits & Bytes CyberCafé.");
+        new App();
     }
 }
