@@ -11,6 +11,7 @@ import com.example.senac.controller.CyberSnackController;
 import com.example.senac.controller.PedidoController;
 import com.example.senac.controller.PedidoCyberSnackController;
 import com.example.senac.controller.UsuarioController;
+import com.example.senac.model.CyberSnack;
 import com.example.senac.model.Pedido;
 import com.example.senac.model.Pedido.TipoPagamento;
 import com.example.senac.model.PedidoCyberSnack;
@@ -90,42 +91,40 @@ public class PagamentoView extends javax.swing.JPanel {
     }
 
     public void cadastrarDadosDoPedido() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
-        EntityManager em = emf.createEntityManager();
-        float precoTotal = (float) confirmacaoPedidoView.getPrecoTotal();
-
+        boolean sucesso = false;
+    
         try {
-            em.getTransaction().begin();
-
+            // Obtém os dados necessários
+            float precoTotal = (float) confirmacaoPedidoView.getPrecoTotal();
+            ArrayList<CyberSnack> cyberSnacks = cyberSnacksView.getCyberSnacksSelecionados();
+            ArrayList<Integer> quantidades = cyberSnacksView.getQuantidadesSelecionadas();
+    
             // Pega o usuário existente
             Usuario usuario = usuarioController.getObjetoUsuario();
             List<PedidoCyberSnack> itensPedido = new ArrayList<>();
-
+    
             // Cria o pedido e cadastra no banco de dados
             Pedido pedido = pedidoController.criarObjetoPedido(usuario, LocalDate.now(), precoTotal, tipoPagamento, qtdParcelas, itensPedido);
-            boolean pedidoCadastrado = pedidoController.cadastrarPedido(pedido);
-
-
-            // Depois coisas de Pedido_CyberSnack
-
-            boolean sucesso = pedidoCadastrado; // isso ser validado de acordo com os métodos depois
-
-            if (sucesso) {
-                em.getTransaction().commit();
-                System.out.println("\n\n\n\n\n\n\n\nFuncionou a implementação do pedido!\n\n\n\n\n\n\n\n");
-
-
-            } else {
-                em.getTransaction().rollback();
+            sucesso = pedidoController.cadastrarPedido(pedido);
+    
+            // Se tiverem cyberSnacks selecionados, eles são cadastrados no banco de dados com as suas quantidades
+            if (cyberSnacks != null && quantidades != null) {
+                for (int i = 0; i < cyberSnacks.size(); i++) {
+                    CyberSnack cybersnack = cyberSnacks.get(i); // Pega o CyberSnack do loop
+                    Integer quantidade = quantidades.get(i); // Pega a quantidade que está relacionada
+    
+                    Long cyberSnackId = cybersnack.getId();
+                    CyberSnack cyberSnackPersistence = cyberSnackController.obterCyberSnack(cyberSnackId);
+                    // Pega o CyberSnack do banco de dados para que a persistência funcione
+    
+                    // Cria o pedido_cybersnack e cadastra no banco de dados
+                    PedidoCyberSnack pedidoCyberSnack = pedidoCyberSnackController.criarObjetoPedidoCyberSnack(pedido, cyberSnackPersistence, quantidade, precoTotal);
+                    sucesso = pedidoCyberSnackController.criarPedidoCyberSnack(pedidoCyberSnack);
+                }
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado. Contate um funcionário do Bits & Bytes para mais informações.", "Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-        } finally {
-            em.close();
-            emf.close();
         }
     }
 

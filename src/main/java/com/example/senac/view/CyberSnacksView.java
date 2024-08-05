@@ -211,6 +211,14 @@ public class CyberSnacksView extends javax.swing.JPanel {
         return dados;
     }
 
+    public ArrayList<CyberSnack> getCyberSnacksSelecionados() {
+        return cyberSnacksSelecionados;
+    }
+
+    public ArrayList<Integer> getQuantidadesSelecionadas() {
+        return quantidadesSelecionadas;
+    }
+
     public void atualizarDadosConfirmacaoPedido() {
         confirmacaoPedidoView.atualizarDadosPedido();
     }
