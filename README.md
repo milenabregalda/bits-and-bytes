@@ -3,11 +3,11 @@
 O Bits & Bytes é um sistema de autoatendimento desenvolvido para o Cybercafé Bits & Bytes, como Projeto Integrador de Desktop do curso Técnico em Desenvolvimento de Sistemas do Senac-RS.
 
 Nele, o usuário pode:
-- Fazer login ou criar uma conta;
-- Reservar uma CyberStation (mesa de computador);
-- Adquirir CyberSnacks (salgados, doces, bebidas e combos);
-- Confirmar o pedido e alterá-lo se necessário;
-- Realizar o pagamento utilizando crédito, débito ou Pix.
+1. Fazer login ou criar uma conta;
+2. Reservar uma CyberStation (mesa de computador);
+3. Adquirir CyberSnacks (salgados, doces, bebidas e combos);
+4. Confirmar o pedido e alterá-lo se necessário;
+5. Realizar o pagamento utilizando crédito, débito ou Pix.
 
 ## Tecnologias Utilizadas
 
